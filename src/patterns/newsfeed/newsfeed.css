@@ -1,0 +1,8 @@
+/* PATTERN: newsfeed
+   Figma Section / Newsfeed: heading, three Supercomponent [Type=Card]. */
+@layer sc-components {
+  .newsfeed_component { display: flex; flex-direction: column; gap: var(--sc-padding-gap-huge); }
+  .newsfeed_list { display: flex; gap: var(--sc-padding-gap-large); align-items: stretch; }
+  .newsfeed_list > * { flex: 1 1 0; min-width: 0; }
+  @media (max-width: 767px) { .newsfeed_list { flex-direction: column; } }
+}

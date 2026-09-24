@@ -1,0 +1,340 @@
+{
+  "$description": "The contract for spacing and type. Colour roles are NOT here — they live in schemes.json, and the default scheme supplies :root. Declaring them twice meant one change needed two edits, with a guard to catch the times it did not.",
+  "width": {
+    "container": {
+      "small": {
+        "$type": "dimension",
+        "$value": "768px",
+        "$figmaName": "UI + Spacing/Width/Container/Small"
+      },
+      "medium": {
+        "$type": "dimension",
+        "$value": "1024px",
+        "$modes": {
+          "wide": "1120px",
+          "xwide": "1200px"
+        },
+        "$figmaName": "UI + Spacing/Width/Container/Medium"
+      },
+      "large": {
+        "$type": "dimension",
+        "$value": "1280px",
+        "$modes": {
+          "wide": "1440px",
+          "xwide": "1600px"
+        },
+        "$figmaName": "UI + Spacing/Width/Container/Large"
+      },
+      "full": {
+        "$type": "dimension",
+        "$value": "100%",
+        "$figmaName": "UI + Spacing/Width/Container/Full"
+      }
+    },
+    "column": {
+      "widest": {
+        "$type": "dimension",
+        "$value": "1280px",
+        "$figmaName": "UI + Spacing/Width/Column/Widest"
+      },
+      "wider": {
+        "$type": "dimension",
+        "$value": "1024px",
+        "$figmaName": "UI + Spacing/Width/Column/Wider"
+      },
+      "wide": {
+        "$type": "dimension",
+        "$value": "768px",
+        "$figmaName": "UI + Spacing/Width/Column/Wide"
+      },
+      "medium": {
+        "$type": "dimension",
+        "$value": "560px",
+        "$figmaName": "UI + Spacing/Width/Column/Medium"
+      },
+      "tight": {
+        "$type": "dimension",
+        "$value": "480px",
+        "$figmaName": "UI + Spacing/Width/Column/Tight"
+      },
+      "tighter": {
+        "$type": "dimension",
+        "$value": "400px",
+        "$figmaName": "UI + Spacing/Width/Column/Tighter"
+      },
+      "tightest": {
+        "$type": "dimension",
+        "$value": "320px",
+        "$figmaName": "UI + Spacing/Width/Column/Tightest"
+      }
+    }
+  },
+  "padding": {
+    "gap": {
+      "none": {
+        "$type": "dimension",
+        "$value": "0px",
+        "$figmaName": "UI + Spacing/Padding/Gap/None"
+      },
+      "tiny": {
+        "$type": "dimension",
+        "$value": "4px",
+        "$modes": {
+          "xwide": "8px"
+        },
+        "$figmaName": "UI + Spacing/Padding/Gap/Tiny"
+      },
+      "small": {
+        "$type": "dimension",
+        "$value": "8px",
+        "$modes": {
+          "wide": "12px",
+          "xwide": "16px"
+        },
+        "$figmaName": "UI + Spacing/Padding/Gap/Small"
+      },
+      "medium": {
+        "$type": "dimension",
+        "$value": "16px",
+        "$modes": {
+          "wide": "20px",
+          "xwide": "24px",
+          "landscape": "12px",
+          "portrait": "12px"
+        },
+        "$figmaName": "UI + Spacing/Padding/Gap/Medium"
+      },
+      "large": {
+        "$type": "dimension",
+        "$value": "32px",
+        "$modes": {
+          "wide": "36px",
+          "xwide": "40px",
+          "tablet": "24px",
+          "landscape": "20px",
+          "portrait": "16px"
+        },
+        "$figmaName": "UI + Spacing/Padding/Gap/Large"
+      },
+      "huge": {
+        "$type": "dimension",
+        "$value": "64px",
+        "$modes": {
+          "wide": "72px",
+          "xwide": "80px",
+          "tablet": "48px",
+          "landscape": "40px",
+          "portrait": "32px"
+        },
+        "$figmaName": "UI + Spacing/Padding/Gap/Huge"
+      }
+    },
+    "block": {
+      "none": {
+        "$type": "dimension",
+        "$value": "0px",
+        "$figmaName": "UI + Spacing/Padding/Block/None"
+      },
+      "tiny": {
+        "$type": "dimension",
+        "$value": "16px",
+        "$modes": {
+          "wide": "20px",
+          "xwide": "24px",
+          "tablet": "12px",
+          "landscape": "12px",
+          "portrait": "8px"
+        },
+        "$figmaName": "UI + Spacing/Padding/Block/Tiny"
+      },
+      "small": {
+        "$type": "dimension",
+        "$value": "32px",
+        "$modes": {
+          "wide": "44px",
+          "xwide": "56px",
+          "tablet": "24px",
+          "landscape": "20px",
+          "portrait": "16px"
+        },
+        "$figmaName": "UI + Spacing/Padding/Block/Small"
+      },
+      "medium": {
+        "$type": "dimension",
+        "$value": "64px",
+        "$modes": {
+          "wide": "80px",
+          "xwide": "96px",
+          "tablet": "48px",
+          "landscape": "40px",
+          "portrait": "32px"
+        },
+        "$figmaName": "UI + Spacing/Padding/Block/Medium"
+      },
+      "large": {
+        "$type": "dimension",
+        "$value": "128px",
+        "$modes": {
+          "wide": "144px",
+          "xwide": "160px",
+          "tablet": "96px",
+          "landscape": "72px",
+          "portrait": "56px"
+        },
+        "$figmaName": "UI + Spacing/Padding/Block/Large"
+      },
+      "huge": {
+        "$type": "dimension",
+        "$value": "256px",
+        "$modes": {
+          "wide": "288px",
+          "xwide": "320px",
+          "tablet": "192px",
+          "landscape": "144px",
+          "portrait": "112px"
+        },
+        "$figmaName": "UI + Spacing/Padding/Block/Huge"
+      }
+    },
+    "section": {
+      "global": {
+        "$type": "dimension",
+        "$value": "64px",
+        "$modes": {
+          "wide": "80px",
+          "xwide": "120px",
+          "tablet": "48px",
+          "landscape": "32px",
+          "portrait": "20px"
+        },
+        "$figmaName": "UI + Spacing/Padding/Section/Global"
+      },
+      "large": {
+        "$type": "string",
+        "$value": "{padding.block.large}",
+        "$figmaName": "UI + Spacing/Padding/Section/Large"
+      },
+      "medium": {
+        "$type": "string",
+        "$value": "{padding.block.medium}",
+        "$figmaName": "UI + Spacing/Padding/Section/Medium"
+      },
+      "small": {
+        "$type": "string",
+        "$value": "{padding.block.small}",
+        "$figmaName": "UI + Spacing/Padding/Section/Small"
+      }
+    },
+    "control": {
+      "none": {
+        "$type": "dimension",
+        "$value": "0px",
+        "$figmaName": "UI + Spacing/Padding/Control/None"
+      },
+      "tiny": {
+        "$type": "dimension",
+        "$value": "4px",
+        "$figmaName": "UI + Spacing/Padding/Control/Tiny"
+      },
+      "small": {
+        "$type": "dimension",
+        "$value": "8px",
+        "$figmaName": "UI + Spacing/Padding/Control/Small"
+      },
+      "medium": {
+        "$type": "dimension",
+        "$value": "16px",
+        "$figmaName": "UI + Spacing/Padding/Control/Medium"
+      },
+      "large": {
+        "$type": "dimension",
+        "$value": "24px",
+        "$figmaName": "UI + Spacing/Padding/Control/Large"
+      },
+      "huge": {
+        "$type": "dimension",
+        "$value": "32px",
+        "$figmaName": "UI + Spacing/Padding/Control/Huge"
+      }
+    }
+  },
+  "corners": {
+    "modal": {
+      "$type": "string",
+      "$value": "{radius.none}",
+      "$figmaName": "UI + Spacing/Corners/Modal"
+    },
+    "card": {
+      "$type": "string",
+      "$value": "{radius.none}",
+      "$figmaName": "UI + Spacing/Corners/Card"
+    },
+    "media": {
+      "$type": "string",
+      "$value": "{radius.none}",
+      "$figmaName": "UI + Spacing/Corners/Media"
+    },
+    "button": {
+      "$type": "string",
+      "$value": "{radius.none}",
+      "$figmaName": "UI + Spacing/Corners/Button"
+    },
+    "tag": {
+      "$type": "string",
+      "$value": "{radius.none}",
+      "$figmaName": "UI + Spacing/Corners/Tag"
+    },
+    "avatar": {
+      "$type": "string",
+      "$value": "{radius.round}",
+      "$figmaName": "UI + Spacing/Corners/Avatar"
+    },
+    "input": {
+      "$type": "string",
+      "$value": "{radius.small}",
+      "$figmaName": "UI + Spacing/Corners/Input"
+    },
+    "control": {
+      "$type": "string",
+      "$value": "{radius.none}",
+      "$figmaName": "UI + Spacing/Corners/Control"
+    }
+  },
+  "radius": {
+    "round": {
+      "$type": "dimension",
+      "$value": "9999px",
+      "$figmaName": "UI + Spacing/Radius/Round"
+    },
+    "huge": {
+      "$type": "dimension",
+      "$value": "2rem",
+      "$figmaName": "UI + Spacing/Radius/Huge"
+    },
+    "large": {
+      "$type": "dimension",
+      "$value": "1.5rem",
+      "$figmaName": "UI + Spacing/Radius/Large"
+    },
+    "medium": {
+      "$type": "dimension",
+      "$value": "1rem",
+      "$figmaName": "UI + Spacing/Radius/Medium"
+    },
+    "small": {
+      "$type": "dimension",
+      "$value": "0.25rem",
+      "$figmaName": "UI + Spacing/Radius/Small"
+    },
+    "tiny": {
+      "$type": "dimension",
+      "$value": "0.125rem",
+      "$figmaName": "UI + Spacing/Radius/Tiny"
+    },
+    "none": {
+      "$type": "dimension",
+      "$value": "0rem",
+      "$figmaName": "UI + Spacing/Radius/None"
+    }
+  }
+}

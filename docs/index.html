@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en" data-sc-theme="cahoots">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Supercomponent — v0.3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Inter:wght@400;500&family=Roboto+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../dist/supercomponent.tokens.css">
+<link rel="stylesheet" href="../src/styles/base.css">
+<link rel="stylesheet" href="../src/blocks/button/button.css">
+<link rel="stylesheet" href="../src/blocks/action-row/action-row.css">
+<link rel="stylesheet" href="../src/blocks/media/media.css">
+<link rel="stylesheet" href="../src/patterns/hero/hero.css">
+<link rel="stylesheet" href="../src/patterns/supercomponent/supercomponent.css">
+<style>
+  @layer sc-components {
+    .doc_swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr)); gap: var(--sc-padding-gap-medium); }
+    .doc_swatch { border: 1px solid var(--sc-color-border); border-radius: var(--sc-radius-medium); overflow: hidden; }
+    .doc_chip { height: 4rem; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--sc-color-text) var(--sc-opacity-20), transparent); }
+    .doc_meta { padding: var(--sc-padding-gap-tiny) var(--sc-padding-gap-small); font-family: var(--sc-typeface-family-decorative); font-size: var(--sc-font-size-text-tiny); }
+    .doc_rule { border: 0; border-top: 1px solid var(--sc-color-border); margin: 0; }
+    .doc_stack > * + * { margin-top: var(--sc-padding-gap-large); }
+    .doc_spec { font-family: var(--sc-typeface-family-decorative); font-size: var(--sc-font-size-text-tiny); color: var(--sc-color-accent); display: block; margin-bottom: var(--sc-padding-gap-tiny); }
+    .doc_grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr)); gap: var(--sc-padding-gap-large); }
+    .doc_token-table { width: 100%; border-collapse: collapse; font-family: var(--sc-typeface-family-decorative); font-size: var(--sc-font-size-text-tiny); }
+    .doc_token-table th { text-align: left; padding: var(--sc-padding-gap-small); border-bottom: 2px solid var(--sc-color-border); color: var(--sc-color-text); }
+    .doc_token-table td { padding: var(--sc-padding-gap-small); border-bottom: 1px solid var(--sc-color-border); }
+    .doc_token-table code { font-family: var(--sc-typeface-family-decorative); }
+    .doc_corner-demo { display: inline-block; width: 4rem; height: 4rem; background: var(--sc-color-foreground); border: 1px solid var(--sc-color-border); }
+    .doc_focus-demo:focus-visible { outline: 2px solid var(--sc-color-focus); outline-offset: 3px; }
+    .doc_inline-row { display: flex; flex-wrap: wrap; gap: var(--sc-padding-gap-medium); align-items: center; }
+    .doc_control-demo { display: inline-flex; align-items: center; justify-content: center; background: var(--sc-color-foreground); border: 1px solid var(--sc-color-border); border-radius: var(--sc-corners-control); font-family: var(--sc-typeface-family-decorative); font-size: var(--sc-font-size-text-tiny); color: var(--sc-color-text); }
+  }
+</style>
+</head>
+<body>
+<main class="page-wrapper">
+
+  <section class="section_wrap">
+    <div class="padding-global"><div class="container-large"><div class="padding-section-medium">
+      <p class="text-style-label text-color-brand">Supercomponent v0.3 &middot; Cahoots Studio</p>
+    </div></div></div>
+  </section>
+  <hr class="doc_rule">
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       HERO
+       ═══════════════════════════════════════════════════════════════════ -->
+  <section class="hero_wrap section_wrap" data-sc-pattern="hero">
+    <div class="padding-global"><div class="container-large"><div class="padding-section-large">
+      <div class="hero_component">
+        <p class="text-style-label text-color-muted" data-sc-motion="reveal-up">Digital brand design</p>
+        <h1 class="text-style-headline-hero hero_heading" data-sc-motion="reveal-up">Websites that hold their shape</h1>
+        <p class="text-style-text-large text-color-secondary max-width-large" data-sc-motion="reveal-up">One design system, four places to ship it. Build it once in Figma, run it in Astro, Webflow, or WordPress without rebuilding a thing.</p>
+        <div class="action-row" data-sc-motion="reveal-up">
+          <a href="#" class="button is-large">See the work</a>
+          <a href="#" class="button is-secondary is-large">Start a project</a>
+        </div>
+      </div>
+    </div></div></div>
+  </section>
+  <hr class="doc_rule">
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       TEXT STYLES
+       ═══════════════════════════════════════════════════════════════════ -->
+  <section class="section_wrap"><div class="padding-global"><div class="container-large"><div class="padding-section-medium doc_stack">
+    <h2 class="text-style-headline-small">Text styles</h2>
+    <p class="text-style-text-medium text-color-secondary max-width-large">Size and weight come from variables. Leading and tracking are set per style &mdash; they are consequences of size, not scales.</p>
+    <div class="doc_stack">
+      <div><code class="doc_spec">.text-style-headline-hero</code><p class="text-style-headline-hero">Headline Hero</p></div>
+      <div><code class="doc_spec">.text-style-headline-huge</code><p class="text-style-headline-huge">Headline Huge</p></div>
+      <div><code class="doc_spec">.text-style-headline-large</code><p class="text-style-headline-large">Headline Large</p></div>
+      <div><code class="doc_spec">.text-style-headline-medium</code><p class="text-style-headline-medium">Headline Medium</p></div>
+      <div><code class="doc_spec">.text-style-headline-small</code><p class="text-style-headline-small">Headline Small</p></div>
+      <div><code class="doc_spec">.text-style-headline-tiny</code><p class="text-style-headline-tiny">Headline Tiny</p></div>
+      <div><code class="doc_spec">.text-style-text-huge</code><p class="text-style-text-huge">Text Huge</p></div>
+      <div><code class="doc_spec">.text-style-text-large</code><p class="text-style-text-large">Text Large</p></div>
+      <div><code class="doc_spec">.text-style-text-medium</code><p class="text-style-text-medium">Text Medium</p></div>
+      <div><code class="doc_spec">.text-style-text-small</code><p class="text-style-text-small">Text Small</p></div>
+      <div><code class="doc_spec">.text-style-text-tiny</code><p class="text-style-text-tiny">Text Tiny</p></div>
+      <div><code class="doc_spec">.text-style-label</code><p class="text-style-label">Label</p></div>
+    </div>
+
+    <h2 class="text-style-headline-small">Structure is independent of size</h2>
+    <p class="text-style-text-medium text-color-secondary max-width-large">Heading tags carry document structure. Text styles carry appearance. They do not have to agree &mdash; which is what lets a page keep a correct h1&rarr;h6 outline while looking however the design needs it to.</p>
+    <div class="doc_stack">
+      <h2 class="text-style-headline-hero">An h2, styled huge</h2>
+      <h1 class="text-style-headline-tiny">An h1, styled tiny</h1>
+      <h3>A bare h3 &mdash; falls back to its default, which is what CMS content produces</h3>
+    </div>
+  </div></div></div></section>
+  <hr class="doc_rule">
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       COLOUR ROLES
+       ═══════════════════════════════════════════════════════════════════ -->
+  <section class="section_wrap"><div class="padding-global"><div class="container-large"><div class="padding-section-medium doc_stack">
+    <h2 class="text-style-headline-small">Colour roles</h2>
+    <p class="text-style-text-medium text-color-secondary max-width-large">Five roles define a section&rsquo;s palette. Components bind to these &mdash; never to raw hex values.</p>
+    <div class="doc_swatches" id="swatches"></div>
+  </div></div></div></section>
+  <hr class="doc_rule">
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       COLOUR SCHEMES
+       ═══════════════════════════════════════════════════════════════════ -->
+  <section class="section_wrap"><div class="padding-global"><div class="container-large"><div class="padding-section-medium doc_stack">
+    <h2 class="text-style-headline-small">Colour schemes</h2>
+    <p class="text-style-text-medium text-color-secondary max-width-large">Tag a section with <code>data-sc-scheme</code> and everything inside inherits. The same markup, three palettes &mdash; no component changes.</p>
+  </div></div></div></section>
+
+  <section class="section_wrap"><div class="padding-global"><div class="container-large"><div class="padding-section-medium">
+    <p class="text-style-label text-color-muted">Scheme 1 &mdash; Primary &middot; most of the page</p>
+    <p class="text-style-headline-tiny">Same block, default surface</p>
+    <p class="text-style-text-medium text-color-secondary">The base scheme that every section inherits unless overridden.</p>
+    <div class="action-row"><a href="#" class="button">Primary action</a><a href="#" class="button is-secondary">Secondary</a><a href="#" class="button is-link">Link</a></div>
+  </div></div></div></section>
+
+  <section class="section_wrap" data-sc-scheme="scheme-2"><div class="padding-global"><div class="container-large"><div class="padding-section-medium">
+    <p class="text-style-label text-color-muted">Scheme 2 &mdash; Subtle &middot; Navigation lives here</p>
+    <p class="text-style-headline-tiny">Same block, quieter surface</p>
+    <p class="text-style-text-medium text-color-secondary">Body copy holds its contrast automatically. Navigation uses this scheme for its four states.</p>
+    <div class="action-row"><a href="#" class="button">Primary action</a><a href="#" class="button is-secondary">Secondary</a><a href="#" class="button is-link">Link</a></div>
+  </div></div></div></section>
+
+  <section class="section_wrap" data-sc-scheme="scheme-3"><div class="padding-global"><div class="container-large"><div class="padding-section-medium">
+    <p class="text-style-label text-color-muted">Scheme 3 &mdash; Contrast &middot; Footer and CTAs live here</p>
+    <p class="text-style-headline-tiny">Same block, high-contrast surface</p>
+    <p class="text-style-text-medium text-color-secondary">Buttons, borders and muted text all adapt automatically. Footer uses this scheme.</p>
+    <div class="action-row"><a href="#" class="button">Primary action</a><a href="#" class="button is-secondary">Secondary</a><a href="#" class="button is-link">Link</a></div>
+  </div></div></div></section>
+  <hr class="doc_rule">
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       BLOCKS: BUTTON
+       ═══════════════════════════════════════════════════════════════════ -->
+  <section class="section_wrap"><div class="padding-global"><div class="container-large"><div class="padding-section-medium doc_stack">
+    <h2 class="text-style-headline-small">Button</h2>
+    <p class="text-style-text-medium text-color-secondary max-width-large">Three variants. Colour is component-level &mdash; not from the scheme. Hover is an overlay, matching Figma&rsquo;s stacked-fill technique. 44px minimum touch target.</p>
+
+    <div>
+      <code class="doc_spec">Primary</code>
+      <div class="doc_inline-row">
+        <a href="#" class="button">Default</a>
+        <a href="#" class="button is-large">Large</a>
+      </div>
+    </div>
+    <div>
+      <code class="doc_spec">Secondary (outlined)</code>
+      <div class="doc_inline-row">
+        <a href="#" class="button is-secondary">Default</a>
+        <a href="#" class="button is-secondary is-large">Large</a>
+      </div>
+    </div>
+    <div>
+      <code class="doc_spec">Link (underline only)</code>
+      <div class="doc_inline-row">
+        <a href="#" class="button is-link">Default</a>
+        <a href="#" class="button is-link is-large">Large</a>
+      </div>
+    </div>
+
+    <div>
+      <code class="doc_spec">Focus ring &mdash; uses --sc-color-focus (Electric Violet)</code>
+      <div class="doc_inline-row">
+        <a href="#" class="button doc_focus-demo">Tab to me</a>
+        <a href="#" class="button is-secondary doc_focus-demo">Tab to me</a>
+      </div>
+    </div>
+  </div></div></div></section>
+  <hr class="doc_rule">
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       BLOCKS: MEDIA
+       ═══════════════════════════════════════════════════════════════════ -->
+  <section class="section_wrap"><div class="padding-global"><div class="container-large"><div class="padding-section-medium doc_stack">
+    <h2 class="text-style-headline-small">Media</h2>
+    <p class="text-style-text-medium text-color-secondary max-width-large">A ratio-locked frame. Ten variants in Figma collapse to one class and modifiers. Empty state uses the Foreground colour.</p>
+    <div class="doc_grid">
+      <div>
+        <code class="doc_spec">.media.is-16x9</code>
+        <div class="media is-16x9"></div>
+      </div>
+      <div>
+        <code class="doc_spec">.media.is-3x2</code>
+        <div class="media is-3x2"></div>
+      </div>
+      <div>
+        <code class="doc_spec">.media.is-4x3</code>
+        <div class="media is-4x3"></div>
+      </div>
+      <div>
+        <code class="doc_spec">.media.is-1x1</code>
+        <div class="media is-1x1"></div>
+      </div>
+      <div>
+        <code class="doc_spec">.media.is-4x5</code>
+        <div class="media is-4x5"></div>
+      </div>
+      <div>
+        <code class="doc_spec">.media.is-2x3</code>
+        <div class="media is-2x3"></div>
+      </div>
+    </div>
+  </div></div></div></section>
+  <hr class="doc_rule">
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       BLOCKS: ACTION ROW
+       ═══════════════════════════════════════════════════════════════════ -->
+  <section class="section_wrap"><div class="padding-global"><div class="container-large"><div class="padding-section-medium doc_stack">
+    <h2 class="text-style-headline-small">Action row</h2>
+    <p class="text-style-text-medium text-color-secondary max-width-large">A horizontal cluster of actions. Stacks full-width on mobile. This is a block, not a layout primitive &mdash; it has its own responsive behaviour.</p>
+    <div>
+      <code class="doc_spec">.action-row (default &mdash; stacks below 767px)</code>
+      <div class="action-row">
+        <a href="#" class="button">Primary</a>
+        <a href="#" class="button is-secondary">Secondary</a>
+        <a href="#" class="button is-link">Link</a>
+      </div>
+    </div>
+    <div>
+      <code class="doc_spec">.action-row.is-center</code>
+      <div class="action-row is-center">
+        <a href="#" class="button">Centred</a>
+        <a href="#" class="button is-secondary">Centred</a>
+      </div>
+    </div>
+  </div></div></div></section>
+  <hr class="doc_rule">
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       PATTERNS: SUPERCOMPONENT
+       ═══════════════════════════════════════════════════════════════════ -->
+  <section class="section_wrap"><div class="padding-global"><div class="container-large"><div class="padding-section-medium doc_stack">
+    <h2 class="text-style-headline-small">Supercomponent</h2>
+    <p class="text-style-text-medium text-color-secondary max-width-large">The core composition: media, headline, text, actions. Drops into any container and takes its width from there. Card is now a variant of this &mdash; not a separate block.</p>
+    <div class="doc_grid">
+      <div class="supercomponent">
+        <div class="media is-3x2"></div>
+        <p class="text-style-label text-color-muted">Label</p>
+        <h3 class="text-style-headline-tiny">Default variant</h3>
+        <p class="text-style-text-small text-color-secondary">The same component lives in cards, columns, rows, and sections. Width comes from the container.</p>
+        <div class="action-row is-inline-mobile">
+          <a href="#" class="button is-link">Learn more</a>
+        </div>
+      </div>
+      <div class="supercomponent">
+        <div class="media is-3x2"></div>
+        <p class="text-style-label text-color-muted">Label</p>
+        <h3 class="text-style-headline-tiny">Card variant</h3>
+        <p class="text-style-text-small text-color-secondary">Formerly a standalone block. Card treatment is now a Type variant of Supercomponent.</p>
+        <div class="action-row is-inline-mobile">
+          <a href="#" class="button is-link">Learn more</a>
+        </div>
+      </div>
+    </div>
+  </div></div></div></section>
+  <hr class="doc_rule">
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       CORNERS
+       ═══════════════════════════════════════════════════════════════════ -->
+  <section class="section_wrap"><div class="padding-global"><div class="container-large"><div class="padding-section-medium doc_stack">
+    <h2 class="text-style-headline-small">Semantic corners</h2>
+    <p class="text-style-text-medium text-color-secondary max-width-large">Components bind to the semantic layer, not raw radii. Changing a radius primitive re-corners every element that aliases it.</p>
+    <div class="doc_inline-row">
+      <div>
+        <code class="doc_spec">Modal (large)</code>
+        <div class="doc_corner-demo" style="border-radius: var(--sc-corners-modal)"></div>
+      </div>
+      <div>
+        <code class="doc_spec">Card (large)</code>
+        <div class="doc_corner-demo" style="border-radius: var(--sc-corners-card)"></div>
+      </div>
+      <div>
+        <code class="doc_spec">Media (medium)</code>
+        <div class="doc_corner-demo" style="border-radius: var(--sc-corners-media)"></div>
+      </div>
+      <div>
+        <code class="doc_spec">Button (medium)</code>
+        <div class="doc_corner-demo" style="border-radius: var(--sc-corners-button)"></div>
+      </div>
+      <div>
+        <code class="doc_spec">Input (small)</code>
+        <div class="doc_corner-demo" style="border-radius: var(--sc-corners-input)"></div>
+      </div>
+      <div>
+        <code class="doc_spec">Tag (tiny)</code>
+        <div class="doc_corner-demo" style="border-radius: var(--sc-corners-tag)"></div>
+      </div>
+      <div>
+        <code class="doc_spec">Avatar (round)</code>
+        <div class="doc_corner-demo" style="border-radius: var(--sc-corners-avatar)"></div>
+      </div>
+    </div>
+  </div></div></div></section>
+  <hr class="doc_rule">
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       CONTROL PADDING
+       ═══════════════════════════════════════════════════════════════════ -->
+  <section class="section_wrap"><div class="padding-global"><div class="container-large"><div class="padding-section-medium doc_stack">
+    <h2 class="text-style-headline-small">Control padding</h2>
+    <p class="text-style-text-medium text-color-secondary max-width-large">Fixed across breakpoints &mdash; unlike gap and block padding which scale with viewport. Used for buttons, inputs, tags, and other interactive controls.</p>
+    <div class="doc_inline-row" id="control-padding"></div>
+  </div></div></div></section>
+  <hr class="doc_rule">
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       SPACING SCALE
+       ═══════════════════════════════════════════════════════════════════ -->
+  <section class="section_wrap"><div class="padding-global"><div class="container-large"><div class="padding-section-medium doc_stack">
+    <h2 class="text-style-headline-small">Spacing</h2>
+    <p class="text-style-text-medium text-color-secondary max-width-large">Three scales. Gap for inline spacing, Block for component padding, Section for page rhythm. All three are responsive except Control (shown above).</p>
+    <table class="doc_token-table">
+      <thead><tr><th>Token</th><th>Desktop</th><th>Role</th></tr></thead>
+      <tbody>
+        <tr><td><code>--sc-padding-gap-tiny</code></td><td>4px</td><td>Tightest inline gap</td></tr>
+        <tr><td><code>--sc-padding-gap-small</code></td><td>8px</td><td>Button gap, action-row gap</td></tr>
+        <tr><td><code>--sc-padding-gap-medium</code></td><td>16px</td><td>Card grid gap</td></tr>
+        <tr><td><code>--sc-padding-gap-large</code></td><td>32px</td><td>Supercomponent internal stack</td></tr>
+        <tr><td><code>--sc-padding-gap-huge</code></td><td>64px</td><td>Major section gap</td></tr>
+        <tr><td colspan="3" style="height:1rem"></td></tr>
+        <tr><td><code>--sc-padding-block-tiny</code></td><td>16px</td><td>Button vertical padding</td></tr>
+        <tr><td><code>--sc-padding-block-small</code></td><td>32px</td><td>Card padding</td></tr>
+        <tr><td><code>--sc-padding-block-medium</code></td><td>64px</td><td>Content block padding</td></tr>
+        <tr><td><code>--sc-padding-block-large</code></td><td>128px</td><td>Section padding-large alias</td></tr>
+        <tr><td><code>--sc-padding-block-huge</code></td><td>256px</td><td>Full-bleed hero</td></tr>
+        <tr><td colspan="3" style="height:1rem"></td></tr>
+        <tr><td><code>--sc-padding-section-global</code></td><td>64px</td><td>Page horizontal padding</td></tr>
+        <tr><td><code>--sc-padding-section-small</code></td><td>= block/small</td><td>Compact section</td></tr>
+        <tr><td><code>--sc-padding-section-medium</code></td><td>= block/medium</td><td>Standard section</td></tr>
+        <tr><td><code>--sc-padding-section-large</code></td><td>= block/large</td><td>Hero / feature section</td></tr>
+      </tbody>
+    </table>
+  </div></div></div></section>
+  <hr class="doc_rule">
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       RESPONSIVE MODES
+       ═══════════════════════════════════════════════════════════════════ -->
+  <section class="section_wrap"><div class="padding-global"><div class="container-large"><div class="padding-section-medium doc_stack">
+    <h2 class="text-style-headline-small">Responsive modes</h2>
+    <p class="text-style-text-medium text-color-secondary max-width-large">Six modes matching Webflow&rsquo;s breakpoints. 1280 is deliberately skipped. Display type scales up on large screens; body type does not.</p>
+    <table class="doc_token-table">
+      <thead><tr><th>Mode</th><th>Query</th><th>Container</th></tr></thead>
+      <tbody>
+        <tr><td>xwide</td><td>min-width: 1920px</td><td>1600px</td></tr>
+        <tr><td>wide</td><td>min-width: 1440px</td><td>1440px</td></tr>
+        <tr><td>default</td><td>Desktop 992+</td><td>1280px</td></tr>
+        <tr><td>tablet</td><td>max-width: 991px</td><td>1024px</td></tr>
+        <tr><td>landscape</td><td>max-width: 767px</td><td>1024px</td></tr>
+        <tr><td>portrait</td><td>max-width: 479px</td><td>1024px</td></tr>
+      </tbody>
+    </table>
+  </div></div></div></section>
+  <hr class="doc_rule">
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       FOCUS TOKENS
+       ═══════════════════════════════════════════════════════════════════ -->
+  <section class="section_wrap"><div class="padding-global"><div class="container-large"><div class="padding-section-medium doc_stack">
+    <h2 class="text-style-headline-small">Focus tokens</h2>
+    <p class="text-style-text-medium text-color-secondary max-width-large"><code>--sc-color-focus</code> (Electric Violet) and <code>--sc-color-focus-contrast</code> (White) for consistent focus ring styling across every scheme.</p>
+    <div class="doc_inline-row">
+      <div class="doc_swatch" style="width:12rem">
+        <div class="doc_chip" style="background: var(--sc-color-focus)"></div>
+        <div class="doc_meta">focus<br><span style="color:var(--sc-color-text)">Electric Violet</span></div>
+      </div>
+      <div class="doc_swatch" style="width:12rem">
+        <div class="doc_chip" style="background: var(--sc-color-focus-contrast)"></div>
+        <div class="doc_meta">focus-contrast<br><span style="color:var(--sc-color-text)">White</span></div>
+      </div>
+    </div>
+  </div></div></div></section>
+  <hr class="doc_rule">
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       COMPONENT INVENTORY
+       ═══════════════════════════════════════════════════════════════════ -->
+  <section class="section_wrap" data-sc-scheme="scheme-2"><div class="padding-global"><div class="container-large"><div class="padding-section-medium doc_stack">
+    <h2 class="text-style-headline-small">Component inventory</h2>
+    <p class="text-style-text-medium text-color-secondary max-width-large">Everything in the system as of v0.3.</p>
+    <table class="doc_token-table">
+      <thead><tr><th>Type</th><th>Name</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Block</td><td>Button</td><td>Primary, Secondary, Link &middot; 44px touch target</td></tr>
+        <tr><td>Block</td><td>Media</td><td>10 aspect ratios + free</td></tr>
+        <tr><td>Block</td><td>Action Row</td><td>Stacks on mobile, centre/end align</td></tr>
+        <tr><td>Block</td><td>Navigation</td><td>4 states on Scheme 2 (Figma only, CSS pending)</td></tr>
+        <tr><td>Block</td><td>Navigation Link</td><td>Default, Hover, Current, Pressed</td></tr>
+        <tr><td>Pattern</td><td>Hero</td><td>Headline, subtext, action row</td></tr>
+        <tr><td>Pattern</td><td>Supercomponent</td><td>Default + Card variant</td></tr>
+        <tr><td>Pattern</td><td>Footer</td><td>Scheme 3 (Figma only, CSS pending)</td></tr>
+        <tr><td>Asset</td><td>SC_Logo</td><td>Brand lockup (Figma only)</td></tr>
+        <tr><td>Asset</td><td>SC_Marks</td><td>Icon marks (Figma only)</td></tr>
+      </tbody>
+    </table>
+  </div></div></div></section>
+  <hr class="doc_rule">
+
+  <!-- ═══════════════════════════════════════════════════════════════════
+       KNOWN ISSUES
+       ═══════════════════════════════════════════════════════════════════ -->
+  <section class="section_wrap" data-sc-scheme="scheme-3"><div class="padding-global"><div class="container-large"><div class="padding-section-medium doc_stack">
+    <h2 class="text-style-headline-small">Known issues</h2>
+    <p class="text-style-text-medium text-color-secondary max-width-large"><strong>Figma schemes don&rsquo;t cascade to nested components.</strong> A section set to Scheme 2 does not propagate that scheme to component instances nested inside it &mdash; Figma&rsquo;s variable mode scoping stops at the first component boundary. The CSS cascade works correctly; this is a Figma-only limitation.</p>
+  </div></div></div></section>
+
+</main>
+<script>
+  var roles = ['background','foreground','text','accent','border'];
+  document.getElementById('swatches').innerHTML = roles.map(function (r) {
+    var v = getComputedStyle(document.documentElement).getPropertyValue('--sc-color-' + r).trim();
+    return '<div class="doc_swatch"><div class="doc_chip" style="background:var(--sc-color-' + r + ')"></div><div class="doc_meta">' + r + '<br><span style="color:var(--sc-color-text)">' + v + '</span></div></div>';
+  }).join('');
+
+  var controls = ['none','tiny','small','medium','large','huge'];
+  document.getElementById('control-padding').innerHTML = controls.map(function (c) {
+    var v = getComputedStyle(document.documentElement).getPropertyValue('--sc-padding-control-' + c).trim();
+    return '<div style="text-align:center"><code class="doc_spec">' + c + '</code><div class="doc_control-demo" style="padding:var(--sc-padding-control-' + c + ')">' + v + '</div></div>';
+  }).join('');
+</script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+{
+  "$description": "Air Methods brand theme, synced from Figma 18WKlxwsAYNi1EVrq21obj via npm run sync.",
+  "$theme": "airmethods",
+  "typeface": {
+    "family": {
+      "headline": {
+        "$type": "string",
+        "$value": "Proxima Nova Condensed",
+        "$figmaName": "Typography/Typeface/Family/Headline"
+      },
+      "text": {
+        "$type": "string",
+        "$value": "Hanken Grotesk",
+        "$figmaName": "Typography/Typeface/Family/Text"
+      },
+      "decorative": {
+        "$type": "string",
+        "$value": "Roboto Mono",
+        "$figmaName": "Typography/Typeface/Family/Decorative"
+      }
+    },
+    "weight": {
+      "regular": {
+        "$type": "number",
+        "$value": 400,
+        "$figmaName": "Typography/Typeface/Weight/Regular"
+      },
+      "medium": {
+        "$type": "number",
+        "$value": 500,
+        "$figmaName": "Typography/Typeface/Weight/Medium"
+      },
+      "semibold": {
+        "$type": "number",
+        "$value": 600,
+        "$figmaName": "Typography/Typeface/Weight/Semibold"
+      },
+      "bold": {
+        "$type": "number",
+        "$value": 700,
+        "$figmaName": "Typography/Typeface/Weight/Bold"
+      },
+      "extrabold": {
+        "$type": "number",
+        "$value": 800,
+        "$figmaName": "Typography/Typeface/Weight/ExtraBold"
+      },
+      "black": {
+        "$type": "number",
+        "$value": 900,
+        "$figmaName": "Typography/Typeface/Weight/Black"
+      }
+    }
+  },
+  "font-size": {
+    "headline": {
+      "hero": {
+        "$type": "dimension",
+        "$value": "8rem",
+        "$modes": {
+          "wide": "9rem",
+          "xwide": "10.5rem",
+          "tablet": "6rem",
+          "landscape": "4rem",
+          "portrait": "3.25rem"
+        },
+        "$figmaName": "Typography/Size/Headline/Hero"
+      },
+      "huge": {
+        "$type": "dimension",
+        "$value": "5.625rem",
+        "$modes": {
+          "wide": "6.25rem",
+          "xwide": "7.25rem",
+          "tablet": "4.5rem",
+          "landscape": "3.25rem",
+          "portrait": "2.75rem"
+        },
+        "$figmaName": "Typography/Size/Headline/Huge"
+      },
+      "large": {
+        "$type": "dimension",
+        "$value": "4rem",
+        "$modes": {
+          "wide": "4.375rem",
+          "xwide": "5rem",
+          "tablet": "3.5rem",
+          "landscape": "2.625rem",
+          "portrait": "2.25rem"
+        },
+        "$figmaName": "Typography/Size/Headline/Large"
+      },
+      "medium": {
+        "$type": "dimension",
+        "$value": "2.8125rem",
+        "$modes": {
+          "wide": "3rem",
+          "xwide": "3.25rem",
+          "tablet": "2.5rem",
+          "landscape": "2.125rem",
+          "portrait": "1.875rem"
+        },
+        "$figmaName": "Typography/Size/Headline/Medium"
+      },
+      "small": {
+        "$type": "dimension",
+        "$value": "2rem",
+        "$modes": {
+          "wide": "2.125rem",
+          "xwide": "2.25rem",
+          "tablet": "1.875rem",
+          "landscape": "1.625rem",
+          "portrait": "1.5rem"
+        },
+        "$figmaName": "Typography/Size/Headline/Small"
+      },
+      "tiny": {
+        "$type": "dimension",
+        "$value": "1.25rem",
+        "$modes": {
+          "xwide": "1.375rem",
+          "landscape": "1.125rem",
+          "portrait": "1.125rem"
+        },
+        "$figmaName": "Typography/Size/Headline/Tiny"
+      }
+    },
+    "text": {
+      "huge": {
+        "$type": "dimension",
+        "$value": "3rem",
+        "$modes": {
+          "xwide": "3.25rem",
+          "tablet": "2.5rem",
+          "landscape": "2rem",
+          "portrait": "1.875rem"
+        },
+        "$figmaName": "Typography/Size/Text/Huge"
+      },
+      "large": {
+        "$type": "dimension",
+        "$value": "2.25rem",
+        "$modes": {
+          "xwide": "2.375rem",
+          "tablet": "2rem",
+          "landscape": "1.75rem",
+          "portrait": "1.625rem"
+        },
+        "$figmaName": "Typography/Size/Text/Large"
+      },
+      "medium": {
+        "$type": "dimension",
+        "$value": "1.5rem",
+        "$modes": {
+          "tablet": "1.375rem",
+          "landscape": "1.25rem",
+          "portrait": "1.25rem"
+        },
+        "$figmaName": "Typography/Size/Text/Medium"
+      },
+      "small": {
+        "$type": "dimension",
+        "$value": "1.125rem",
+        "$modes": {
+          "landscape": "1.0625rem",
+          "portrait": "1.0625rem"
+        },
+        "$figmaName": "Typography/Size/Text/Small"
+      },
+      "tiny": {
+        "$type": "dimension",
+        "$value": "0.875rem",
+        "$figmaName": "Typography/Size/Text/Tiny"
+      }
+    }
+  }
+}

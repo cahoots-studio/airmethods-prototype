@@ -1,0 +1,9 @@
+/* Prototype chrome only — the light/dark toggle. The page itself is styled
+   entirely by assets/supercomponent.css (tokens from Figma + src/ patterns). */
+@layer sc-components {
+  .prototype_mode-toggle {
+    position: fixed; z-index: 10;
+    right: var(--sc-padding-gap-medium); bottom: var(--sc-padding-gap-medium);
+    background-color: var(--sc-color-background);
+  }
+}

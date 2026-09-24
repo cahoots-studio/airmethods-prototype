@@ -1,0 +1,12 @@
+/* PATTERN: footer
+   Figma Section / Footer · Scheme 3: primary links | legal + copyright.
+   The Figma columns are empty until a Footer component exists. */
+@layer sc-components {
+  .footer_component { display: flex; gap: var(--sc-padding-gap-large); align-items: flex-start; }
+  .footer_component > * { flex: 1 1 0; min-width: 0; }
+  .footer_links { display: flex; flex-wrap: wrap; gap: var(--sc-padding-gap-medium) var(--sc-padding-gap-large); margin: 0; padding: 0; list-style: none; }
+  .footer_links a { text-decoration: none; }
+  .footer_link { font-weight: var(--sc-typeface-weight-extrabold); }
+  .footer_legal { display: flex; flex-direction: column; gap: var(--sc-padding-gap-medium); }
+  @media (max-width: 767px) { .footer_component { flex-direction: column; } }
+}

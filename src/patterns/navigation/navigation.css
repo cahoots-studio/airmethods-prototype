@@ -1,0 +1,27 @@
+/* PATTERN: navigation
+   Figma: Navigation [Layout=Desktop] · Scheme 2. Logo, links, CTA in one row;
+   links collapse below Mobile Landscape (the Mobile Open accordion is not
+   built in this prototype). */
+@layer sc-components {
+  .navigation_component {
+    display: flex;
+    align-items: center;
+    gap: var(--sc-padding-gap-large);
+    padding-block: var(--sc-padding-gap-medium);
+  }
+  .navigation_logo { text-decoration: none; text-transform: uppercase; }
+  .navigation_links {
+    display: flex; flex-wrap: wrap; gap: var(--sc-padding-gap-large);
+    margin: 0 0 0 auto; padding: 0; list-style: none;
+  }
+  .navigation_link {
+    font-size: var(--sc-font-size-text-small);
+    font-weight: var(--sc-typeface-weight-extrabold);
+    text-decoration: none;
+  }
+  .navigation_link:hover { text-decoration: underline; text-decoration-color: var(--sc-color-accent); }
+  @media (max-width: 767px) {
+    .navigation_links { display: none; }
+    .navigation_component { justify-content: space-between; }
+  }
+}

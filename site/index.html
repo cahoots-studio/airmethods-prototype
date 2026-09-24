@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Air Methods — Homepage prototype</title>
+  <meta name="description" content="Supercomponent prototype: Air Methods homepage, built from tokens synced from Figma.">
+  <meta name="robots" content="noindex">
+  <!-- Proxima Nova Condensed (display headlines). Adobe Fonts kit vir5hey — list the Netlify domain on the web project. -->
+  <link rel="stylesheet" href="https://use.typekit.net/vir5hey.css">
+  <!-- Hanken Grotesk (Figma Text family) + Fira Sans Condensed (headline fallback until the kit carries 900). -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@900&family=Hanken+Grotesk:wght@400;800;900&display=swap">
+  <!-- Generated from Figma variables by `npm run sync` + src/ — do not edit by hand. -->
+  <link rel="stylesheet" href="assets/supercomponent.css">
+  <link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<div class="page-wrapper">
+
+  <!-- Figma: Navigation [Layout=Desktop] · Scheme 2. Items are the live site's top level;
+       the Figma instance still carries SC placeholder copy. -->
+  <header class="navigation_wrap section_wrap" data-sc-pattern="navigation" data-sc-scheme="scheme-2">
+    <div class="padding-global">
+      <nav class="container-large navigation_component" aria-label="Primary">
+        <a href="#" class="navigation_logo text-style-headline-tiny" data-sc-slot="logo">Air Methods</a>
+        <ul class="navigation_links">
+          <li><a href="#" class="navigation_link" data-sc-slot="link">Company</a></li>
+          <li><a href="#" class="navigation_link" data-sc-slot="link">Air Medical</a></li>
+          <li><a href="#" class="navigation_link" data-sc-slot="link">Careers</a></li>
+          <li><a href="#" class="navigation_link" data-sc-slot="link">Contact</a></li>
+        </ul>
+        <a href="#" class="button" data-sc-slot="cta">Patient &amp; Family Center</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-wrapper">
+
+    <!-- Figma: Section / Hero · Scheme 3 · Section/Large -->
+    <section class="hero_wrap section_wrap" data-sc-pattern="hero" data-sc-scheme="scheme-3">
+      <div class="padding-global">
+        <div class="container-large">
+          <div class="padding-section-large">
+            <div class="hero_component is-split">
+              <div class="supercomponent hero_content">
+                <h1 class="text-style-headline-huge" data-sc-slot="heading">Closing the distance to lifesaving care.</h1>
+                <div class="action-row">
+                  <a href="#" class="button is-link" data-sc-slot="cta-primary">Partner with Us →</a>
+                  <a href="#" class="button is-link" data-sc-slot="cta-secondary">Explore Careers →</a>
+                </div>
+              </div>
+              <!-- Column / Patient Center — PENDING overlap pattern. Scheme 1 inside Scheme 3. -->
+              <aside class="hero_aside" data-sc-scheme="scheme-1" aria-label="Patient portal">
+                <h2 class="text-style-headline-tiny" data-sc-slot="aside-heading">Patient Portal</h2>
+                <figure class="media is-16x9" aria-hidden="true" data-sc-slot="aside-media"></figure>
+                <div class="action-row is-inline-mobile">
+                  <a href="#" class="button is-link" data-sc-slot="aside-cta">Access Your Account</a>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Figma: Section / Mission -->
+    <section class="statement_wrap section_wrap" data-sc-pattern="statement">
+      <div class="padding-global">
+        <div class="container-large">
+          <div class="padding-section-medium">
+            <div class="statement_component">
+              <div class="supercomponent">
+                <h2 class="text-style-headline-medium" data-sc-slot="heading">We connect people to essential care when time, distance, or access stand in the way.</h2>
+              </div>
+              <div class="placeholder is-tall" role="img" aria-label="Map feature, pending">
+                <span class="text-style-label">Map feature — pending</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Figma: Section / Partners -->
+    <section class="partners_wrap section_wrap" data-sc-pattern="partners">
+      <div class="padding-global">
+        <div class="container-large">
+          <div class="padding-section-medium">
+            <div class="partners_component">
+              <h2 class="text-style-headline-medium" data-sc-slot="heading">Our partners make it possible.</h2>
+              <div class="placeholder" role="img" aria-label="Partner logos, pending">
+                <span class="text-style-label">Partner logos — pending assets</span>
+              </div>
+              <div class="action-row is-end">
+                <a href="#" class="button is-link" data-sc-slot="cta">Explore Our Partner Network →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Figma: Section / What We Do (Figma heading copy currently duplicates Partners; wireframe copy used) -->
+    <section class="services_wrap section_wrap" data-sc-pattern="services">
+      <div class="padding-global">
+        <div class="container-large">
+          <div class="padding-section-medium">
+            <div class="services_component">
+              <h2 class="text-style-headline-medium" data-sc-slot="heading">What We Do at Air Methods</h2>
+              <div class="services_list">
+                <div class="supercomponent">
+                  <h3 class="text-style-headline-tiny" data-sc-slot="item-heading">Emergency Air Medical</h3>
+                  <p class="text-style-text-small" data-sc-slot="item-text">Scene response and time-critical air medical transport when patients need rapid access to advanced care.</p>
+                  <div class="action-row is-inline-mobile"><a href="#" class="button is-link" data-sc-slot="item-cta">Learn More →</a></div>
+                </div>
+                <div class="supercomponent">
+                  <h3 class="text-style-headline-tiny" data-sc-slot="item-heading">Interfacility Transport</h3>
+                  <p class="text-style-text-small" data-sc-slot="item-text">Helicopter and fixed-wing transport connecting patients with the appropriate level of care.</p>
+                  <div class="action-row is-inline-mobile"><a href="#" class="button is-link" data-sc-slot="item-cta">Learn More →</a></div>
+                </div>
+                <div class="supercomponent">
+                  <h3 class="text-style-headline-tiny" data-sc-slot="item-heading">Healthcare Partnerships</h3>
+                  <p class="text-style-text-small" data-sc-slot="item-text">Flexible air medical programs designed around the operational and clinical needs of healthcare partners.</p>
+                  <div class="action-row is-inline-mobile"><a href="#" class="button is-link" data-sc-slot="item-cta">Learn More →</a></div>
+                </div>
+              </div>
+              <div class="supercomponent max-width-widest">
+                <p class="text-style-text-medium" data-sc-slot="footnote">More than transportation. Every mission is supported by experienced clinicians, pilots, aircraft, safety systems, training, maintenance and operational infrastructure.</p>
+                <div class="action-row is-inline-mobile"><a href="#" class="button is-link" data-sc-slot="footnote-cta">Explore Our Capabilities →</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Figma: Section / Careers -->
+    <section class="story_wrap section_wrap" data-sc-pattern="story">
+      <div class="padding-global">
+        <div class="container-large">
+          <div class="padding-section-large">
+            <div class="story_component">
+              <div class="supercomponent max-width-wide">
+                <h2 class="text-style-headline-medium" data-sc-slot="heading">Join a team that shows up when it matters most.</h2>
+                <p class="text-style-text-medium" data-sc-slot="text">Behind every mission is a team of people bringing their expertise, commitment, and care to work every day. Find your place at Air Methods and help make critical care possible.</p>
+                <div class="action-row is-inline-mobile"><a href="#" class="button is-link" data-sc-slot="cta">Find Your Place At Air Methods →</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Figma: Section / History -->
+    <section class="story_wrap section_wrap" data-sc-pattern="story">
+      <div class="padding-global">
+        <div class="container-large">
+          <div class="padding-section-large">
+            <div class="story_component">
+              <div class="supercomponent max-width-wide">
+                <h2 class="text-style-headline-medium" data-sc-slot="heading">46 years. One mission that still moves us forward.</h2>
+                <p class="text-style-text-medium" data-sc-slot="text">What began with a belief that where you live shouldn’t determine your access to critical care has grown into a nationwide air medical operation. Through it all, our purpose has remained the same: connecting people and communities to the care they need.</p>
+                <div class="action-row is-inline-mobile"><a href="#" class="button is-link" data-sc-slot="cta">About Air Methods →</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Figma: Section / Newsfeed · Supercomponent [Type=Card] ×3 — placeholder content, as in Figma -->
+    <section class="newsfeed_wrap section_wrap" data-sc-pattern="newsfeed">
+      <div class="padding-global">
+        <div class="container-large">
+          <div class="padding-section-medium">
+            <div class="newsfeed_component">
+              <h2 class="text-style-headline-medium" data-sc-slot="heading">Newsfeed</h2>
+              <div class="newsfeed_list">
+                <article class="supercomponent is-card">
+                  <figure class="media is-3x2" aria-hidden="true" data-sc-slot="item-media"></figure>
+                  <h3 class="text-style-headline-small" data-sc-slot="item-heading">Small Headline</h3>
+                  <p class="text-style-text-small" data-sc-slot="item-text">This is a bit of small text it is our baseline text. Good for long form text, paragraphs etc. This is the smallest compliant text size</p>
+                  <div class="action-row is-inline-mobile"><a href="#" class="button is-link" data-sc-slot="item-cta">Read More →</a></div>
+                </article>
+                <article class="supercomponent is-card">
+                  <figure class="media is-3x2" aria-hidden="true" data-sc-slot="item-media"></figure>
+                  <h3 class="text-style-headline-small" data-sc-slot="item-heading">Small Headline</h3>
+                  <p class="text-style-text-small" data-sc-slot="item-text">This is a bit of small text it is our baseline text. Good for long form text, paragraphs etc. This is the smallest compliant text size</p>
+                  <div class="action-row is-inline-mobile"><a href="#" class="button is-link" data-sc-slot="item-cta">Read More →</a></div>
+                </article>
+                <article class="supercomponent is-card">
+                  <figure class="media is-3x2" aria-hidden="true" data-sc-slot="item-media"></figure>
+                  <h3 class="text-style-headline-small" data-sc-slot="item-heading">Small Headline</h3>
+                  <p class="text-style-text-small" data-sc-slot="item-text">This is a bit of small text it is our baseline text. Good for long form text, paragraphs etc. This is the smallest compliant text size</p>
+                  <div class="action-row is-inline-mobile"><a href="#" class="button is-link" data-sc-slot="item-cta">Read More →</a></div>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Figma: Section / Footer · Scheme 3. Figma columns are empty (no Footer component yet); links are the live site's. -->
+  <footer class="footer_wrap section_wrap" data-sc-pattern="footer" data-sc-scheme="scheme-3">
+    <div class="padding-global">
+      <div class="container-large">
+        <div class="padding-section-small">
+          <div class="footer_component">
+            <ul class="footer_links">
+              <li><a href="#" class="footer_link" data-sc-slot="link">Contact</a></li>
+              <li><a href="#" class="footer_link" data-sc-slot="link">Media Center</a></li>
+              <li><a href="#" class="footer_link" data-sc-slot="link">Supplier Portal</a></li>
+              <li><a href="#" class="footer_link" data-sc-slot="link">AlertLine</a></li>
+            </ul>
+            <div class="footer_legal">
+              <ul class="footer_links">
+                <li><a href="#" class="text-style-text-tiny" data-sc-slot="legal-link">Notice of HIPAA Privacy Practices</a></li>
+                <li><a href="#" class="text-style-text-tiny" data-sc-slot="legal-link">Privacy Policy</a></li>
+                <li><a href="#" class="text-style-text-tiny" data-sc-slot="legal-link">CCPA Privacy Notice</a></li>
+                <li><a href="#" class="text-style-text-tiny" data-sc-slot="legal-link">No Surprises Act</a></li>
+              </ul>
+              <p class="text-style-text-tiny" data-sc-slot="copyright">© 2026 Air Methods. Prototype — not the live site.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- Prototype chrome only: toggles the Dark column of every scheme. Not part of the site. -->
+<button type="button" class="button is-secondary prototype_mode-toggle" aria-pressed="false">Dark mode</button>
+<script>
+  (function () {
+    var b = document.querySelector('.prototype_mode-toggle');
+    b.addEventListener('click', function () {
+      var dark = document.body.getAttribute('data-sc-mode') === 'dark';
+      if (dark) document.body.removeAttribute('data-sc-mode'); else document.body.setAttribute('data-sc-mode', 'dark');
+      b.setAttribute('aria-pressed', String(!dark));
+      b.textContent = dark ? 'Dark mode' : 'Light mode';
+    });
+  })();
+</script>
+</body>
+</html>

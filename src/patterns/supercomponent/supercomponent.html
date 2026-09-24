@@ -1,0 +1,25 @@
+<!-- PATTERN: supercomponent
+     Mirrored from Figma · Supercomponent
+
+     Media / Headline / Text / Action Row. Heading level comes from the document
+     outline, not the visual size — the text-style class carries appearance, the
+     tag carries structure, and they are independent by design. -->
+
+<div class="supercomponent">
+  <figure class="media is-16x9">
+    <img src="" alt="" loading="lazy" decoding="async">
+  </figure>
+
+  <h3 class="text-style-headline-large" data-sc-slot="headline">
+    Headline
+  </h3>
+
+  <p class="text-style-text-small" data-sc-slot="text">
+    Supporting text.
+  </p>
+
+  <div class="action-row" data-sc-slot="actions">
+    <a href="#" class="button">Contact Us</a>
+    <a href="#" class="button is-secondary">View Case Study</a>
+  </div>
+</div>

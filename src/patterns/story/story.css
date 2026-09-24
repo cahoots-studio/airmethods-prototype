@@ -1,0 +1,6 @@
+/* PATTERN: story
+   Figma Section / Careers and Section / History: one Supercomponent capped at
+   Column/Wide, left-aligned. Width comes from the max-width utility. */
+@layer sc-components {
+  .story_component { display: flex; flex-direction: column; align-items: flex-start; }
+}

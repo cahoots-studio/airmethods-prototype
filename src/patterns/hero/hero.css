@@ -1,0 +1,49 @@
+/* PATTERN: hero
+   Rules for every pattern file:
+     1. Only --sc-* tokens. No raw hex, no raw rem.
+     2. No margin on the outer element — section rhythm belongs to CF utilities.
+     3. Lives in @layer sc-components so utilities can always override.
+
+   Layout is declared here, per pattern. There is no shared layout class. */
+
+@layer sc-components {
+  .hero_component {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sc-padding-gap-large);
+  }
+
+  .hero_heading { max-width: 18ch; }
+
+  @media (max-width: 767px) {
+    .hero_component { gap: var(--sc-padding-gap-medium); }
+    .hero_heading { max-width: none; }
+  }
+}
+
+/* ---- is-split: heading + actions beside an aside ----------------------------
+   Air Methods · Figma Section / Hero: Container (horizontal, gap Gap/Large) →
+   Column / Headline + Actions (bottom-aligned) + Column / Patient Center
+   (max-width Column/Tightest). Additive — the stacked hero above is unchanged. */
+@layer sc-components {
+  .hero_component.is-split {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+  .hero_component.is-split > .hero_content { flex: 1 1 0; min-width: 0; }
+  .hero_aside {
+    flex: 0 1 var(--sc-width-column-tightest);
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sc-padding-gap-small);
+    padding: var(--sc-padding-gap-small) var(--sc-padding-gap-tiny);
+    background-color: var(--sc-color-foreground);
+  }
+  @media (max-width: 767px) {
+    .hero_component.is-split { flex-direction: column; align-items: stretch; }
+    .hero_aside { flex-basis: auto; }
+  }
+}

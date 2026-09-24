@@ -1,0 +1,28 @@
+{
+  "name": "airmethods-prototype",
+  "version": "0.1.0",
+  "description": "Air Methods homepage prototype on Supercomponent \u2014 tokens synced from Figma 18WKlxwsAYNi1EVrq21obj.",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "sync": "node build/sync.mjs",
+    "tokens:pull": "node build/sync.mjs --no-deploy",
+    "tokens:css": "node build/tokens-to-css.mjs",
+    "tokens:wp": "node build/tokens-to-themejson.mjs",
+    "tokens:webflow": "node build/tokens-to-webflow.mjs",
+    "tokens:seed-figma": "node build/tokens-to-figma.mjs",
+    "lint": "node build/lint-tokens.mjs",
+    "tokens:build": "npm run tokens:css && npm run tokens:wp && npm run tokens:webflow && npm run bundle && npm run check:scales && npm run lint",
+    "dev": "npm run build:site && npx serve _site",
+    "build": "npm run tokens:build",
+    "bundle": "node build/bundle-css.mjs",
+    "build:site": "npm run tokens:build && node build/build-site.mjs && node build/build-prototype.mjs",
+    "color:add": "node build/color-ramp.mjs",
+    "theme:new": "node build/theme-new.mjs",
+    "color:signals": "node build/color-signals.mjs",
+    "check:scales": "node build/check-scales.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

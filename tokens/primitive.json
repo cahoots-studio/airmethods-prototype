@@ -1,0 +1,244 @@
+{
+  "$description": "Layout geometry only — space, size, radius, breakpoints. IDENTICAL for every client. Authored in Figma under the Primitive collection.",
+  "color": {
+    "royal-blue": {
+      "$type": "color",
+      "$value": "#406DE7",
+      "$figmaName": "Color Primitives/Color/Key Colors/Royal Blue"
+    },
+    "ground": {
+      "$type": "color",
+      "$value": "#FFFFFF",
+      "$figmaName": "Color Primitives/Color/Key Colors/Ground"
+    },
+    "top": {
+      "$type": "color",
+      "$value": "#0C223F",
+      "$figmaName": "Color Primitives/Color/Key Colors/Top"
+    },
+    "neutral-lightest": {
+      "$type": "color",
+      "$value": "#F7F8F9",
+      "$figmaName": "Color Primitives/Color/Scale/Neutral/Lightest"
+    },
+    "neutral-lighter": {
+      "$type": "color",
+      "$value": "#EBEEF1",
+      "$figmaName": "Color Primitives/Color/Scale/Neutral/Lighter"
+    },
+    "neutral-light": {
+      "$type": "color",
+      "$value": "#D8DDE4",
+      "$figmaName": "Color Primitives/Color/Scale/Neutral/Light"
+    },
+    "neutral-neutral": {
+      "$type": "color",
+      "$value": "#9FA9B6",
+      "$figmaName": "Color Primitives/Color/Scale/Neutral/Neutral"
+    },
+    "neutral-dark": {
+      "$type": "color",
+      "$value": "#697380",
+      "$figmaName": "Color Primitives/Color/Scale/Neutral/Dark"
+    },
+    "neutral-darker": {
+      "$type": "color",
+      "$value": "#4E555F",
+      "$figmaName": "Color Primitives/Color/Scale/Neutral/Darker"
+    },
+    "neutral-darkest": {
+      "$type": "color",
+      "$value": "#373B40",
+      "$figmaName": "Color Primitives/Color/Scale/Neutral/Darkest"
+    },
+    "white": {
+      "$type": "color",
+      "$value": "#FFFFFF",
+      "$figmaName": "Color Primitives/Color/Utility/White"
+    },
+    "black": {
+      "$type": "color",
+      "$value": "#000000",
+      "$figmaName": "Color Primitives/Color/Utility/Black"
+    },
+    "error": {
+      "$type": "color",
+      "$value": "#E7405C",
+      "$figmaName": "Color Primitives/Color/Utility/Error"
+    },
+    "warning": {
+      "$type": "color",
+      "$value": "#9A7000",
+      "$figmaName": "Color Primitives/Color/Utility/Warning"
+    },
+    "success": {
+      "$type": "color",
+      "$value": "#009138",
+      "$figmaName": "Color Primitives/Color/Utility/Success"
+    },
+    "info": {
+      "$type": "color",
+      "$value": "#007EC6",
+      "$figmaName": "Color Primitives/Color/Utility/Info"
+    },
+    "royal-blue-lightest": {
+      "$type": "color",
+      "$value": "#DAE6FF",
+      "$figmaName": "Color Primitives/Color/Scale/Royal Blue/Lightest"
+    },
+    "royal-blue-lighter": {
+      "$type": "color",
+      "$value": "#A8C4FF",
+      "$figmaName": "Color Primitives/Color/Scale/Royal Blue/Lighter"
+    },
+    "royal-blue-light": {
+      "$type": "color",
+      "$value": "#6F9AFF",
+      "$figmaName": "Color Primitives/Color/Scale/Royal Blue/Light"
+    },
+    "royal-blue-dark": {
+      "$type": "color",
+      "$value": "#3158B8",
+      "$figmaName": "Color Primitives/Color/Scale/Royal Blue/Dark"
+    },
+    "royal-blue-darker": {
+      "$type": "color",
+      "$value": "#23458B",
+      "$figmaName": "Color Primitives/Color/Scale/Royal Blue/Darker"
+    },
+    "royal-blue-darkest": {
+      "$type": "color",
+      "$value": "#173364",
+      "$figmaName": "Color Primitives/Color/Scale/Royal Blue/Darkest"
+    },
+    "focus": {
+      "$type": "string",
+      "$value": "{color.royal-blue}",
+      "$figmaName": "Color Primitives/Color/Utility/Focus"
+    },
+    "focus-contrast": {
+      "$type": "string",
+      "$value": "{color.white}",
+      "$figmaName": "Color Primitives/Color/Utility/Focus Contrast"
+    }
+  },
+  "transparency": {
+    "transparent": {
+      "$type": "color",
+      "$value": "#F7F8F900",
+      "$figmaName": "Color Primitives/Transparency/Transparent"
+    },
+    "neutral-lightest-5": {
+      "$type": "color",
+      "$value": "#F7F8F90D",
+      "$figmaName": "Color Primitives/Transparency/Neutral Lightest 5"
+    },
+    "neutral-lightest-10": {
+      "$type": "color",
+      "$value": "#F7F8F91A",
+      "$figmaName": "Color Primitives/Transparency/Neutral Lightest 10"
+    },
+    "neutral-lightest-15": {
+      "$type": "color",
+      "$value": "#F7F8F926",
+      "$figmaName": "Color Primitives/Transparency/Neutral Lightest 15"
+    },
+    "neutral-lightest-20": {
+      "$type": "color",
+      "$value": "#F7F8F933",
+      "$figmaName": "Color Primitives/Transparency/Neutral Lightest 20"
+    },
+    "neutral-lightest-30": {
+      "$type": "color",
+      "$value": "#F7F8F94D",
+      "$figmaName": "Color Primitives/Transparency/Neutral Lightest 30"
+    },
+    "neutral-lightest-40": {
+      "$type": "color",
+      "$value": "#F7F8F966",
+      "$figmaName": "Color Primitives/Transparency/Neutral Lightest 40"
+    },
+    "neutral-lightest-50": {
+      "$type": "color",
+      "$value": "#F7F8F980",
+      "$figmaName": "Color Primitives/Transparency/Neutral Lightest 50"
+    },
+    "neutral-lightest-60": {
+      "$type": "color",
+      "$value": "#F7F8F999",
+      "$figmaName": "Color Primitives/Transparency/Neutral Lightest 60"
+    },
+    "neutral-darkest-5": {
+      "$type": "color",
+      "$value": "#373B400D",
+      "$figmaName": "Color Primitives/Transparency/Neutral Darkest 5"
+    },
+    "neutral-darkest-10": {
+      "$type": "color",
+      "$value": "#373B401A",
+      "$figmaName": "Color Primitives/Transparency/Neutral Darkest 10"
+    },
+    "neutral-darkest-15": {
+      "$type": "color",
+      "$value": "#373B4026",
+      "$figmaName": "Color Primitives/Transparency/Neutral Darkest 15"
+    },
+    "neutral-darkest-20": {
+      "$type": "color",
+      "$value": "#373B4033",
+      "$figmaName": "Color Primitives/Transparency/Neutral Darkest 20"
+    },
+    "neutral-darkest-30": {
+      "$type": "color",
+      "$value": "#373B404D",
+      "$figmaName": "Color Primitives/Transparency/Neutral Darkest 30"
+    },
+    "neutral-darkest-40": {
+      "$type": "color",
+      "$value": "#373B4066",
+      "$figmaName": "Color Primitives/Transparency/Neutral Darkest 40"
+    },
+    "neutral-darkest-50": {
+      "$type": "color",
+      "$value": "#373B4080",
+      "$figmaName": "Color Primitives/Transparency/Neutral Darkest 50"
+    },
+    "neutral-darkest-60": {
+      "$type": "color",
+      "$value": "#373B4099",
+      "$figmaName": "Color Primitives/Transparency/Neutral Darkest 60"
+    }
+  },
+  "opacity": {
+    "5": {
+      "$type": "number",
+      "$value": 5,
+      "$figmaName": "Color Primitives/Opacity/5"
+    },
+    "10": {
+      "$type": "number",
+      "$value": 10,
+      "$figmaName": "Color Primitives/Opacity/10"
+    },
+    "20": {
+      "$type": "number",
+      "$value": 20,
+      "$figmaName": "Color Primitives/Opacity/20"
+    },
+    "40": {
+      "$type": "number",
+      "$value": 40,
+      "$figmaName": "Color Primitives/Opacity/40"
+    },
+    "60": {
+      "$type": "number",
+      "$value": 60,
+      "$figmaName": "Color Primitives/Opacity/60"
+    },
+    "80": {
+      "$type": "number",
+      "$value": 80,
+      "$figmaName": "Color Primitives/Opacity/80"
+    }
+  }
+}

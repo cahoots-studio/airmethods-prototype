@@ -1,0 +1,60 @@
+/* Supercomponent base layer.
+   Cascade order is declared in the generated token file:
+     @layer sc-tokens, sc-base, sc-components, sc-utilities;
+   Utilities land last on purpose. A CF utility (.padding-section-large) must
+   always beat a component's own padding without !important or selector games. */
+
+@layer sc-base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background-color: var(--sc-color-background);
+    color: var(--sc-color-text);
+    font-family: var(--sc-typeface-family-text);
+    font-size: var(--sc-font-size-text-small);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6, p, figure, blockquote { margin: 0; }
+
+  /* Heading APPEARANCE is generated into this layer from tokens/textstyles.json
+     ($headingDefaults). Only structural properties belong here — size, weight,
+     family, and spacing are the text styles' job, and any .text-style-* class
+     overrides them from the utilities layer. */
+  h1, h2, h3, h4, h5, h6 { text-wrap: balance; }
+
+  p { text-wrap: pretty; }
+
+  img, svg, video, canvas { display: block; max-width: 100%; height: auto; }
+
+  a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.2em; }
+
+  button, input, textarea, select { font: inherit; color: inherit; }
+
+  :focus-visible {
+    outline: 2px solid var(--sc-color-accent);
+    outline-offset: 3px;
+  }
+
+  /* Quality floor: honour the OS setting, don't fight it. */
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer sc-components {
+  /* CF page structure. Every section wraps:
+     section > padding-global > container > padding-section > component */
+  .page-wrapper { overflow: clip; }
+  .main-wrapper { display: block; }
+  .section_wrap { position: relative; }
+}

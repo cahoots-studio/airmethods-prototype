@@ -1,0 +1,41 @@
+{
+  "$description": "Repo-authored tokens that Figma cannot express. Never overwritten by sync \u2014 copied through unchanged like motion.json.",
+  "breakpoint": {
+    "portrait": {
+      "$type": "dimension",
+      "$value": "479px"
+    },
+    "landscape": {
+      "$type": "dimension",
+      "$value": "767px"
+    },
+    "tablet": {
+      "$type": "dimension",
+      "$value": "991px"
+    },
+    "desktop": {
+      "$type": "dimension",
+      "$value": "992px"
+    },
+    "wide": {
+      "$type": "dimension",
+      "$value": "1440px"
+    },
+    "xwide": {
+      "$type": "dimension",
+      "$value": "1920px"
+    }
+  },
+  "image-treatment": {
+    "$type": "string",
+    "$value": "none",
+    "$description": "CSS filter applied to media blocks. Figma cannot express filters as variables."
+  },
+  "elevation": {
+    "card": {
+      "$type": "string",
+      "$value": "10px 0 75px rgb(12 34 63 / 0.22)",
+      "$description": "Figma effect style Elevation/Card (Air Methods --c-box-shadow). Effect styles are not variables, so sync cannot carry them; authored here and kept in step by hand."
+    }
+  }
+}

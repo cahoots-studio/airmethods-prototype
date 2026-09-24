@@ -1,0 +1,12 @@
+/* BLOCK: placeholder
+   Stands in for a Figma column marked PENDING (map feature, partner logos).
+   Height comes from Padding/Block so nothing here is a raw value. Delete the
+   block when the last placeholder is replaced. */
+@layer sc-components {
+  .placeholder {
+    display: grid; place-items: center;
+    padding-block: var(--sc-padding-block-medium);
+    border: 1px dashed var(--sc-color-border);
+  }
+  .placeholder.is-tall { padding-block: var(--sc-padding-block-large); }
+}

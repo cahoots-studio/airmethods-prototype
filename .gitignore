@@ -1,0 +1,6 @@
+node_modules/
+dist/
+_site/
+.sync-tmp/
+tokens/.figma-raw.json
+.DS_Store

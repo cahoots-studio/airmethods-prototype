@@ -1,0 +1,100 @@
+{
+  "$description": "Named text styles. VISUAL sizes, deliberately decoupled from HTML heading levels \u2014 an <h2> can carry headline-hero and an <h1> can carry headline-tiny. Use heading tags for document structure, these classes for appearance.\n\nsize and weight reference variables; leading and tracking are literal. Weight is a real scale tied to the typeface and changes per client. Leading and tracking are functions of size \u2014 that two headlines share a leading value is not shared meaning, it is both of them being large. Naming them as a scale would imply you might change one independently of size, and you would not.\n\nAir Methods (AIRMETHODS-SC-TOKEN-SPEC \u00a77, T2/T5/T6): display headlines Hero\u2013Medium are the condensed family at Black, uppercase; Small/Tiny are the subhead tier \u2014 Text family at ExtraBold, because Air Methods' subheads are body-family-800, not condensed. Body leading 1.65 is theirs, measured. `case` is optional and emits text-transform.",
+  "headline-hero": {
+    "size": "font-size.headline.hero",
+    "family": "headline",
+    "weight": "black",
+    "leading": 1.0,
+    "tracking": "0",
+    "case": "uppercase"
+  },
+  "headline-huge": {
+    "size": "font-size.headline.huge",
+    "family": "headline",
+    "weight": "black",
+    "leading": 1.0,
+    "tracking": "0",
+    "case": "uppercase"
+  },
+  "headline-large": {
+    "size": "font-size.headline.large",
+    "family": "headline",
+    "weight": "black",
+    "leading": 1.1,
+    "tracking": "0",
+    "case": "uppercase"
+  },
+  "headline-medium": {
+    "size": "font-size.headline.medium",
+    "family": "headline",
+    "weight": "black",
+    "leading": 1.15,
+    "tracking": "0",
+    "case": "uppercase"
+  },
+  "headline-small": {
+    "size": "font-size.headline.small",
+    "family": "text",
+    "weight": "extrabold",
+    "leading": 1.15,
+    "tracking": "0"
+  },
+  "headline-tiny": {
+    "size": "font-size.headline.tiny",
+    "family": "text",
+    "weight": "extrabold",
+    "leading": 1.15,
+    "tracking": "0"
+  },
+  "text-huge": {
+    "size": "font-size.text.huge",
+    "family": "text",
+    "weight": "regular",
+    "leading": 1.3,
+    "tracking": "0"
+  },
+  "text-large": {
+    "size": "font-size.text.large",
+    "family": "text",
+    "weight": "regular",
+    "leading": 1.35,
+    "tracking": "0"
+  },
+  "text-medium": {
+    "size": "font-size.text.medium",
+    "family": "text",
+    "weight": "regular",
+    "leading": 1.65,
+    "tracking": "0"
+  },
+  "text-small": {
+    "size": "font-size.text.small",
+    "family": "text",
+    "weight": "regular",
+    "leading": 1.65,
+    "tracking": "0"
+  },
+  "text-tiny": {
+    "size": "font-size.text.tiny",
+    "family": "text",
+    "weight": "regular",
+    "leading": 1.5,
+    "tracking": "0"
+  },
+  "label": {
+    "size": "font-size.text.tiny",
+    "family": "decorative",
+    "weight": "medium",
+    "leading": 1.3,
+    "tracking": "0.08em"
+  },
+  "$headingDefaults": {
+    "$description": "Fallback for BARE heading tags \u2014 what a CMS produces with no class. Utilities sit in a later layer, so an explicit .text-style-* always wins.",
+    "h1": "headline-large",
+    "h2": "headline-medium",
+    "h3": "headline-small",
+    "h4": "headline-tiny",
+    "h5": "text-large",
+    "h6": "text-medium"
+  }
+}

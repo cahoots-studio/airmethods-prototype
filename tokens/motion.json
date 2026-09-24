@@ -1,0 +1,25 @@
+{
+  "$description": "REPO-ONLY. Figma variables cannot express easing curves or composite motion, so these are authored here and are NOT overwritten by tokens:pull. Consumed by both CSS transitions and the GSAP presets in src/motion/presets.js.",
+  "duration": {
+    "instant": { "$type": "duration", "$value": "0.12s" },
+    "fast":    { "$type": "duration", "$value": "0.24s" },
+    "base":    { "$type": "duration", "$value": "0.4s" },
+    "slow":    { "$type": "duration", "$value": "0.7s" },
+    "ambient": { "$type": "duration", "$value": "1.2s" }
+  },
+  "ease": {
+    "standard": { "$type": "cubicBezier", "$value": "cubic-bezier(0.22, 0.61, 0.36, 1)" },
+    "entrance": { "$type": "cubicBezier", "$value": "cubic-bezier(0.16, 1, 0.3, 1)" },
+    "exit":     { "$type": "cubicBezier", "$value": "cubic-bezier(0.4, 0, 1, 1)" },
+    "spring":   { "$type": "cubicBezier", "$value": "cubic-bezier(0.34, 1.56, 0.64, 1)" }
+  },
+  "distance": {
+    "reveal": { "$type": "dimension", "$value": "1.5rem" },
+    "drift":  { "$type": "dimension", "$value": "4rem" }
+  },
+  "stagger": {
+    "tight": { "$type": "number", "$value": 0.06 },
+    "base":  { "$type": "number", "$value": 0.1 },
+    "loose": { "$type": "number", "$value": 0.18 }
+  }
+}

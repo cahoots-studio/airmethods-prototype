@@ -1,0 +1,41 @@
+/* PATTERN: supercomponent
+   Mirrored from Figma · Supercomponent · 13 Aug 2026
+
+   The core composition: media, headline, text, actions. Drops into any
+   container — card, column, row, section — and takes its width from there.
+
+   Fills width rather than declaring one. Figma pins it to 560 because a canvas
+   frame needs a number; in code the container decides, which is what "drop it
+   anywhere" actually requires.
+
+   Deliberately thin. The children carry their own appearance through
+   text-style-* and the media and action-row blocks, so this file only handles
+   what is true about the stack itself. No positional classes until something
+   genuinely needs one. */
+
+@layer sc-components {
+  .supercomponent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--sc-padding-gap-large);
+    width: 100%;
+    min-width: 0;              /* flex children refuse to shrink below content
+                                  without this — the usual cause of overflow */
+  }
+
+  .supercomponent > .media { width: 100%; }
+}
+
+/* ---- Type=Card -------------------------------------------------------------
+   Figma: Supercomponent [Type=Card] — Foreground surface, Corners/Card,
+   effect style Elevation/Card. A card is a Supercomponent with a surface,
+   not a different component. */
+@layer sc-components {
+  .supercomponent.is-card {
+    padding: var(--sc-padding-gap-large);
+    background-color: var(--sc-color-foreground);
+    border-radius: var(--sc-corners-card);
+    box-shadow: var(--sc-elevation-card);
+  }
+}

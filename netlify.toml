@@ -1,0 +1,20 @@
+# Netlify build config.
+# The style guide is the deployable artifact; everything else is source.
+
+[build]
+  command = "npm run build:site"
+  publish = "_site"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Long-cache the bundle; the HTML stays fresh so a rebuild is picked up.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

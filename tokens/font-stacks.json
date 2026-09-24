@@ -1,0 +1,8 @@
+{
+  "$description": "Figma family name -> CSS font stack. Figma variables hold the family as Figma displays it ('Proxima Nova Condensed'); web font services name it differently ('proxima-nova-condensed' on Adobe Fonts). Keyed by the exact Figma value; anything not listed is emitted quoted, as-is. Fallbacks are the measured substitutes from AIRMETHODS-SC-TOKEN-SPEC §8, so the page holds its measure while the kit loads or if a weight is missing from it.",
+  "Proxima Nova Condensed": "\"proxima-nova-condensed\", \"Fira Sans Condensed\", \"Arial Narrow\", sans-serif",
+  "Proxima Nova": "\"proxima-nova\", \"Hanken Grotesk\", Arial, sans-serif",
+  "Hanken Grotesk": "\"Hanken Grotesk\", Arial, sans-serif",
+  "Fira Sans Condensed": "\"Fira Sans Condensed\", \"Arial Narrow\", sans-serif",
+  "Roboto Mono": "\"Roboto Mono\", ui-monospace, monospace"
+}

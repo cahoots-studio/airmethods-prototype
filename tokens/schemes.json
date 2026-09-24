@@ -1,0 +1,94 @@
+{
+  "$description": "Colour schemes. Eight roles: Background, Foreground, Text, Accent, Border, Button Surface, Button Text, Button Border.\n\nScheme 1 (Primary) is most of the page. Scheme 2 (Subtle) is an eye break. Scheme 3 (Contrast) grabs attention for CTAs and featured content. A brand change to Scheme 1 propagates to the others.\n\nTwo axes. SCHEME varies section to section (data-sc-scheme). MODE is the light/dark axis (data-sc-mode) — light is the primary mode, dark its inverse.",
+  "$default": "scheme-1",
+  "$defaultMode": "light",
+  "$modes": [
+    "dark",
+    "light"
+  ],
+  "$roles": [
+    "background",
+    "foreground",
+    "text",
+    "accent",
+    "border",
+    "button-surface",
+    "button-text",
+    "button-border"
+  ],
+  "$global": {},
+  "schemes": {
+    "scheme-1": {
+      "$label": "Scheme 1 — Primary",
+      "$note": "The source. Schemes 2 and 3 are derived from this by swapping roles.",
+      "light": {
+        "background": "{color.ground}",
+        "foreground": "{color.ground}",
+        "text": "{color.top}",
+        "accent": "{color.royal-blue}",
+        "border": "{color.neutral-light}",
+        "button-surface": "{color.royal-blue}",
+        "button-text": "{color.ground}",
+        "button-border": "{color.royal-blue}"
+      },
+      "dark": {
+        "background": "{color.top}",
+        "foreground": "{color.neutral-darkest}",
+        "text": "{color.ground}",
+        "accent": "{color.royal-blue-light}",
+        "border": "{color.neutral-darker}",
+        "button-surface": "{color.royal-blue}",
+        "button-text": "{color.ground}",
+        "button-border": "{color.royal-blue}"
+      }
+    },
+    "scheme-2": {
+      "$label": "Scheme 2 — Subtle",
+      "$note": "Background and Foreground swapped from Scheme 1.",
+      "light": {
+        "background": "{color.neutral-lighter}",
+        "foreground": "{color.ground}",
+        "text": "{color.top}",
+        "accent": "{color.royal-blue}",
+        "border": "{color.neutral-neutral}",
+        "button-surface": "{color.royal-blue}",
+        "button-text": "{color.ground}",
+        "button-border": "{color.royal-blue}"
+      },
+      "dark": {
+        "background": "{color.neutral-darkest}",
+        "foreground": "{color.neutral-darker}",
+        "text": "{color.ground}",
+        "accent": "{color.royal-blue-light}",
+        "border": "{color.neutral-dark}",
+        "button-surface": "{color.royal-blue-light}",
+        "button-text": "{color.top}",
+        "button-border": "{color.royal-blue-light}"
+      }
+    },
+    "scheme-3": {
+      "$label": "Scheme 3 — Contrast",
+      "$note": "Grabs attention — CTAs, featured content. Dark surface with light text; foreground and border step to the opposite end of the neutral ramp so raised surfaces read correctly.",
+      "light": {
+        "background": "{color.top}",
+        "foreground": "{color.neutral-darkest}",
+        "text": "{color.ground}",
+        "accent": "{color.royal-blue-light}",
+        "border": "{color.neutral-darker}",
+        "button-surface": "{color.royal-blue}",
+        "button-text": "{color.ground}",
+        "button-border": "{color.royal-blue}"
+      },
+      "dark": {
+        "background": "{color.ground}",
+        "foreground": "{color.ground}",
+        "text": "{color.top}",
+        "accent": "{color.royal-blue}",
+        "border": "{color.neutral-light}",
+        "button-surface": "{color.royal-blue}",
+        "button-text": "{color.ground}",
+        "button-border": "{color.royal-blue}"
+      }
+    }
+  }
+}

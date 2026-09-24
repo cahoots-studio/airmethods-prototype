@@ -1,0 +1,72 @@
+/* BLOCK: media
+   Mirrored from Figma · Media [Ratio × Image] · 13 Aug 2026
+
+   A ratio-locked frame holding an image. Ten variants in Figma collapse to one
+   class plus ten modifiers here, because aspect-ratio is a property rather than
+   something needing its own component.
+
+   The empty state uses Foreground rather than a grey, so an image-less slot
+   reads as reserved space in whatever scheme it lands in — and matches the
+   surface a card would use. */
+
+@layer sc-components {
+  .media {
+    --media-ratio: 16 / 9;
+
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: var(--media-ratio);
+
+    overflow: hidden;                       /* Figma: clipsContent — without it
+                                               the image squares off the radius */
+    border-radius: var(--sc-corners-media);
+    border: 1px solid var(--sc-color-border);
+    background-color: var(--sc-color-foreground);
+  }
+
+  /* Landscape */
+  .media.is-16x9 { --media-ratio: 16 / 9; }
+  .media.is-3x2  { --media-ratio: 3 / 2; }
+  .media.is-4x3  { --media-ratio: 4 / 3; }
+  .media.is-5x4  { --media-ratio: 5 / 4; }
+
+  /* Square */
+  .media.is-1x1  { --media-ratio: 1 / 1; }
+
+  /* Portrait */
+  .media.is-4x5  { --media-ratio: 4 / 5; }
+  .media.is-3x4  { --media-ratio: 3 / 4; }
+  .media.is-2x3  { --media-ratio: 2 / 3; }
+  .media.is-9x16 { --media-ratio: 9 / 16; }
+
+  /* Free takes whatever the container gives it. In Figma this is the one
+     variant with no aspect lock; here it is simply the absence of the
+     property, with height coming from the parent. */
+  .media.is-free {
+    aspect-ratio: auto;
+    height: 100%;
+  }
+
+  .media img,
+  .media video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;                      /* Figma: scaleMode FILL — crop to
+                                               fill, never distort */
+    object-position: center;
+
+    /* House grade. A token rather than a per-image setting, so one change
+       regrades every image on every page. Figma bakes filters into each fill,
+       which cannot be expressed as a shared style there. */
+    filter: var(--sc-image-treatment, none);
+  }
+
+  /* Reframe when the subject is not centred. Figma equivalent is dragging the
+     fill's position handles. */
+  .media.is-top img    { object-position: center top; }
+  .media.is-bottom img { object-position: center bottom; }
+  .media.is-left img   { object-position: left center; }
+  .media.is-right img  { object-position: right center; }
+}

@@ -1,0 +1,40 @@
+<!--
+  PATTERN: hero
+  Figma component: Supercomponent / Blocks / Hero
+  Code Connect:    src/patterns/hero/hero.figma.ts
+
+  This is the reference pattern. Every other pattern copies this shape:
+    section.<block>_wrap > .padding-global > .container-* > .padding-section-* > .<block>_component
+
+  Slots (what a client can edit):  eyebrow, heading, body, primary CTA, secondary CTA
+  Motion:                          data-sc-motion attributes only — never inline GSAP
+-->
+<section class="hero_wrap section_wrap" data-sc-pattern="hero">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-xlarge">
+        <div class="hero_component">
+
+          <p class="text-style-label text-color-muted" data-sc-motion="reveal-up" data-sc-slot="eyebrow">
+            Digital brand design
+          </p>
+
+          <h1 class="text-style-headline-hero hero_heading" data-sc-motion="reveal-up" data-sc-slot="heading">
+            Websites that hold their shape
+          </h1>
+
+          <p class="text-style-text-large text-color-secondary max-width-large" data-sc-motion="reveal-up" data-sc-slot="body">
+            One design system, four places to ship it. Build it once in Figma, run it
+            in Astro, Webflow, or WordPress without rebuilding a thing.
+          </p>
+
+          <div class="action-row" data-sc-motion="reveal-up">
+            <a href="#work" class="button is-large" data-sc-slot="cta-primary">See the work</a>
+            <a href="#contact" class="button is-secondary is-large" data-sc-slot="cta-secondary">Start a project</a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
