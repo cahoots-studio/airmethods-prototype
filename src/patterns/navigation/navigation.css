@@ -1,27 +1,45 @@
 /* PATTERN: navigation
-   Figma: Navigation [Layout=Desktop] · Scheme 2. Logo, links, CTA in one row;
-   links collapse below Mobile Landscape (the Mobile Open accordion is not
-   built in this prototype). */
+   Figma: Navigation [Layout=Desktop] · Scheme 3 (navy). On the Phase 1 homepage
+   the bar's fill is switched off so it sits transparent over the hero; the
+   `is-overlay` modifier does the same here. Links collapse below Mobile
+   Landscape (the Mobile Open accordion is not built in this prototype). */
 @layer sc-components {
+  .navigation_wrap.is-overlay {
+    position: absolute;
+    inset: 0 0 auto 0;
+    z-index: 2;
+    background-color: transparent;
+  }
+
   .navigation_component {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: var(--sc-padding-gap-large);
-    padding-block: var(--sc-padding-gap-medium);
+    padding-block: var(--sc-padding-block-tiny);
   }
-  .navigation_logo { text-decoration: none; text-transform: uppercase; }
+
+  .navigation_logo { display: block; flex: none; width: calc(var(--sc-width-column-tightest) * 0.75); color: var(--sc-color-text); }
+  .navigation_logo svg { width: 100%; height: auto; fill: currentColor; }
+
+  .navigation_actions { display: flex; align-items: center; gap: var(--sc-padding-gap-large); }
   .navigation_links {
-    display: flex; flex-wrap: wrap; gap: var(--sc-padding-gap-large);
-    margin: 0 0 0 auto; padding: 0; list-style: none;
+    display: flex; flex-wrap: wrap; gap: var(--sc-padding-gap-medium);
+    margin: 0; padding: 0; list-style: none;
   }
   .navigation_link {
+    padding-inline: var(--sc-padding-gap-tiny);
     font-size: var(--sc-font-size-text-small);
     font-weight: var(--sc-typeface-weight-extrabold);
     text-decoration: none;
   }
   .navigation_link:hover { text-decoration: underline; text-decoration-color: var(--sc-color-accent); }
-  @media (max-width: 767px) {
+
+  @media (max-width: 991px) {
     .navigation_links { display: none; }
-    .navigation_component { justify-content: space-between; }
+  }
+  @media (max-width: 479px) {
+    .navigation_logo { width: calc(var(--sc-width-column-tightest) * 0.5); }
+    .navigation_actions .button { padding-inline: var(--sc-padding-control-small); font-size: var(--sc-font-size-text-tiny); white-space: nowrap; }
   }
 }

@@ -1,6 +1,0 @@
-/* PATTERN: partners
-   Figma Section / Partners: heading, logo row, action aligned end.
-   Three stacked containers, gap Gap/Huge. */
-@layer sc-components {
-  .partners_component { display: flex; flex-direction: column; gap: var(--sc-padding-gap-huge); }
-}

@@ -1,0 +1,51 @@
+/* PATTERN: cta
+   Figma: Homepage — Phase 1 Update › Section / Patient CTA (146:2739).
+   A Royal Blue panel (Scheme 1 Button Surface, Elevation/Card) overlapped by a
+   free-ratio image; a Link button sits on a white chip at the image's
+   bottom-right corner. Overlap is a grid with shared tracks, not negative
+   margins, so it holds at every width. */
+@layer sc-components {
+  .cta_component {
+    position: relative;
+    display: grid;
+    grid-template-columns: 11fr 2fr 9fr;   /* 893 · 195 overlap · 707 in Figma */
+    align-items: center;
+  }
+  .cta_panel {
+    grid-column: 1 / 3;
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--sc-padding-gap-medium);
+    padding: var(--sc-padding-block-tiny);
+    padding-inline-end: calc(var(--sc-padding-block-tiny) + 18%);
+    background-color: var(--sc-color-button-surface);
+    color: var(--sc-color-button-text);
+    box-shadow: var(--sc-elevation-card);
+  }
+  .cta_panel .supercomponent {
+    max-width: var(--sc-width-column-tighter);
+    align-items: center;
+    text-align: center;
+    gap: var(--sc-padding-gap-small);
+  }
+  .cta_panel .ekg { width: 100%; max-width: var(--sc-width-column-tight); color: var(--sc-color-button-text); }
+  .cta_media { grid-column: 2 / 4; grid-row: 1; z-index: 1; }
+  .cta_media .media { aspect-ratio: 902 / 821; border: 0; }
+  .cta_action {
+    position: absolute;
+    z-index: 2;
+    right: calc(var(--sc-padding-gap-large) * -0.75);
+    bottom: var(--sc-padding-gap-large);
+    padding-inline: var(--sc-padding-control-small);
+    background-color: var(--sc-color-background);
+  }
+
+  @media (max-width: 767px) {
+    .cta_component { grid-template-columns: 1fr; }
+    .cta_panel { grid-column: 1; grid-row: 2; padding-inline-end: var(--sc-padding-block-tiny); padding-block: var(--sc-padding-block-small); }
+    .cta_media { grid-column: 1; grid-row: 1; }
+    .cta_action { position: static; justify-self: start; margin-top: var(--sc-padding-gap-medium); }
+  }
+}

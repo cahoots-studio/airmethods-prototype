@@ -1,5 +1,18 @@
 # Changelog
 
+## 2026-09-28 — Phase 1 homepage
+
+- Homepage rebuilt from Figma "Homepage — Phase 1 Update" (146:2642): overlay nav, clouds/Royal hero with
+  helicopter, Coverage band + card with two artifact slots (map feature, partner network), What We Do,
+  Join the Team, Patient CTA overlap, Newsfeed track, footer with Logo Mark.
+- Tokens re-synced: Corners/Card → Medium, Corners/Tag → Small (None on mobile), Scheme 1 Foreground → Royal
+  Blue Lightest, Text/Large 45 @1920, Container/Medium 1440 @1920, Section/Global @1920 → Block/Small (56).
+- **check:scales fails**: Section/Global is 80 at 1440 but 56 at 1920 (grows as the viewport narrows).
+  Built with the other steps; fix in Figma, then re-sync.
+- Button: Control padding (Medium × Huge); Link underline 3px in Scheme Accent.
+- New: patterns coverage, cta; block mark. Removed: statement, partners.
+- Images exported from Figma into site/img (1× renders); build-prototype copies them to _site/img.
+
 ## v0.3.0 — 2026-09-23
 
 ### Components

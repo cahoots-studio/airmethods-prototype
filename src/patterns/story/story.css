@@ -1,6 +1,16 @@
 /* PATTERN: story
-   Figma Section / Careers and Section / History: one Supercomponent capped at
-   Column/Wide, left-aligned. Width comes from the max-width utility. */
+   Figma: Homepage — Phase 1 Update › "Join a team…" (146:2747).
+   Copy column capped at Column/Wide, vertically centred, beside an image block
+   (shape-ramp lines + angled frame + cut-out figure, exported as one image).
+   The image column is allowed to bleed past the container edge, as in Figma. */
 @layer sc-components {
-  .story_component { display: flex; flex-direction: column; align-items: flex-start; }
+  .story_component { display: flex; align-items: center; gap: var(--sc-padding-gap-large); }
+  .story_component > .supercomponent { flex: 0 1 var(--sc-width-column-wide); gap: var(--sc-padding-gap-large); }
+  .story_media { flex: 1 1 0; min-width: 0; }
+  .story_media img { width: 100%; height: auto; }
+
+  @media (max-width: 991px) {
+    .story_component { flex-direction: column; align-items: stretch; }
+    .story_component > .supercomponent { flex-basis: auto; }
+  }
 }

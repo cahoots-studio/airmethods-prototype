@@ -35,7 +35,7 @@
     /* spec/spacing-and-type.md §5 — padding tokens shrink with viewport,
        so the touch target must be a fixed floor, not a sum of padding. */
     min-height: 44px;
-    padding: var(--sc-padding-block-tiny) var(--sc-padding-block-small);
+    padding: var(--sc-padding-control-medium) var(--sc-padding-control-huge); /* Figma: Control/Medium × Control/Huge (flat across breakpoints) */
     border: 1px solid var(--button-border);
     border-radius: var(--sc-corners-button);
 
@@ -85,16 +85,16 @@
   }
 
   /* ---- Link: underline only -----------------------------------------------
-     Figma sets the bottom stroke alone (0/0/1/0), no radius, and vertical
-     padding from Gap/Small rather than the Padding scale. */
+     Figma sets the bottom stroke alone (0/0/3/0, bound to Scheme Accent), no
+     radius, vertical padding Control/Small. */
   .button.is-link {
     --button-surface: transparent;
     --button-text: var(--sc-color-text);
     --button-overlay: transparent;
 
-    padding: var(--sc-padding-gap-small) 0;
-    border-width: 0 0 1px 0;
-    border-bottom-color: var(--sc-color-button-border);
+    padding: var(--sc-padding-control-small) 0;
+    border-width: 0 0 3px 0;               /* Air Methods: 3px inset underline, Scheme Accent */
+    border-bottom-color: var(--sc-color-accent);
     border-radius: 0;
   }
 

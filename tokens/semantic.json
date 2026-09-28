@@ -12,7 +12,7 @@
         "$value": "1024px",
         "$modes": {
           "wide": "1120px",
-          "xwide": "1200px"
+          "xwide": "1440px"
         },
         "$figmaName": "UI + Spacing/Width/Container/Medium"
       },
@@ -202,7 +202,7 @@
         "$value": "64px",
         "$modes": {
           "wide": "80px",
-          "xwide": "120px",
+          "xwide": "{padding.block.small}",
           "tablet": "48px",
           "landscape": "32px",
           "portrait": "20px"
@@ -266,7 +266,11 @@
     },
     "card": {
       "$type": "string",
-      "$value": "{radius.none}",
+      "$value": "{radius.medium}",
+      "$modes": {
+        "landscape": "{radius.none}",
+        "portrait": "{radius.none}"
+      },
       "$figmaName": "UI + Spacing/Corners/Card"
     },
     "media": {
@@ -281,7 +285,11 @@
     },
     "tag": {
       "$type": "string",
-      "$value": "{radius.none}",
+      "$value": "{radius.small}",
+      "$modes": {
+        "landscape": "{radius.none}",
+        "portrait": "{radius.none}"
+      },
       "$figmaName": "UI + Spacing/Corners/Tag"
     },
     "avatar": {

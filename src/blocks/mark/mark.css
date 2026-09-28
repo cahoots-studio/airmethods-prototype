@@ -1,0 +1,24 @@
+/* BLOCK: mark
+   The Air Methods "V" chevron in a ring — a decorative watermark that sits
+   behind a Supercomponent's top-left corner. Figma: the Icon frames in
+   What We Do / Newsfeed (Opacity/40 on the lead card, Opacity/60 elsewhere).
+   Colour comes from the scheme so it follows light/dark. */
+@layer sc-components {
+  .mark {
+    position: absolute;
+    z-index: -1;
+    top: calc(var(--sc-padding-block-small) * -1.3);
+    left: calc(var(--sc-padding-block-small) * -1.4);
+    width: calc(var(--sc-padding-block-large) * 0.96);
+    color: var(--sc-color-accent);
+    opacity: var(--sc-opacity-40);
+    pointer-events: none;
+  }
+  .mark.is-small {
+    top: auto; bottom: 0;
+    width: calc(var(--sc-padding-block-large) * 0.6);
+    color: var(--sc-color-foreground);
+    opacity: var(--sc-opacity-60);
+  }
+  .mark svg { width: 100%; height: auto; }
+}

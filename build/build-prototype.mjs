@@ -17,4 +17,5 @@ writeFileSync(join(SITE, 'styleguide/index.html'), guide);
 
 cpSync(join(ROOT, 'site/index.html'), join(SITE, 'index.html'));
 cpSync(join(ROOT, 'site/site.css'), join(SITE, 'assets/site.css'));
+cpSync(join(ROOT, 'site/img'), join(SITE, 'img'), { recursive: true });
 console.log('✓ _site/index.html (Air Methods homepage) · _site/styleguide/ (token inspector)');

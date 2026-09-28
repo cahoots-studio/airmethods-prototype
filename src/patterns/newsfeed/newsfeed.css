@@ -1,8 +1,39 @@
 /* PATTERN: newsfeed
-   Figma Section / Newsfeed: heading, three Supercomponent [Type=Card]. */
+   Figma: Homepage — Phase 1 Update › Newsfeed (146:2941).
+   Centred heading + View All, then a horizontal track: one lead story with a
+   large shaped image, followed by smaller stories that run past the right edge
+   (Figma lets them overflow the frame). The track scrolls; the section clips. */
 @layer sc-components {
-  .newsfeed_component { display: flex; flex-direction: column; gap: var(--sc-padding-gap-huge); }
-  .newsfeed_list { display: flex; gap: var(--sc-padding-gap-large); align-items: stretch; }
-  .newsfeed_list > * { flex: 1 1 0; min-width: 0; }
-  @media (max-width: 767px) { .newsfeed_list { flex-direction: column; } }
+  .newsfeed_wrap { overflow: hidden; }
+  .newsfeed_component { display: flex; flex-direction: column; gap: var(--sc-padding-gap-large); }
+  .supercomponent.newsfeed_heading { align-items: center; text-align: center; gap: var(--sc-padding-gap-small); }
+
+  .newsfeed_list {
+    display: flex;
+    align-items: flex-end;
+    gap: var(--sc-padding-gap-huge);
+    width: 100%;
+    max-width: var(--sc-width-container-medium);
+    margin-inline: auto;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    /* room for the mark watermark, which sits outside the lead card's corner */
+    padding-block-start: var(--sc-padding-block-medium);
+    padding-inline-start: var(--sc-padding-block-medium);
+    scroll-padding-inline-start: var(--sc-padding-block-medium);
+  }
+  .newsfeed_list > * { flex: 0 0 auto; scroll-snap-align: start; position: relative; isolation: isolate; }
+  .newsfeed_list > .is-lead { width: 70%; }
+  .newsfeed_list > :not(.is-lead) { width: 31.5%; }
+  .newsfeed_list .supercomponent { gap: var(--sc-padding-gap-small); padding-inline: var(--sc-padding-gap-medium); }
+  .newsfeed_list .media { border: 0; background: none; }
+  .newsfeed_list .media.is-strip { aspect-ratio: auto; }
+  .newsfeed_list .media.is-strip img { width: 45%; height: auto; }
+
+  @media (max-width: 767px) {
+    .newsfeed_list > .is-lead { width: 88%; }
+    .newsfeed_list > :not(.is-lead) { width: 70%; }
+  }
 }

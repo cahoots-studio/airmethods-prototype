@@ -1,8 +1,0 @@
-/* PATTERN: statement
-   Figma Section / Mission: statement headline beside a feature column.
-   Two equal columns, gap Gap/Large; stacks below Mobile Landscape. */
-@layer sc-components {
-  .statement_component { display: flex; gap: var(--sc-padding-gap-large); align-items: flex-start; }
-  .statement_component > * { flex: 1 1 0; min-width: 0; }
-  @media (max-width: 767px) { .statement_component { flex-direction: column; align-items: stretch; } }
-}

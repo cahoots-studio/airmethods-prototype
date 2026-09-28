@@ -1,49 +1,86 @@
 /* PATTERN: hero
+   Figma: Homepage — Phase 1 Update › Section / Hero (146:2643).
+
    Rules for every pattern file:
      1. Only --sc-* tokens. No raw hex, no raw rem.
      2. No margin on the outer element — section rhythm belongs to CF utilities.
      3. Lives in @layer sc-components so utilities can always override.
 
-   Layout is declared here, per pattern. There is no shared layout class. */
+   Background, bottom to top, mirrors the Figma fill stack:
+     clouds photo (cover) → Royal Blue 80% fading out by 75% (top wash)
+     → Royal Blue rising from 73% to solid (bleeds into the Coverage band).
+   The Royal Blue stops use color-mix on the key colour so they stay token-bound.
+   The helicopter is a separate image layer, top-right, behind the copy. */
 
 @layer sc-components {
-  .hero_component {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--sc-padding-gap-large);
+  .hero_wrap {
+    --hero-royal: var(--sc-color-royal-blue);
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    background:
+      linear-gradient(to bottom, transparent 73%, var(--hero-royal) 100%),
+      linear-gradient(to bottom,
+        color-mix(in srgb, var(--hero-royal) var(--sc-opacity-80), transparent) 0%,
+        color-mix(in srgb, var(--hero-royal) var(--sc-opacity-80), transparent) 26%,
+        transparent 75%),
+      var(--hero-bg, none) center / cover no-repeat,
+      var(--hero-royal);
   }
 
-  .hero_heading { max-width: 18ch; }
+  .hero_component {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: var(--sc-padding-gap-huge);
+    /* The Figma container is a fixed 710 at 1920; a viewport-relative floor
+       keeps the same proportion without a raw pixel value. */
+    min-height: 60svh;
+  }
 
+  .hero_content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sc-padding-gap-huge);
+    max-width: var(--sc-width-column-widest);
+  }
+
+  /* Figma: Action Row capped at Column/Wider and aligned to the end of the
+     Column/Widest content column — the buttons sit indented under the headline. */
+  .hero_actions {
+    width: 100%;
+    max-width: var(--sc-width-column-wider);
+    margin-inline-start: auto;
+  }
+
+  .hero_image {
+    position: absolute;
+    z-index: -1;
+    top: var(--sc-padding-block-small);
+    right: 0;
+    width: 65%;
+    max-width: none;
+    pointer-events: none;
+  }
+
+  @media (max-width: 991px) {
+    .hero_image { width: 90%; right: -10%; }
+    .hero_actions { margin-inline-start: 0; }
+  }
   @media (max-width: 767px) {
-    .hero_component { gap: var(--sc-padding-gap-medium); }
-    .hero_heading { max-width: none; }
+    .hero_component { min-height: 70svh; gap: var(--sc-padding-gap-large); }
+    .hero_content { gap: var(--sc-padding-gap-large); }
+    .hero_image { width: 120%; right: -20%; top: var(--sc-padding-block-large); }
   }
 }
 
-/* ---- is-split: heading + actions beside an aside ----------------------------
-   Air Methods · Figma Section / Hero: Container (horizontal, gap Gap/Large) →
-   Column / Headline + Actions (bottom-aligned) + Column / Patient Center
-   (max-width Column/Tightest). Additive — the stacked hero above is unchanged. */
+/* Vertical rhythm. The navigation overlays the hero, so the top padding adds
+   the bar's height (Block/Tiny ×2 + a control row) to Figma's Section/Medium.
+   Bottom is Section/Large, as in the Figma Hero frame. */
 @layer sc-components {
-  .hero_component.is-split {
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: space-between;
-  }
-  .hero_component.is-split > .hero_content { flex: 1 1 0; min-width: 0; }
-  .hero_aside {
-    flex: 0 1 var(--sc-width-column-tightest);
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--sc-padding-gap-small);
-    padding: var(--sc-padding-gap-small) var(--sc-padding-gap-tiny);
-    background-color: var(--sc-color-foreground);
-  }
-  @media (max-width: 767px) {
-    .hero_component.is-split { flex-direction: column; align-items: stretch; }
-    .hero_aside { flex-basis: auto; }
+  .hero_component {
+    padding-block-start: calc(var(--sc-padding-section-medium) + var(--sc-padding-block-tiny) * 2 + var(--sc-padding-control-medium) * 2 + var(--sc-font-size-text-small));
+    padding-block-end: var(--sc-padding-section-large);
   }
 }

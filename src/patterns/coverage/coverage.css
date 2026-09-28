@@ -1,0 +1,39 @@
+/* PATTERN: coverage
+   Figma: Homepage — Phase 1 Update › Section / Coverage (146:2655).
+   A Royal Blue band (Scheme 1 Accent) carrying one white card
+   (Scheme 1 Background, Corners/Card). The card holds two stacked blocks —
+   the statement + map feature, and the partners heading + partner network.
+   Both feature slots are placeholders: they are filled by artifacts from
+   another project. */
+@layer sc-components {
+  .coverage_wrap { background-color: var(--sc-color-accent); }
+
+  .coverage_card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sc-padding-gap-huge);
+    padding: var(--sc-padding-block-medium);
+    background-color: var(--sc-color-background);
+    border-radius: var(--sc-corners-card);
+  }
+
+  .coverage_block { display: flex; flex-direction: column; gap: var(--sc-padding-gap-large); }
+  .coverage_heading { max-width: var(--sc-width-column-wider); }
+
+  /* Slot for an incoming artifact. Height tracks Padding/Block so the
+     reserved space scales with the breakpoint like the Figma frames do
+     (769 / 553 at 1920). */
+  .coverage_feature {
+    display: grid;
+    place-items: center;
+    min-height: calc(var(--sc-padding-block-huge) * 2);
+    border: 1px dashed var(--sc-color-border);
+    border-radius: var(--sc-corners-card);
+    color: var(--sc-color-border);
+  }
+  .coverage_feature.is-short { min-height: calc(var(--sc-padding-block-huge) * 1.25); }
+
+  @media (max-width: 767px) {
+    .coverage_card { padding: var(--sc-padding-block-small) var(--sc-padding-gap-large); }
+  }
+}

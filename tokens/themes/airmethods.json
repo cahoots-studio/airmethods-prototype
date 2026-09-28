@@ -141,7 +141,7 @@
         "$type": "dimension",
         "$value": "2.25rem",
         "$modes": {
-          "xwide": "2.375rem",
+          "xwide": "2.8125rem",
           "tablet": "2rem",
           "landscape": "1.75rem",
           "portrait": "1.625rem"

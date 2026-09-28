@@ -1,9 +1,35 @@
 /* PATTERN: services
-   Figma Section / What We Do: heading, three Supercomponents in a row, then a
-   capabilities line capped at Column/Widest. Stacks gap Gap/Huge. */
+   Figma: Homepage — Phase 1 Update › "What we do at Air Methods" (146:2732).
+   Headline Large; three Supercomponents in a Container/Medium row, vertically
+   centred (the lead one carries a larger image and body copy); then a
+   capabilities Supercomponent capped at Container/Small and pushed to the end. */
 @layer sc-components {
   .services_component { display: flex; flex-direction: column; gap: var(--sc-padding-gap-huge); }
-  .services_list { display: flex; gap: var(--sc-padding-gap-large); align-items: flex-start; }
+
+  .services_list {
+    display: flex;
+    gap: var(--sc-padding-gap-medium);
+    align-items: center;
+    width: 100%;
+    max-width: var(--sc-width-container-medium);
+    margin-inline: auto;
+  }
   .services_list > * { flex: 1 1 0; min-width: 0; }
-  @media (max-width: 767px) { .services_list { flex-direction: column; } }
+
+  .services_item { position: relative; isolation: isolate; }
+  .services_item .supercomponent { gap: var(--sc-padding-gap-small); padding-inline: var(--sc-padding-gap-medium); }
+  .services_item .media { border: 0; background: none; }
+  .services_item .media.is-strip { aspect-ratio: auto; height: auto; }
+  .services_item .media.is-strip img { width: 50%; height: auto; }
+
+  .supercomponent.services_footnote {
+    align-self: flex-end;
+    max-width: var(--sc-width-container-small);
+    gap: var(--sc-padding-gap-small);
+  }
+
+  @media (max-width: 767px) {
+    .services_list { flex-direction: column; align-items: stretch; gap: var(--sc-padding-gap-huge); }
+    .supercomponent.services_footnote { align-self: stretch; }
+  }
 }

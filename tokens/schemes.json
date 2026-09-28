@@ -23,7 +23,7 @@
       "$note": "The source. Schemes 2 and 3 are derived from this by swapping roles.",
       "light": {
         "background": "{color.ground}",
-        "foreground": "{color.ground}",
+        "foreground": "{color.royal-blue-lightest}",
         "text": "{color.top}",
         "accent": "{color.royal-blue}",
         "border": "{color.neutral-light}",
