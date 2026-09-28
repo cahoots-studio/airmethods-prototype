@@ -1,16 +1,61 @@
 /* PATTERN: story
-   Figma: Homepage — Phase 1 Update › "Join a team…" (146:2747).
-   Copy column capped at Column/Wide, vertically centred, beside an image block
-   (shape-ramp lines + angled frame + cut-out figure, exported as one image).
-   The image column is allowed to bleed past the container edge, as in Figma. */
-@layer sc-components {
-  .story_component { display: flex; align-items: center; gap: var(--sc-padding-gap-large); }
-  .story_component > .supercomponent { flex: 0 1 var(--sc-width-column-wide); gap: var(--sc-padding-gap-large); }
-  .story_media { flex: 1 1 0; min-width: 0; }
-  .story_media img { width: 100%; height: auto; }
+   Figma: Homepage — Phase 1 Update › "Join the Team" (146:2747) and, mirrored
+   with .is-reverse, "History" (204:1191).
 
+   The art (shape-ramp lines + angled photo frame, and on Join the cut-out
+   crew member) is exported from each section's Image Block as one image.
+   It is absolutely placed against the section, not the container, so it runs
+   to the viewport edge: right on Join, left on History. Size is a share of
+   the section width (Figma @1920: 1642 × 825, 1555 × 814) so the composition
+   holds at every desktop width.
+
+   Like Figma, the art starts at the section's top edge and the copy centres
+   in the space beside it; the component's min-height is the art height less
+   the section padding above it, which is what puts the copy there. */
+@layer sc-components {
+  .story_wrap {
+    position: relative;
+    container-type: inline-size;       /* cqi below = section width */
+    overflow: clip;
+    --story-art-w: 85.52;              /* 1642 / 1920 */
+    --story-art-h: 42.97;              /*  825 / 1920 */
+  }
+  .story_wrap.is-reverse {
+    --story-art-w: 80.99;              /* 1555 / 1920 */
+    --story-art-h: 42.4;               /*  814 / 1920 */
+  }
+
+  .story_art {
+    position: absolute; top: 0; right: 0;
+    width: calc(var(--story-art-w) * 1cqi);
+    pointer-events: none;
+  }
+  .story_wrap.is-reverse .story_art { right: auto; left: 0; }
+  .story_art img { display: block; width: 100%; height: auto; }
+
+  .story_component {
+    position: relative;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: var(--sc-padding-gap-large);
+    min-height: calc(var(--story-art-h) * 1cqi - var(--sc-padding-section-large));
+  }
+  /* Column/Wide, but never more than half the section: the art scales with
+     the viewport and the copy does not, so below ~1600 a full Column/Wide
+     would run into the photo. */
+  .story_component > .supercomponent { flex: 0 1 min(var(--sc-width-column-wide), 50cqi); min-width: 0; gap: var(--sc-padding-gap-large); }
+  .story_aside { flex: none; }        /* History: "Our History" button over the photo */
+
+  /* Stacked: art first at full bleed, then copy. The white, faded end of the
+     art is cropped off so the photo leads. */
   @media (max-width: 991px) {
-    .story_component { flex-direction: column; align-items: stretch; }
+    .story_art {
+      position: static; width: 130%; margin-left: -30%;
+      /* the section padding above the copy would double up with the art */
+      margin-bottom: calc(var(--sc-padding-gap-large) - var(--sc-padding-section-large));
+    }
+    .story_wrap.is-reverse .story_art { margin-left: 0; }
+    .story_component { min-height: 0; flex-direction: column; align-items: stretch; }
     .story_component > .supercomponent { flex-basis: auto; }
+    .story_aside { order: 2; }
   }
 }
