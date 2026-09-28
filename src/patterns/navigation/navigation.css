@@ -9,7 +9,8 @@
                                    and the V marker under the open item.
    The bar and panel use the Royal Blue key colour: Figma binds them to
    Scheme 2 / Scheme 1 Accent, which both resolve to it, while the text stays on
-   Scheme 3. Links collapse below Tablet (Mobile Open is not built here yet). */
+   Scheme 3. Below Tablet the links and CTA move into the Mobile Open drawer
+   (js/navigation.js toggles .is-open on the wrap and on accordion items). */
 @layer sc-components {
   .navigation_wrap {
     --nav-surface: var(--sc-color-royal-blue);
@@ -135,11 +136,115 @@
     .navigation_menu { translate: none; clip-path: none; }
   }
 
+  /* Mobile-only pieces are off at Desktop */
+  .navigation_logo-mark, .navigation_toggle, .navigation_chevron { display: none; }
+
+  /* ---- Below Tablet: [Layout=Mobile] / [Layout=Mobile Open] ----
+     Solid Royal Blue bar (Scheme 1 Accent), Logo · Type=Mark, a Main Menu / Close
+     trigger in Text Small Black. The link list and CTA become a full-height
+     Royal Blue drawer: Proxima Text Large uppercase rows over Scheme 3 Border
+     rules, submenus as an accordion of Hanken ExtraBold Text Small links, and the
+     CTA pinned to the bottom as a white button with navy text. */
   @media (max-width: 991px) {
-    .navigation_links { display: none; }
+    .navigation_wrap.is-overlay { background-color: var(--nav-surface); }
+    .navigation_component { position: relative; z-index: 1; }
+
+    .navigation_logo { width: calc(var(--sc-width-column-tightest) * 0.23); }
+    .navigation_logo-full { display: none; }
+    .navigation_logo-mark { display: block; }
+
+    .navigation_toggle {
+      display: inline-flex; align-items: center;
+      padding: 0; border: 0; background: none; color: var(--sc-color-text);
+      font-family: var(--sc-typeface-family-text);
+      font-size: var(--sc-font-size-text-small);
+      font-weight: var(--sc-typeface-weight-black);
+      line-height: 1.3;
+      cursor: pointer;
+    }
+    .navigation_logo, .navigation_toggle { position: relative; z-index: 1; }
+    .navigation_toggle-open, .navigation_toggle-close { display: inline-flex; align-items: center; gap: var(--sc-padding-gap-small); }
+    .navigation_toggle-open svg { width: calc(var(--sc-font-size-text-small) * 0.8); }
+    .navigation_toggle-close svg { width: calc(var(--sc-font-size-text-small) * 0.95); }
+    .navigation_toggle-close,
+    .navigation_wrap.is-open .navigation_toggle-open { display: none; }
+    .navigation_wrap.is-open .navigation_toggle-close { display: inline-flex; }
+
+    /* Drawer */
+    .navigation_actions {
+      position: fixed; inset: 0; z-index: 0;
+      flex-direction: column; align-items: stretch; gap: var(--sc-padding-gap-large);
+      overflow-y: auto; overscroll-behavior: contain;
+      /* bar height on top, then Panel padding (Block/Small · Section/Global) inside the
+         bar's own Section/Global gutter, as nested in the Figma frame */
+      padding:
+        calc(var(--sc-padding-block-tiny) * 2 + var(--sc-font-size-text-small) * 1.3 + var(--sc-padding-gap-huge) + var(--sc-padding-block-small))
+        calc(var(--sc-padding-section-global) * 2)
+        calc(var(--sc-padding-block-tiny) + var(--sc-padding-block-small));
+      background-color: var(--nav-surface);
+      visibility: hidden; opacity: 0;
+      transition: opacity var(--nav-speed) var(--sc-ease-standard), visibility 0s linear var(--nav-speed);
+    }
+    .navigation_wrap.is-open .navigation_actions { visibility: visible; opacity: 1; transition-delay: 0s; }
+
+    .navigation_links { display: flex; flex-direction: column; flex-wrap: nowrap; align-items: stretch; gap: var(--sc-padding-gap-large); }
+    .navigation_item {
+      flex-direction: column; align-items: stretch; gap: var(--sc-padding-gap-medium);
+      padding-bottom: var(--sc-padding-gap-medium);
+      border-bottom: 1px solid var(--sc-color-border);
+    }
+    /* Navigation Link · Type=Nav Link at Text Large */
+    .navigation_link {
+      display: flex; align-items: center; justify-content: space-between;
+      font-family: var(--sc-typeface-family-headline);
+      font-size: var(--sc-font-size-text-large);
+      font-weight: var(--sc-typeface-weight-extrabold);
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+    .navigation_item.has-menu > .navigation_link::after,
+    .navigation_marker { display: none; }
+    .navigation_chevron {
+      display: block; flex: none; width: calc(var(--sc-font-size-text-small) * 0.8);
+      transition: rotate var(--nav-speed) var(--sc-ease-standard);
+    }
+    .navigation_item.is-open .navigation_chevron { rotate: 180deg; }
+
+    /* Submenu → accordion body */
+    .navigation_menu {
+      position: static; padding: 0; background: none; border-radius: 0;
+      visibility: visible; opacity: 1; translate: none; clip-path: none; transition: none;
+      display: none;
+    }
+    .navigation_item.is-open > .navigation_menu { display: block; }
+    .navigation_menu-container { display: block; max-width: none; }
+    .navigation_menu-info { display: none; }
+    .navigation_submenu {
+      gap: var(--sc-padding-gap-small);
+      padding: 0 0 0 var(--sc-padding-gap-medium);
+      border-left: 0;
+    }
+    .navigation_submenu > li { display: flex; }
+    /* Navigation Link · Type=Text Link at Text Small */
+    .navigation_sublink {
+      font-family: var(--sc-typeface-family-text);
+      font-size: var(--sc-font-size-text-small);
+      font-weight: var(--sc-typeface-weight-extrabold);
+      text-transform: none;
+    }
+    .navigation_sublink svg { display: none; }
+
+    /* CTA pinned to the bottom: white surface, navy text (Scheme 1 Background / Scheme 2 Text) */
+    .navigation_actions > .button {
+      margin-top: auto; justify-content: center;
+      --button-surface: var(--sc-color-ground);
+      --button-text: var(--sc-color-top);
+      --button-border: var(--sc-color-ground);
+    }
   }
-  @media (max-width: 479px) {
-    .navigation_logo { width: calc(var(--sc-width-column-tightest) * 0.5); }
-    .navigation_actions .button { padding-inline: var(--sc-padding-control-small); font-size: var(--sc-font-size-text-tiny); white-space: nowrap; }
+  html.is-nav-open { overflow: hidden; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .navigation_actions, .navigation_chevron { transition: none; }
   }
 }
