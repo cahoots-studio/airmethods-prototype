@@ -94,11 +94,13 @@
 
 /* ---- Partner Logo Field (artifact 2: claude.ai/artifact/56GMw54cWSzbAL6nUmQ9Js) ----
    The last beat of the scroll story. Colorway from the approved package
-   (claude-code-handoff/partner-logo-field, 28 Sep 2026). The beat has no fill
-   of its own, so the globe's Royal Blue → navy gradient shows through; tiles
-   and borders are Royal Blue so only the logos read at rest; the nearest logo
-   turns white.
-     --lf-bg / --lf-tile / --lf-border  #416DE7  → Royal Blue (#406DE7)
+   (claude-code-handoff/partner-logo-field, 28 Sep 2026), with the beat on a
+   full-bleed wash from transparent to solid Royal Blue, so the globe shows
+   through at the top and the section lands on brand blue at the bottom. Tiles
+   have no fill, so only the logos read at rest; the nearest logo turns white
+   and its tile picks up the accent ring.
+     --lf-bg                            #416DE7  → Royal Blue wash (0% → 100%)
+     --lf-tile / --lf-border            #416DE7  → none (transparent)
      --lf-logo                          #C5CEDD  → Neutral Light / Neutral mix
      --lf-logo-focus                    #FFFFFF  → White
    Layout and motion live in js/partner-field.js. */
@@ -110,9 +112,12 @@
     max-width: none;
     padding-block: var(--sc-padding-block-small);
     gap: var(--sc-padding-gap-medium);
-    --partners-bg: var(--sc-color-royal-blue);
-    --tile: var(--partners-bg);
-    --tile-line: var(--partners-bg);
+    --tile: transparent;
+    --tile-line: transparent;
+    /* Full-bleed wash from inside the container: transparent Royal Blue at the
+       top (the globe shows through) to solid Royal Blue at the bottom. The
+       border-image outset paints out to the viewport edges without adding width. */
+    border-image: linear-gradient(to bottom, color-mix(in srgb, var(--sc-color-royal-blue) 0%, transparent), var(--sc-color-royal-blue)) fill 0 / / 0 100vw;
     --logo: color-mix(in srgb, var(--sc-color-neutral-light) 65%, var(--sc-color-neutral-neutral));
     --logo-focus: var(--sc-color-white);
   }
