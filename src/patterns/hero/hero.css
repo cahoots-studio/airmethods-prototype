@@ -34,9 +34,12 @@
     flex-direction: column;
     justify-content: flex-end;
     gap: var(--sc-padding-gap-huge);
-    /* The Figma container is a fixed 710 at 1920; a viewport-relative floor
-       keeps the same proportion without a raw pixel value. */
-    min-height: 60svh;
+    /* Figma: the hero Container is a fixed 710 tall at 1920 with the copy
+       bottom-aligned, so on a 1080 screen the buttons land ~890px down.
+       Filling the viewport (nav overlays it) and bottom-aligning puts the
+       copy at the same place on load at any screen height. */
+    box-sizing: border-box;
+    min-height: 100svh;
   }
 
   .hero_content {
@@ -69,7 +72,7 @@
     .hero_actions { margin-inline-start: 0; }
   }
   @media (max-width: 767px) {
-    .hero_component { min-height: 70svh; gap: var(--sc-padding-gap-large); }
+    .hero_component { gap: var(--sc-padding-gap-large); }
     .hero_content { gap: var(--sc-padding-gap-large); }
     .hero_image { width: 120%; right: -20%; top: var(--sc-padding-block-large); }
   }
