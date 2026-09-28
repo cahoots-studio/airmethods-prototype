@@ -7,10 +7,12 @@
    Card states, from Figma:
      Default  ring mark 5%, description 50%, image and CTA hidden
      Hover    ring mark 40%, description 100%, image above the title, CTA shown
-   Figma grows the card in flow (103 → 471px), which in a browser drops the
-   title ~130px under the cursor. Instead the image and CTA always hold their
-   space and only fade, so the title and neighbours never move — the image
-   rises into room reserved above it.
+   Figma's row is centre-aligned at a fixed height; the hovered card grows
+   equally up and down past it, so neighbours and the page never move. Same
+   here: the image always holds its space (card height is constant, no
+   reflow), and at rest the title + text are lifted by half the image height
+   so they sit in the card's vertical middle. On hover they settle back as the
+   image rises in above, and the CTA drops in below, overflowing the card.
 
    Hover is an enhancement: the Default state only applies where a pointer can
    hover and the row is side by side. Touch and ≤991px get the Hover state,
@@ -21,7 +23,7 @@
   .services_list {
     display: flex;
     gap: var(--sc-padding-gap-large);              /* Figma: Container / Posts, 40 @1920 */
-    align-items: flex-start;
+    align-items: center;
     width: 100%;
     max-width: var(--sc-width-container-large);
     margin-inline: auto;
@@ -34,17 +36,18 @@
     container-type: inline-size;                   /* lets the mark find the title below the image */
     --services-motion: var(--sc-duration-base) var(--sc-ease-standard);   /* Figma: Smart Animate 400ms */
   }
+  /* Image height (content width × 297/457) plus the gap under it. Read by
+     descendants so 100cqi resolves against the card. */
+  .services_item > * {
+    --services-media-offset: calc((100cqi - 2 * var(--sc-padding-gap-medium)) * 297 / 457 + var(--sc-padding-gap-small));
+  }
   .services_item .supercomponent { gap: var(--sc-padding-gap-small); padding-inline: var(--sc-padding-gap-medium); }
 
   /* The mark sits on the title's corner, not the card's — so it is pushed down
      by the image height (content width × 297/457) plus one gap. */
   .services_item .mark {
-    top: calc(
-      var(--sc-padding-block-small) * -1.3
-      + (100cqi - 2 * var(--sc-padding-gap-medium)) * 297 / 457
-      + var(--sc-padding-gap-small)
-    );
-    transition: opacity var(--services-motion);
+    top: calc(var(--sc-padding-block-small) * -1.3 + var(--services-media-offset));
+    transition: opacity var(--services-motion), transform var(--services-motion);
   }
 
   /* Figma: Media › Rectangle 6 — a four-point shape with 30px corners on
@@ -59,18 +62,27 @@
   }
 
   .services_media,
+  .services_item h3,
   .services_text,
   .services_cta { transition: opacity var(--services-motion), transform var(--services-motion); }
 
   /* Default state — only where hover exists and the cards are side by side. */
   @media (hover: hover) and (min-width: 992px) {
-    .services_item .mark { opacity: var(--sc-opacity-5); }
+    .services_item .supercomponent { position: relative; }
+    .services_cta {                                 /* out of flow: overflows below, as in Figma */
+      position: absolute;
+      top: calc(100% + var(--sc-padding-gap-small));
+      left: var(--sc-padding-gap-medium);
+      opacity: 0;
+      transform: translateY(calc(var(--sc-distance-reveal) * -1));
+    }
     .services_media { opacity: 0; transform: translateY(var(--sc-distance-reveal)); }
+    .services_item :is(.mark, h3, .services_text) { transform: translateY(calc(var(--services-media-offset) / -2)); }
+    .services_item .mark { opacity: var(--sc-opacity-5); }
     .services_text { opacity: 0.5; }                /* Figma: Text instance at 50%, unbound */
-    .services_cta { opacity: 0; }
 
-    .services_item:is(:hover, :focus-within) .mark { opacity: var(--sc-opacity-40); }
-    .services_item:is(:hover, :focus-within) :is(.services_media, .services_text, .services_cta) {
+    .services_item:is(:hover, :focus-within) .mark { opacity: var(--sc-opacity-40); transform: none; }
+    .services_item:is(:hover, :focus-within) :is(.services_media, h3, .services_text, .services_cta) {
       opacity: 1;
       transform: none;
     }
