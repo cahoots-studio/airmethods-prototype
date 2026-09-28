@@ -30,7 +30,7 @@
 </svg>
 <div class="page-wrapper">
 
-  <!-- Figma: Navigation [Layout=Desktop] · Scheme 3, fill off (transparent over the hero) -->
+  <!-- Figma: Navigation [Layout=Desktop] (transparent) → hover: Royal Blue bar; items with a menu drop [Layout=Desktop Expanded] · Scheme 3 -->
   <header class="navigation_wrap section_wrap is-overlay" data-sc-pattern="navigation" data-sc-scheme="scheme-3">
     <div class="padding-global">
       <nav class="navigation_component" aria-label="Primary">
@@ -39,11 +39,62 @@
         </a>
         <div class="navigation_actions">
           <ul class="navigation_links">
-            <li><a href="#" class="navigation_link" data-sc-slot="link">Company</a></li>
-            <li><a href="#" class="navigation_link" data-sc-slot="link">Air Medical</a></li>
-            <li><a href="#" class="navigation_link" data-sc-slot="link">Media Center</a></li>
-            <li><a href="#" class="navigation_link" data-sc-slot="link">Careers</a></li>
-            <li><a href="#" class="navigation_link" data-sc-slot="link">Contact</a></li>
+            <li class="navigation_item has-menu">
+              <a href="#" class="navigation_link" data-sc-slot="link" aria-haspopup="true" aria-controls="menu-company">Company<svg class="navigation_marker" viewBox="16 14 29 38" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M16.486 14.551l14.221 37.373L44.93 14.551l-14.223 7.9-14.221-7.9zm14.221 34.083V23.787l11.992-6.661-11.992 31.508z"/></svg></a>
+              <div class="navigation_menu" id="menu-company">
+                <div class="navigation_menu-container">
+                  <div class="navigation_menu-info">
+                    <a href="#" class="button is-link" data-sc-slot="menu-cta">Learn More</a>
+                  </div>
+                  <ul class="navigation_submenu">
+                      <li><a href="#" class="navigation_sublink" data-sc-slot="sublink">Safety<svg viewBox="0 0 8 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M1.5 1l5 5-5 5"/></svg></a></li>
+                      <li><a href="#" class="navigation_sublink" data-sc-slot="sublink">Clinical<svg viewBox="0 0 8 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M1.5 1l5 5-5 5"/></svg></a></li>
+                      <li><a href="#" class="navigation_sublink" data-sc-slot="sublink">Ascend Clinical Training<svg viewBox="0 0 8 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M1.5 1l5 5-5 5"/></svg></a></li>
+                      <li><a href="#" class="navigation_sublink" data-sc-slot="sublink">Leadership<svg viewBox="0 0 8 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M1.5 1l5 5-5 5"/></svg></a></li>
+                      <li><a href="#" class="navigation_sublink" data-sc-slot="sublink">Divisions<svg viewBox="0 0 8 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M1.5 1l5 5-5 5"/></svg></a></li>
+                      <li><a href="#" class="navigation_sublink" data-sc-slot="sublink">Climate Risk<svg viewBox="0 0 8 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M1.5 1l5 5-5 5"/></svg></a></li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li class="navigation_item has-menu">
+              <a href="#" class="navigation_link" data-sc-slot="link" aria-haspopup="true" aria-controls="menu-air-medical">Air Medical<svg class="navigation_marker" viewBox="16 14 29 38" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M16.486 14.551l14.221 37.373L44.93 14.551l-14.223 7.9-14.221-7.9zm14.221 34.083V23.787l11.992-6.661-11.992 31.508z"/></svg></a>
+              <div class="navigation_menu" id="menu-air-medical">
+                <div class="navigation_menu-container">
+                  <div class="navigation_menu-info">
+                    <a href="#" class="button is-link" data-sc-slot="menu-cta">Learn More</a>
+                  </div>
+                  <ul class="navigation_submenu">
+                      <li><a href="#" class="navigation_sublink" data-sc-slot="sublink">Programs<svg viewBox="0 0 8 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M1.5 1l5 5-5 5"/></svg></a></li>
+                      <li><a href="#" class="navigation_sublink" data-sc-slot="sublink">Membership Facts<svg viewBox="0 0 8 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M1.5 1l5 5-5 5"/></svg></a></li>
+                      <li><a href="#" class="navigation_sublink" data-sc-slot="sublink">In-Network Insurance<svg viewBox="0 0 8 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M1.5 1l5 5-5 5"/></svg></a></li>
+                      <li><a href="#" class="navigation_sublink" data-sc-slot="sublink">Healthcare Partners<svg viewBox="0 0 8 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M1.5 1l5 5-5 5"/></svg></a></li>
+                      <li><a href="#" class="navigation_sublink" data-sc-slot="sublink">Community Outreach<svg viewBox="0 0 8 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M1.5 1l5 5-5 5"/></svg></a></li>
+                      <li><a href="#" class="navigation_sublink" data-sc-slot="sublink">Scheduled Air Medical Transport Services<svg viewBox="0 0 8 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M1.5 1l5 5-5 5"/></svg></a></li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li class="navigation_item"><a href="#" class="navigation_link" data-sc-slot="link">Media Center</a></li>
+            <li class="navigation_item has-menu">
+              <a href="#" class="navigation_link" data-sc-slot="link" aria-haspopup="true" aria-controls="menu-careers">Careers<svg class="navigation_marker" viewBox="16 14 29 38" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M16.486 14.551l14.221 37.373L44.93 14.551l-14.223 7.9-14.221-7.9zm14.221 34.083V23.787l11.992-6.661-11.992 31.508z"/></svg></a>
+              <div class="navigation_menu" id="menu-careers">
+                <div class="navigation_menu-container">
+                  <div class="navigation_menu-info">
+                    <a href="#" class="button is-link" data-sc-slot="menu-cta">Learn More</a>
+                  </div>
+                  <ul class="navigation_submenu">
+                      <li><a href="#" class="navigation_sublink" data-sc-slot="sublink">Military Careers<svg viewBox="0 0 8 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M1.5 1l5 5-5 5"/></svg></a></li>
+                      <li><a href="#" class="navigation_sublink" data-sc-slot="sublink">Mechanic Careers<svg viewBox="0 0 8 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M1.5 1l5 5-5 5"/></svg></a></li>
+                      <li><a href="#" class="navigation_sublink" data-sc-slot="sublink">Pilot Careers<svg viewBox="0 0 8 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M1.5 1l5 5-5 5"/></svg></a></li>
+                      <li><a href="#" class="navigation_sublink" data-sc-slot="sublink">Clinical Careers<svg viewBox="0 0 8 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M1.5 1l5 5-5 5"/></svg></a></li>
+                      <li><a href="#" class="navigation_sublink" data-sc-slot="sublink">Internal Open Positions<svg viewBox="0 0 8 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M1.5 1l5 5-5 5"/></svg></a></li>
+                      <li><a href="#" class="navigation_sublink" data-sc-slot="sublink">View All<svg viewBox="0 0 8 12" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" d="M1.5 1l5 5-5 5"/></svg></a></li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+            <li class="navigation_item"><a href="#" class="navigation_link" data-sc-slot="link">Contact</a></li>
           </ul>
           <a href="#" class="button" data-sc-slot="cta">Patient &amp; Family Center</a>
         </div>

@@ -1,15 +1,29 @@
 /* PATTERN: navigation
-   Figma: Navigation [Layout=Desktop] · Scheme 3 (navy). On the Phase 1 homepage
-   the bar's fill is switched off so it sits transparent over the hero; the
-   `is-overlay` modifier does the same here. Links collapse below Mobile
-   Landscape (the Mobile Open accordion is not built in this prototype). */
+   Figma: Navigation · Scheme 3 (white on navy/royal).
+     [Layout=Desktop]           transparent bar over the hero (fill switched off)
+     hover anywhere on the bar  → Royal Blue bar
+     hover an item with a menu  → [Layout=Desktop Expanded]: the Royal Blue panel
+                                   drops from under the bar — Learn More link on the
+                                   left, a ruled list of Proxima uppercase sublinks
+                                   (Navigation Link · Type=Nav Link) with chevrons,
+                                   and the V marker under the open item.
+   The bar and panel use the Royal Blue key colour: Figma binds them to
+   Scheme 2 / Scheme 1 Accent, which both resolve to it, while the text stays on
+   Scheme 3. Links collapse below Tablet (Mobile Open is not built here yet). */
 @layer sc-components {
+  .navigation_wrap {
+    --nav-surface: var(--sc-color-royal-blue);
+    --nav-speed: var(--sc-duration-fast);
+  }
   .navigation_wrap.is-overlay {
     position: absolute;
     inset: 0 0 auto 0;
-    z-index: 2;
+    z-index: 20;
     background-color: transparent;
+    transition: background-color var(--nav-speed) var(--sc-ease-standard);
   }
+  .navigation_wrap.is-overlay:hover,
+  .navigation_wrap.is-overlay:focus-within { background-color: var(--nav-surface); }
 
   .navigation_component {
     display: flex;
@@ -24,16 +38,102 @@
 
   .navigation_actions { display: flex; align-items: center; gap: var(--sc-padding-gap-large); }
   .navigation_links {
-    display: flex; flex-wrap: wrap; gap: var(--sc-padding-gap-medium);
+    display: flex; flex-wrap: wrap; align-items: center; gap: var(--sc-padding-gap-medium);
     margin: 0; padding: 0; list-style: none;
   }
+  .navigation_item { position: static; display: flex; align-items: center; }
   .navigation_link {
     padding-inline: var(--sc-padding-gap-tiny);
     font-size: var(--sc-font-size-text-small);
     font-weight: var(--sc-typeface-weight-extrabold);
     text-decoration: none;
   }
-  .navigation_link:hover { text-decoration: underline; text-decoration-color: var(--sc-color-accent); }
+  /* Extend each item's hover target down to the bar's bottom edge, so the pointer
+     can travel from the label into the panel without the menu closing. */
+  .navigation_item.has-menu > .navigation_link { position: relative; }
+  .navigation_item.has-menu > .navigation_link::after {
+    content: ""; position: absolute; left: 0; right: 0; top: 100%;
+    height: calc(var(--sc-padding-block-tiny) + var(--sc-padding-control-medium) * 2);
+  }
+
+  /* CTA on the Royal Blue bar: Figma switches on the button's light overlay so it
+     still reads against a surface of the same colour. */
+  .navigation_wrap:hover .navigation_actions > .button::after,
+  .navigation_wrap:focus-within .navigation_actions > .button::after { opacity: 1; }
+
+  /* ---- V marker under the open item ---- */
+  .navigation_marker {
+    position: absolute;
+    left: 50%;
+    top: calc(100% + var(--sc-padding-control-small));
+    width: var(--sc-padding-control-small);
+    translate: -50% 0;
+    color: var(--sc-color-text);
+    opacity: 0;
+    transition: opacity var(--nav-speed) var(--sc-ease-standard);
+    pointer-events: none;
+  }
+
+  /* ---- Dropdown panel (Layout=Desktop Expanded › Panel) ---- */
+  .navigation_menu {
+    position: absolute;
+    left: 0; right: 0; top: 100%;
+    padding: var(--sc-padding-block-small) var(--sc-padding-section-global);
+    background-color: var(--nav-surface);
+    border-radius: 0 0 var(--sc-radius-small) var(--sc-radius-small);
+    visibility: hidden;
+    opacity: 0;
+    translate: 0 calc(var(--sc-padding-gap-medium) * -1);
+    clip-path: inset(0 0 100% 0);
+    transition:
+      opacity var(--nav-speed) var(--sc-ease-standard),
+      translate var(--sc-duration-base) var(--sc-ease-entrance),
+      clip-path var(--sc-duration-base) var(--sc-ease-entrance),
+      visibility 0s linear var(--sc-duration-base);
+  }
+  .navigation_item.has-menu:hover > .navigation_menu,
+  .navigation_item.has-menu:focus-within > .navigation_menu {
+    visibility: visible; opacity: 1; translate: 0 0; clip-path: inset(0 0 0 0);
+    transition-delay: 0s;
+  }
+  .navigation_item.has-menu:hover .navigation_marker,
+  .navigation_item.has-menu:focus-within .navigation_marker { opacity: 1; }
+
+  .navigation_menu-container {
+    display: flex;
+    width: 100%;
+    max-width: var(--sc-width-column-wider);
+    margin-inline: auto;
+  }
+  .navigation_menu-info { flex: 0 0 var(--sc-width-column-tightest); padding-top: var(--sc-padding-gap-small); }
+  .navigation_menu-info .button.is-link { border-bottom-color: var(--sc-color-text); }
+
+  .navigation_submenu {
+    flex: 1 1 auto;
+    display: flex; flex-direction: column; gap: var(--sc-padding-gap-large);
+    margin: 0;
+    padding: var(--sc-padding-gap-small) 0 0 var(--sc-padding-gap-medium);
+    border-left: 1px solid var(--sc-color-border);
+    list-style: none;
+  }
+  /* Navigation Link · Type=Nav Link: Proxima Nova Condensed ExtraBold, uppercase */
+  .navigation_sublink {
+    display: inline-flex; align-items: center; gap: var(--sc-padding-gap-tiny);
+    padding-inline: var(--sc-padding-gap-tiny);
+    font-family: var(--sc-typeface-family-headline);
+    font-size: var(--sc-font-size-text-small);
+    font-weight: var(--sc-typeface-weight-extrabold);
+    line-height: 1.2;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .navigation_sublink svg { width: var(--sc-padding-control-small); height: auto; flex: none; transition: translate var(--nav-speed) var(--sc-ease-standard); }
+  .navigation_sublink:hover svg, .navigation_sublink:focus-visible svg { translate: var(--sc-padding-control-tiny) 0; }
+  .navigation_sublink:hover { text-decoration: underline; text-underline-offset: 0.25em; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .navigation_menu { translate: none; clip-path: none; }
+  }
 
   @media (max-width: 991px) {
     .navigation_links { display: none; }
