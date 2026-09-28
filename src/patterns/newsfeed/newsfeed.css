@@ -6,7 +6,7 @@
 
    Each card: a portrait shaped photo (Figma Media — Vertical, 323 × 404 of a
    453 inner width) aligned to the card's end edge, Headline Small, Text Medium
-   and a View All Partners link, also end-aligned. The Collapsed variant has
+   and a link, also end-aligned. The Collapsed variant has
    no interaction wired in Figma, so the cards are static.
 
    The links here are overridden to Accent in Figma (the Link component now
@@ -37,22 +37,38 @@
   }
   .media.newsfeed_media img { object-position: 60% center; }   /* keep the crew member in the portrait crop */
 
-  /* States (prototype, 28 Sep 2026 — not yet in Figma):
-       Default  photo + headline only
-       Hover    summary and link fade in (also on keyboard focus inside the card)
-     The summary and link keep their space while hidden, so the card never
-     changes height and nothing below it moves. Hover is an enhancement: touch
-     and ≤991px always show everything, or the link would be unreachable. */
-  .newsfeed_item > p,
+  /* States (prototype, 28 Sep 2026 — not yet in Figma), same model as the
+     What We Do cards:
+       Default  headline + summary, centred in the card; image and link hidden
+       Hover    the image rises in above, headline + summary settle below it,
+                the Read Article link fades in (also on keyboard focus)
+     The image keeps its space while hidden, so the card never changes height
+     and nothing around it moves; at rest the text is lifted by half the image
+     height so it sits in the card's vertical middle. Hover is an enhancement:
+     touch and ≤991px always show everything, or the link would be unreachable. */
+  .newsfeed_item {
+    container-type: inline-size;          /* 100cqi = the card's inner width */
+    /* image height (71.3% of the width × 404/323) + the gap under it */
+    --newsfeed-media-offset: calc(89.18cqi + var(--sc-padding-gap-small));
+  }
+  .newsfeed_media,
+  .newsfeed_item > :is(h3, p),
   .newsfeed_cta {
     transition: opacity var(--sc-duration-base) var(--sc-ease-standard),
                 transform var(--sc-duration-base) var(--sc-ease-standard);
   }
   @media (hover: hover) and (min-width: 992px) {
-    .newsfeed_item > p,
-    .newsfeed_cta { opacity: 0; transform: translateY(calc(var(--sc-distance-reveal) * -0.5)); }
-    .newsfeed_item:is(:hover, :focus-within) > p,
-    .newsfeed_item:is(:hover, :focus-within) .newsfeed_cta { opacity: 1; transform: none; }
+    .newsfeed_media { opacity: 0; transform: translateY(var(--sc-distance-reveal)); }
+    .newsfeed_item > :is(h3, p) { transform: translateY(calc(var(--newsfeed-media-offset) / -2)); }
+    .newsfeed_item { position: relative; }
+    .newsfeed_cta {                       /* out of flow, so the text centres exactly; drops in below the card */
+      position: absolute;
+      top: calc(100% + var(--sc-padding-gap-small));
+      right: calc(var(--sc-padding-gap-tiny) + var(--sc-padding-gap-medium));
+      opacity: 0; transform: translateY(calc(var(--sc-distance-reveal) * -0.5));
+    }
+
+    .newsfeed_item:is(:hover, :focus-within) :is(.newsfeed_media, h3, p, .newsfeed_cta) { opacity: 1; transform: none; }
     .newsfeed_item:is(:hover, :focus-within) .newsfeed_cta { transition-delay: var(--sc-duration-instant); }
   }
 
