@@ -37,33 +37,26 @@
     max-width: var(--sc-width-column-medium);
   }
   .coverage_beat > * { pointer-events: auto; }
-  .coverage_beat.is-wide { max-width: var(--sc-width-column-wide); }
-  .coverage_beat p:not(.text-style-text-large) { color: color-mix(in srgb, var(--sc-color-text) var(--sc-opacity-80), transparent); }
 
-  .coverage_eyebrow, .coverage_pill, .coverage_hud, .coverage_legend {
+  /* Intro beat: statement on the left, HUD on the right, tops aligned. The
+     HUD lives in the beat (not on the pinned stage) so it tracks the copy. */
+  .coverage_beat:has(.coverage_intro) { max-width: none; }
+  .coverage_intro {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: var(--sc-padding-gap-large);
+  }
+  .coverage_intro > p { max-width: var(--sc-width-column-wide); min-width: 0; }
+
+  .coverage_hud, .coverage_legend {
     font-family: var(--sc-typeface-family-decorative);
     font-size: var(--sc-font-size-text-tiny);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: color-mix(in srgb, var(--sc-color-text) var(--sc-opacity-60), transparent);
   }
-  .coverage_eyebrow { display: flex; align-items: center; gap: var(--sc-padding-gap-small); }
-  .coverage_eyebrow::before {
-    content: ""; width: var(--sc-padding-control-small); height: var(--sc-padding-control-small);
-    border-radius: var(--sc-radius-round); background: var(--sc-color-accent);
-    box-shadow: 0 0 var(--sc-padding-control-medium) var(--sc-color-accent);
-  }
-  .coverage_pill {
-    align-self: flex-start;
-    padding: var(--sc-padding-control-tiny) var(--sc-padding-control-small);
-    border: 1px solid var(--sc-color-border);
-    border-radius: var(--sc-radius-round);
-  }
-  .coverage_stat { color: var(--sc-color-accent); font-variant-numeric: tabular-nums; }
 
   .coverage_hud {
-    position: absolute; z-index: 3;
-    right: var(--sc-padding-section-global); bottom: var(--sc-padding-block-small);
+    flex: none;
     display: grid; grid-template-columns: auto auto;
     column-gap: var(--sc-padding-gap-medium); row-gap: var(--sc-padding-gap-tiny);
     font-variant-numeric: tabular-nums;
@@ -74,9 +67,9 @@
     font-size: var(--sc-font-size-text-medium); line-height: 1; color: var(--sc-color-text);
     margin-bottom: var(--sc-padding-gap-small);
   }
-  .coverage_legend {
-    position: absolute; z-index: 3;
-    left: var(--sc-padding-section-global); bottom: var(--sc-padding-block-small);
+  .coverage_legend {                 /* last row of the HUD grid */
+    grid-column: 1 / -1; justify-content: flex-end;
+    margin-top: var(--sc-padding-gap-small);
     display: flex; flex-wrap: wrap; gap: var(--sc-padding-gap-medium);
   }
   .coverage_legend span { display: inline-flex; align-items: center; gap: var(--sc-padding-gap-small); }
@@ -88,6 +81,7 @@
 
 
   @media (max-width: 767px) {
+    .coverage_intro { flex-direction: column; }
     .coverage_legend { display: none; }
     .coverage_hud .is-clock { font-size: var(--sc-font-size-text-small); }
   }
@@ -112,9 +106,6 @@
   .coverage_partners_head { display: flex; flex-direction: column; gap: var(--sc-padding-gap-small); max-width: var(--sc-width-column-medium); }
   .coverage_partners_field { position: relative; width: 100%; touch-action: pan-y; }
   .coverage_partners_field { max-width: var(--sc-width-container-medium); margin-inline: auto; }
-  /* While the partners beat is on screen the HUD and legend step aside (set by js/partner-field.js). */
-  .coverage_hud, .coverage_legend { transition: opacity var(--sc-duration-base) var(--sc-ease-standard); }
-  .coverage_stage.is-partners .coverage_hud, .coverage_stage.is-partners .coverage_legend { opacity: 0; }
 
   .partner-logo {
     position: absolute; left: 0; top: 0;
