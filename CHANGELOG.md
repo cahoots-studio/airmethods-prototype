@@ -1,5 +1,14 @@
 # Changelog
 
+## 2026-09-28 — Mission Globe in Section 2
+
+- Section 2 (Coverage) is now the "Mission Globe" artifact as a pinned scroll story: WebGL globe
+  (three.js 0.169 + GSAP ScrollTrigger from CDN) sticks while five beats scroll over it — statement,
+  43 bases, missions/year, 150 mi reach, "Our partners make it possible" + partner-network slot.
+- Section is Scheme 3 (navy), replacing the royal band + white card. Globe colours read the
+  --sc-color-royal-blue / --sc-color-top tokens. Tuning panel and saved settings removed.
+- Bases and volumes are the artifact's placeholders (site/js/mission-globe.js → BASES).
+
 ## 2026-09-28 — Phase 1 homepage
 
 - Homepage rebuilt from Figma "Homepage — Phase 1 Update" (146:2642): overlay nav, clouds/Royal hero with

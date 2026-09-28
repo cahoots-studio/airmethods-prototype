@@ -11,7 +11,7 @@
   <!-- Hanken Grotesk (Figma Text family) + Fira Sans Condensed (headline fallback until the kit carries 900). -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@900&family=Hanken+Grotesk:wght@400;800;900&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@900&family=Hanken+Grotesk:wght@400;500;800;900&family=Roboto+Mono:wght@400;500&display=swap">
   <!-- Generated from Figma variables by `npm run sync` + src/ — do not edit by hand. -->
   <link rel="stylesheet" href="assets/supercomponent.css">
   <link rel="stylesheet" href="assets/site.css">
@@ -71,25 +71,48 @@
       </div>
     </section>
 
-    <!-- Figma: Section / Coverage · Scheme 1 Accent band · white card with two artifact slots -->
-    <section class="coverage_wrap section_wrap" data-sc-pattern="coverage">
-      <div class="padding-global">
-        <div class="padding-section-small">
-          <div class="coverage_card">
-            <div class="coverage_block">
-              <p class="text-style-text-large coverage_heading" data-sc-slot="statement">We connect people to the essential care when time, distance, or access stand in the way.</p>
-              <!-- ARTIFACT SLOT 1 — map feature (incoming from another project) -->
-              <div class="coverage_feature" data-sc-slot="map-feature" role="img" aria-label="Map feature — artifact pending">
-                <span class="text-style-label">Map feature — artifact pending</span>
-              </div>
-            </div>
-            <div class="coverage_block">
-              <h2 class="text-style-headline-medium coverage_heading" data-sc-slot="heading">Our partners make it possible</h2>
-              <!-- ARTIFACT SLOT 2 — partner network (incoming from another project) -->
-              <div class="coverage_feature is-short" data-sc-slot="partner-feature" role="img" aria-label="Partner network — artifact pending">
-                <span class="text-style-label">Partner network — artifact pending</span>
-              </div>
-            </div>
+    <!-- Figma: Section / Coverage · background = "Mission Globe" artifact (js/mission-globe.js) · pinned scroll story · Scheme 3 -->
+    <section class="coverage_wrap section_wrap" id="missions" data-sc-pattern="coverage" data-sc-scheme="scheme-3">
+      <div class="coverage_stage" id="stage">
+        <canvas id="globe" aria-label="Animated globe showing rescue helicopter missions flying out from bases across North America and back"></canvas>
+        <div class="coverage_hud" aria-live="off">
+          <div class="is-clock" id="hudClock">MON 00:00</div>
+          <span>Missions this <span id="hudFrame">week</span></span><b id="hudCount">0</b>
+          <span>Trails in the air</span><b id="hudAir">0</b>
+          <span>Bases</span><b id="hudBases">0</b>
+        </div>
+        <div class="coverage_legend" aria-hidden="true"><span><i></i>Base</span><span><i class="is-trail"></i>Mission out &amp; back</span></div>
+        <div class="coverage_fallback text-style-text-small" id="fallback" hidden>WebGL isn’t available here. On the live site this falls back to a looping video.</div>
+      </div>
+
+      <div class="coverage_story padding-global">
+        <div class="coverage_beat is-wide">
+          <span class="coverage_pill">Prototype · placeholder bases &amp; volumes</span>
+          <div class="coverage_eyebrow">Air medical transport</div>
+          <p class="text-style-text-large" data-sc-slot="statement">We connect people to the essential care when time, distance, or access stand in the way.</p>
+          <p class="text-style-text-medium">Wheels up, somewhere, every <span class="coverage_stat" id="statEvery">17</span>&nbsp;minutes.</p>
+        </div>
+        <div class="coverage_beat">
+          <div class="coverage_eyebrow">The network</div>
+          <h2 class="text-style-headline-medium"><span class="coverage_stat" id="statBases">43</span> bases across North America.</h2>
+          <p class="text-style-text-small">Every base is placed on its home city, with its own annual flight volume driving how often it launches.</p>
+        </div>
+        <div class="coverage_beat">
+          <div class="coverage_eyebrow">The volume</div>
+          <h2 class="text-style-headline-medium"><span class="coverage_stat" id="statYear">30,000</span> missions a year.</h2>
+          <p class="text-style-text-small">Launches follow a daily rhythm, quieter overnight and busiest in the afternoon, so a week plays back the way a real week feels.</p>
+        </div>
+        <div class="coverage_beat">
+          <div class="coverage_eyebrow">The reach</div>
+          <h2 class="text-style-headline-medium">Most flights stay within <span class="coverage_stat">150&nbsp;mi</span> of home.</h2>
+          <p class="text-style-text-small">Short hops are hard to see at continental scale, so distances and arc heights are gently exaggerated.</p>
+        </div>
+        <div class="coverage_beat is-wide">
+          <div class="coverage_eyebrow">Partners</div>
+          <h2 class="text-style-headline-medium" data-sc-slot="heading">Our partners make it possible</h2>
+          <!-- ARTIFACT SLOT 2 — partner network (incoming from another project) -->
+          <div class="coverage_feature" data-sc-slot="partner-feature" role="img" aria-label="Partner network — artifact pending">
+            <span class="coverage_eyebrow">Partner network — artifact pending</span>
           </div>
         </div>
       </div>
@@ -268,5 +291,9 @@
     });
   })();
 </script>
+<!-- Mission Globe: GSAP ScrollTrigger drives the scroll-turn; three.js is imported by the module. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script type="module" src="js/mission-globe.js"></script>
 </body>
 </html>

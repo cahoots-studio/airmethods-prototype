@@ -1,39 +1,101 @@
 /* PATTERN: coverage
-   Figma: Homepage — Phase 1 Update › Section / Coverage (146:2655).
-   A Royal Blue band (Scheme 1 Accent) carrying one white card
-   (Scheme 1 Background, Corners/Card). The card holds two stacked blocks —
-   the statement + map feature, and the partners heading + partner network.
-   Both feature slots are placeholders: they are filled by artifacts from
-   another project. */
-@layer sc-components {
-  .coverage_wrap { background-color: var(--sc-color-accent); }
+   Figma: Homepage — Phase 1 Update › Section / Coverage (146:2655), with the
+   "Mission Globe" artifact as its background (site/js/mission-globe.js).
 
-  .coverage_card {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sc-padding-gap-huge);
-    padding: var(--sc-padding-block-medium);
-    background-color: var(--sc-color-background);
-    border-radius: var(--sc-corners-card);
+   A pinned scroll story, as in the artifact: the stage (WebGL globe) sticks
+   for the section's length while the beats scroll over it. Section length =
+   one screen per beat. Scheme 3 (navy): the globe was designed for Key/Top,
+   and the copy sits in Scheme 3 Text over a left-hand scrim. The partner
+   network (artifact 2) lands in the last beat. */
+@layer sc-components {
+  .coverage_wrap { position: relative; }
+
+  .coverage_stage {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    overflow: hidden;
+    background: var(--bg-fill, var(--sc-color-background));
+  }
+  .coverage_stage canvas { display: block; width: 100%; height: 100%; }
+  .coverage_stage::after {   /* left + bottom scrim so copy stays legible over the globe */
+    content: "";
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      linear-gradient(90deg,
+        color-mix(in srgb, var(--sc-color-background) 72%, transparent) 0%,
+        color-mix(in srgb, var(--sc-color-background) 35%, transparent) 38%,
+        transparent 60%),
+      linear-gradient(0deg, color-mix(in srgb, var(--sc-color-background) 80%, transparent) 0%, transparent 22%);
   }
 
-  .coverage_block { display: flex; flex-direction: column; gap: var(--sc-padding-gap-large); }
-  .coverage_heading { max-width: var(--sc-width-column-wider); }
+  .coverage_story { position: relative; z-index: 2; margin-top: -100svh; pointer-events: none; }
+  .coverage_beat {
+    min-height: 100svh;
+    display: flex; flex-direction: column; justify-content: center;
+    gap: var(--sc-padding-gap-medium);
+    max-width: var(--sc-width-column-medium);
+  }
+  .coverage_beat > * { pointer-events: auto; }
+  .coverage_beat.is-wide { max-width: var(--sc-width-column-wide); }
+  .coverage_beat p:not(.text-style-text-large) { color: color-mix(in srgb, var(--sc-color-text) var(--sc-opacity-80), transparent); }
 
-  /* Slot for an incoming artifact. Height tracks Padding/Block so the
-     reserved space scales with the breakpoint like the Figma frames do
-     (769 / 553 at 1920). */
+  .coverage_eyebrow, .coverage_pill, .coverage_hud, .coverage_legend {
+    font-family: var(--sc-typeface-family-decorative);
+    font-size: var(--sc-font-size-text-tiny);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--sc-color-text) var(--sc-opacity-60), transparent);
+  }
+  .coverage_eyebrow { display: flex; align-items: center; gap: var(--sc-padding-gap-small); }
+  .coverage_eyebrow::before {
+    content: ""; width: var(--sc-padding-control-small); height: var(--sc-padding-control-small);
+    border-radius: var(--sc-radius-round); background: var(--sc-color-accent);
+    box-shadow: 0 0 var(--sc-padding-control-medium) var(--sc-color-accent);
+  }
+  .coverage_pill {
+    align-self: flex-start;
+    padding: var(--sc-padding-control-tiny) var(--sc-padding-control-small);
+    border: 1px solid var(--sc-color-border);
+    border-radius: var(--sc-radius-round);
+  }
+  .coverage_stat { color: var(--sc-color-accent); font-variant-numeric: tabular-nums; }
+
+  .coverage_hud {
+    position: absolute; z-index: 3;
+    right: var(--sc-padding-section-global); bottom: var(--sc-padding-block-small);
+    display: grid; grid-template-columns: auto auto;
+    column-gap: var(--sc-padding-gap-medium); row-gap: var(--sc-padding-gap-tiny);
+    font-variant-numeric: tabular-nums;
+  }
+  .coverage_hud b { color: var(--sc-color-text); font-weight: var(--sc-typeface-weight-medium); text-align: right; }
+  .coverage_hud .is-clock {
+    grid-column: 1 / -1; text-align: right;
+    font-size: var(--sc-font-size-text-medium); line-height: 1; color: var(--sc-color-text);
+    margin-bottom: var(--sc-padding-gap-small);
+  }
+  .coverage_legend {
+    position: absolute; z-index: 3;
+    left: var(--sc-padding-section-global); bottom: var(--sc-padding-block-small);
+    display: flex; flex-wrap: wrap; gap: var(--sc-padding-gap-medium);
+  }
+  .coverage_legend span { display: inline-flex; align-items: center; gap: var(--sc-padding-gap-small); }
+  .coverage_legend i { width: var(--sc-padding-control-small); height: var(--sc-padding-control-small); border-radius: var(--sc-radius-round); border: 2px solid var(--sc-color-accent); }
+  .coverage_legend i.is-trail { width: var(--sc-padding-control-large); height: 2px; border: 0; background: linear-gradient(90deg, transparent, var(--sc-color-accent)); }
+
+  .coverage_fallback { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding-inline: var(--sc-padding-section-global); }
+  .coverage_fallback[hidden] { display: none; }
+
+  /* Artifact slot 2 — partner network (incoming from another project) */
   .coverage_feature {
-    display: grid;
-    place-items: center;
-    min-height: calc(var(--sc-padding-block-huge) * 2);
+    display: grid; place-items: center;
+    min-height: calc(var(--sc-padding-block-huge) * 1.25);
     border: 1px dashed var(--sc-color-border);
     border-radius: var(--sc-corners-card);
-    color: var(--sc-color-border);
   }
-  .coverage_feature.is-short { min-height: calc(var(--sc-padding-block-huge) * 1.25); }
 
   @media (max-width: 767px) {
-    .coverage_card { padding: var(--sc-padding-block-small) var(--sc-padding-gap-large); }
+    .coverage_legend { display: none; }
+    .coverage_hud .is-clock { font-size: var(--sc-font-size-text-small); }
   }
 }
