@@ -94,9 +94,10 @@
 
 /* ---- Partner Logo Field (artifact 2: claude.ai/artifact/56GMw54cWSzbAL6nUmQ9Js) ----
    The last beat of the scroll story. Colorway from the approved package
-   (claude-code-handoff/partner-logo-field, 28 Sep 2026): the beat sits on
-   Royal Blue, full bleed, so it slides up over the globe; tiles and borders
-   match it, so only the logos read at rest; the nearest logo turns white.
+   (claude-code-handoff/partner-logo-field, 28 Sep 2026). The beat has no fill
+   of its own, so the globe's Royal Blue → navy gradient shows through; tiles
+   and borders are Royal Blue so only the logos read at rest; the nearest logo
+   turns white.
      --lf-bg / --lf-tile / --lf-border  #416DE7  → Royal Blue (#406DE7)
      --lf-logo                          #C5CEDD  → Neutral Light / Neutral mix
      --lf-logo-focus                    #FFFFFF  → White
@@ -114,9 +115,6 @@
     --tile-line: var(--partners-bg);
     --logo: color-mix(in srgb, var(--sc-color-neutral-light) 65%, var(--sc-color-neutral-neutral));
     --logo-focus: var(--sc-color-white);
-    /* full-bleed fill from inside the container: paints the border-image
-       outset out to the viewport edges without adding width */
-    border-image: conic-gradient(var(--partners-bg) 0 0) fill 0 / / 0 100vw;
   }
   .coverage_partners_head { display: flex; flex-direction: column; gap: var(--sc-padding-gap-small); max-width: var(--sc-width-column-medium); }
   .coverage_partners_field { position: relative; width: 100%; touch-action: pan-y; }
