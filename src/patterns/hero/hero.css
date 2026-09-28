@@ -8,7 +8,8 @@
 
    Background, bottom to top, mirrors the Figma fill stack:
      clouds photo (cover) → Royal Blue 80% fading out by 75% (top wash)
-     → Royal Blue rising from 73% to solid (bleeds into the Coverage band).
+     → Royal Blue rising from 73% to 80% at the bottom edge.
+   Both gradient layers are 80% layer opacity in Figma.
    The Royal Blue stops use color-mix on the key colour so they stay token-bound.
    The helicopter is a separate image layer, top-right, behind the copy. */
 
@@ -18,8 +19,9 @@
     position: relative;
     isolation: isolate;
     overflow: hidden;
+    container-type: inline-size;   /* cqi below = hero width */
     background:
-      linear-gradient(to bottom, transparent 73%, var(--hero-royal) 100%),
+      linear-gradient(to bottom, transparent 73.2%, color-mix(in srgb, var(--hero-royal) var(--sc-opacity-80), transparent) 100%),
       linear-gradient(to bottom,
         color-mix(in srgb, var(--hero-royal) var(--sc-opacity-80), transparent) 0%,
         color-mix(in srgb, var(--hero-royal) var(--sc-opacity-80), transparent) 26%,
@@ -38,12 +40,12 @@
     flex-direction: column;
     justify-content: flex-end;
     gap: var(--sc-padding-gap-huge);
-    /* Figma: the hero Container is a fixed 710 tall at 1920 with the copy
-       bottom-aligned, so on a 1080 screen the buttons land ~890px down.
-       Filling the viewport (nav overlays it) and bottom-aligning puts the
-       copy at the same place on load at any screen height. */
+    /* Figma: Section / Hero is 1085 tall at 1920 (nav 87 + 96 + a 710 content
+       box with the copy bottom-aligned + 160 + 32). Held as a share of the
+       width (1085 / 1920) so the hero, helicopter and transition wing keep the
+       same composition at every desktop width; content can still grow it. */
     box-sizing: border-box;
-    min-height: 100svh;
+    min-height: 56.51cqi;
   }
 
   .hero_content {
@@ -72,6 +74,10 @@
   }
 
   @media (max-width: 991px) {
+    /* Figma only designs the desktop hero. Below 992 the width share is too
+       short for the stacked copy and helicopter, so the hero fills the screen
+       with the copy bottom-aligned, as before. */
+    .hero_component { min-height: 100svh; }
     .hero_image { width: 90%; right: -10%; }
     .hero_actions { margin-inline-start: 0; }
   }
@@ -84,10 +90,11 @@
 
 /* Vertical rhythm. The navigation overlays the hero, so the top padding adds
    the bar's height (Block/Tiny ×2 + a control row) to Figma's Section/Medium.
-   Bottom is Section/Large, as in the Figma Hero frame. */
+   Bottom is Figma's 160 hero padding + the 32 the section adds under it
+   (192 = Section/Large × 1.5). */
 @layer sc-components {
   .hero_component {
     padding-block-start: calc(var(--sc-padding-section-medium) + var(--sc-padding-block-tiny) * 2 + var(--sc-padding-control-medium) * 2 + var(--sc-font-size-text-small));
-    padding-block-end: var(--sc-padding-section-large);
+    padding-block-end: calc(var(--sc-padding-section-large) * 1.5);
   }
 }
