@@ -88,8 +88,13 @@
 }
 
 /* ---- Partner Logo Field (artifact 2: claude.ai/artifact/56GMw54cWSzbAL6nUmQ9Js) ----
-   The last beat of the scroll story. Tiles sit on the globe; colours are the
-   Scheme 3 roles mixed with transparency, so light/dark follows the scheme.
+   The last beat of the scroll story. Colorway from the approved package
+   (claude-code-handoff/partner-logo-field, 28 Sep 2026): the beat sits on
+   Royal Blue, full bleed, so it slides up over the globe; tiles and borders
+   match it, so only the logos read at rest; the nearest logo turns white.
+     --lf-bg / --lf-tile / --lf-border  #416DE7  → Royal Blue (#406DE7)
+     --lf-logo                          #C5CEDD  → Neutral Light / Neutral mix
+     --lf-logo-focus                    #FFFFFF  → White
    Layout and motion live in js/partner-field.js. */
 @layer sc-components {
   /* The beat spans the site container (Container/Large) like every other section;
@@ -99,9 +104,14 @@
     max-width: none;
     padding-block: var(--sc-padding-block-small);
     gap: var(--sc-padding-gap-medium);
-    --tile: color-mix(in srgb, var(--sc-color-background) 90%, var(--sc-color-text));
-    --tile-line: color-mix(in srgb, var(--sc-color-text) var(--sc-opacity-20), transparent);
-    --logo: color-mix(in srgb, var(--sc-color-text) 55%, transparent);
+    --partners-bg: var(--sc-color-royal-blue);
+    --tile: var(--partners-bg);
+    --tile-line: var(--partners-bg);
+    --logo: color-mix(in srgb, var(--sc-color-neutral-light) 65%, var(--sc-color-neutral-neutral));
+    --logo-focus: var(--sc-color-white);
+    /* full-bleed fill from inside the container: paints the border-image
+       outset out to the viewport edges without adding width */
+    border-image: conic-gradient(var(--partners-bg) 0 0) fill 0 / / 0 100vw;
   }
   .coverage_partners_head { display: flex; flex-direction: column; gap: var(--sc-padding-gap-small); max-width: var(--sc-width-column-medium); }
   .coverage_partners_field { position: relative; width: 100%; touch-action: pan-y; }
@@ -128,10 +138,10 @@
   }
   .partner-logo.is-pill .partner-logo_name { max-width: none; white-space: nowrap; }
   .partner-logo.is-near, .partner-logo:focus-visible {
-    color: var(--sc-color-text);
+    color: var(--logo-focus);
     border-color: color-mix(in srgb, var(--sc-color-accent) 70%, transparent);
     box-shadow: 0 0 0 1px color-mix(in srgb, var(--sc-color-accent) 40%, transparent),
                 0 var(--sc-padding-gap-medium) var(--sc-padding-gap-huge) calc(var(--sc-padding-gap-medium) * -1) color-mix(in srgb, var(--sc-color-accent) 60%, transparent);
   }
-  .partner-logo:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--sc-color-accent) 55%, transparent); }
+  .partner-logo:focus-visible { border-color: var(--logo-focus); box-shadow: 0 0 0 3px color-mix(in srgb, var(--logo-focus) 55%, transparent); }
 }
