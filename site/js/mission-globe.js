@@ -1,8 +1,15 @@
 /* Mission Globe — ported from the "Mission Globe" artifact (claude.ai/artifact/BKzTHxg7x2r57HYMJe3H7d)
-   into Section 2 of the Air Methods homepage. The tuning panel (lil-gui), saved settings and the
-   HUD-to-headline alignment were removed; everything else is the artifact's code and data.
+   into Section 2 of the Air Methods homepage. The HUD-to-headline alignment is done in CSS
+   (coverage.css) instead; everything else is the artifact's code and data.
+
+   Tuning panel: add ?controls to the page URL. Tweaks persist in this browser; "Copy settings"
+   exports JSON that can be pasted into window.MISSION_GLOBE_CONFIG (set before this module loads)
+   or promoted to the defaults below. Panel code is from claude-code-handoff/mission-globe.
+
    Bases and volumes are PLACEHOLDERS — swap BASES for the client's real list. */
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.min.js";
+
+const CONTROLS = new URLSearchParams(location.search).has("controls");
 
 /* =========================================================
    DATA — swap these for the client's real list.
@@ -50,20 +57,20 @@ const params = {
   arcHeight: 1,
   distanceScale: 2.2,
   framing: "North America",
-  tilt: 25,
-  offset: 29,
+  tilt: 21,
+  offset: 23,
   axisTilt: 18,
-  zoom: 1,
+  zoom: 0.92,
   graticule: true,
   hud: true,
   inverted: false,
   background: "#0c223f",
-  bgMode: "Solid",
+  bgMode: "Linear gradient",
   background2: "#040b17",
-  bgAngle: 160,
+  bgAngle: 178,
   bgX: 68,
   bgY: 42,
-  missionColor: "#406de7",
+  missionColor: "#dce740",   /* Dots + streaks: no brand token for this yellow-green */
   globeColor: "#0a1424", globeMatchBg: false, globeShift: -0.06, globeOpacity: 1,
   rimColor: "#406de7", rimStrength: 0.35, rimTightness: 3,
   haloOn: true, haloColor: "#406de7", haloStrength: 0.55, haloSize: 1.14,
@@ -74,8 +81,8 @@ const params = {
   showLegend: true,
   showShade: true,
   dotDensity: 4,
-  landMode: "Dots",
-  lineSpacing: 0.5, lineMin: 0.1, lineMax: 0.75, lineContrast: 0.6, lineLift: 0.8, lineAngle: 0, lineOpacity: 0.6,
+  landMode: "Elevation lines",
+  lineSpacing: 0.19, lineMin: 0.1, lineMax: 0.75, lineContrast: 0.6, lineLift: 0.8, lineAngle: 0, lineOpacity: 0.6,
   paused: false,
 };
 /* Brand colours come from the Supercomponent tokens so the globe follows the theme. */
@@ -83,8 +90,10 @@ const params = {
   const css = getComputedStyle(document.documentElement);
   const tok = (n, f) => (css.getPropertyValue(n).trim() || f);
   const royal = tok("--sc-color-royal-blue", params.accent), top = tok("--sc-color-top", params.background);
-  Object.assign(params, { accent: royal, missionColor: royal, rimColor: royal, haloColor: royal, background: top });
+  /* Approved colorway: Royal Blue → Top (navy) gradient behind the globe. */
+  Object.assign(params, { accent: royal, rimColor: royal, haloColor: royal, background: royal, background2: top });
 }
+Object.assign(params, window.MISSION_GLOBE_CONFIG || {});
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const R2D = 180 / Math.PI, D2R = Math.PI / 180, EARTH_MI = 3958.8;
 
@@ -474,11 +483,26 @@ function setScheme(light) {
   for (const m of glowMats) { m.blending = light ? THREE.NormalBlending : THREE.AdditiveBlending; m.needsUpdate = true; }
 }
 
-/* ---------- apply defaults (the artifact did this through its tuning panel) ---------- */
-applyGlobe();
-applyBackground();
-graticule.visible = params.graticule;
-U.uMode.value = params.landMode === "Elevation lines" ? 1 : 0; land.visible = U.uMode.value === 0;
+/* ---------- apply settings (also re-run by the panel) ---------- */
+function setLandMode(m) {
+  const lines = m === "Elevation lines";
+  U.uMode.value = lines ? 1 : 0; land.visible = !lines;
+}
+function applyAll() {
+  const root = document.getElementById("missions");
+  root.style.setProperty("--mission", params.missionColor);
+  if (params.inverted) setScheme(true);
+  applyBackground(); applyGlobe(); setLandMode(params.landMode);
+  U.uSpacing.value = params.lineSpacing; U.uMinW.value = params.lineMin; U.uMaxW.value = params.lineMax;
+  U.uContrast.value = params.lineContrast; U.uLift.value = params.lineLift; U.uAngle.value = params.lineAngle; U.uLineOpacity.value = params.lineOpacity;
+  U.uTrail.value = params.trail; U.uSize.value = params.trailWidth;
+  graticule.visible = params.graticule;
+  root.classList.toggle("is-clean", !params.showCopy);
+  root.classList.toggle("is-no-shade", !params.showShade);
+  const legend = root.querySelector(".coverage_legend"); if (legend) legend.hidden = !params.showLegend;
+  const hudBox = root.querySelector(".coverage_hud"); if (hudBox) hudBox.hidden = !params.hud;
+}
+applyAll();
 
 /* ---------- loop: pause offscreen, freeze for reduced motion ---------- */
 let visible = true, last = performance.now();
@@ -497,3 +521,109 @@ function frame(now) {
   renderer.render(scene, camera);
 }
 requestAnimationFrame(frame);
+
+/* ---------- tuning panel (only with ?controls) ---------- */
+if (CONTROLS) {
+  const { default: GUI } = await import("https://cdn.jsdelivr.net/npm/lil-gui@0.19.2/dist/lil-gui.esm.min.js");
+  const gui = new GUI({ title: "Prototype controls" });
+  const fColor = gui.addFolder("Colors");
+  fColor.addColor(params, "accent").name("Brand blue").onChange((c) => { accent.set(c); document.getElementById("missions").style.setProperty("--sc-color-accent", c); });
+  fColor.addColor(params, "missionColor").name("Dots + streaks").onChange((c) => { missionColor.set(c); document.getElementById("missions").style.setProperty("--mission", c); });
+  fColor.add(params, "bgMode", ["Solid", "Linear gradient", "Radial gradient"]).name("Background type").onChange(applyBackground);
+  var bgCtrls = {
+    c1: fColor.addColor(params, "background").name("Background").onChange(applyBackground),
+    b2: fColor.addColor(params, "background2").name("Background 2").onChange(applyBackground),
+    angle: fColor.add(params, "bgAngle", 0, 360, 1).name("Angle (°)").onChange(applyBackground),
+    x: fColor.add(params, "bgX", 0, 100, 1).name("Center X (%)").onChange(applyBackground),
+    y: fColor.add(params, "bgY", 0, 100, 1).name("Center Y (%)").onChange(applyBackground),
+  };
+  fColor.add(params, "inverted").name("Invert colors").onChange(setScheme);
+  const fGlobe = gui.addFolder("Globe");
+  fGlobe.add(params, "globeMatchBg").name("Match background").onChange(applyGlobe);
+  var globeCtrls = {
+    color: fGlobe.addColor(params, "globeColor").name("Globe color").onChange(applyGlobe),
+    shift: fGlobe.add(params, "globeShift", -0.3, 0.3, 0.01).name("Darker ↔ lighter").onChange(applyGlobe),
+  };
+  fGlobe.add(params, "globeOpacity", 0, 1, 0.01).name("Globe opacity").onChange(applyGlobe);
+  const fRim = fGlobe.addFolder("Rim glow");
+  fRim.addColor(params, "rimColor").name("Color").onChange(applyGlobe);
+  fRim.add(params, "rimStrength", 0, 1, 0.01).name("Strength").onChange(applyGlobe);
+  fRim.add(params, "rimTightness", 1, 8, 0.1).name("Tightness").onChange(applyGlobe);
+  const fHalo = fGlobe.addFolder("Atmosphere halo");
+  fHalo.add(params, "haloOn").name("Show").onChange(applyGlobe);
+  fHalo.addColor(params, "haloColor").name("Color").onChange(applyGlobe);
+  fHalo.add(params, "haloStrength", 0, 1.5, 0.01).name("Strength").onChange(applyGlobe);
+  fHalo.add(params, "haloSize", 1.02, 1.4, 0.005).name("Size").onChange(applyGlobe);
+  const fLandC = fGlobe.addFolder("Land color");
+  fLandC.addColor(params, "landColor").name("Color").onChange(applyGlobe);
+  fLandC.add(params, "landFront", 0, 1, 0.01).name("Opacity (front)").onChange(applyGlobe);
+  fLandC.add(params, "landEdge", 0, 1, 0.01).name("Opacity (edges)").onChange(applyGlobe);
+  const fGrid = fGlobe.addFolder("Grid");
+  fGrid.addColor(params, "gridColor").name("Color").onChange(applyGlobe);
+  fGrid.add(params, "gridOpacity", 0, 1, 0.01).name("Opacity").onChange(applyGlobe);
+  const fSun = fGlobe.addFolder("Lighting");
+  fSun.add(params, "lightStrength", 0, 1, 0.01).name("Strength (0 = off)").onChange(applyGlobe);
+  fSun.add(params, "lightAngle", -180, 180, 1).name("Direction (°)").onChange(applyGlobe);
+  fSun.add(params, "lightHeight", 0, 90, 1).name("Height (°)").onChange(applyGlobe);
+  fRim.close(); fHalo.close(); fLandC.close(); fGrid.close(); fSun.close();
+  applyGlobe();
+  const fSim = gui.addFolder("Timeline");
+  fSim.add(params, "timeframe", ["24 hours", "7 days"]).name("Timeframe").onChange(() => { simMin = 0; missionCount = 0; });
+  fSim.add(params, "loopSeconds", 15, 180, 1).name("Loop length (s)");
+  fSim.add(params, "activity", 0.25, 4, 0.05).name("Activity ×");
+  fSim.add(params, "paused").name("Pause");
+  const fLook = gui.addFolder("Trails");
+  fLook.add(params, "flightSeconds", 0.6, 5, 0.1).name("Flight time (s)");
+  fLook.add(params, "trail", 0.15, 1, 0.01).name("Trail length").onChange((v) => (U.uTrail.value = v));
+  fLook.add(params, "trailWidth", 1, 8, 0.1).name("Trail width").onChange((v) => (U.uSize.value = v));
+  fLook.add(params, "arcHeight", 0, 3, 0.05).name("Arc height ×");
+  fLook.add(params, "distanceScale", 1, 4, 0.05).name("Distance ×");
+  const fCam = gui.addFolder("Framing");
+  fCam.add(params, "framing", Object.keys(FRAMINGS)).name("Preset").onChange((k) => { window.gsap ? gsap.to(view, { ...FRAMINGS[k], duration: 1.6, ease: "power2.inOut" }) : (view = { ...FRAMINGS[k] }); });
+  fCam.add(params, "zoom", 0.5, 3, 0.01).name("Zoom ×");
+  fCam.add(params, "tilt", 0, 45, 1).name("Tilt (°)");
+  fCam.add(params, "offset", 0, 70, 1).name("Shift right (°)");
+  fCam.add(params, "axisTilt", -35, 35, 0.5).name("Polar axis tilt (°)");
+  fCam.add(params, "graticule").name("Lat/long grid").onChange((v) => (graticule.visible = v));
+  applyBackground();
+  const fLand = gui.addFolder("Land texture");
+  fLand.add(params, "landMode", ["Dots", "Elevation lines"]).name("Mode").onChange((m) => { setLandMode(m); showLandFolders(m); });
+  const fDots = fLand.addFolder("Dots"), fLines = fLand.addFolder("Elevation lines");
+  const showLandFolders = (m) => { fDots.show(m === "Dots"); fLines.show(m !== "Dots"); };
+  fDots.add(params, "dotDensity", 0.2, 4, 0.05).name("Dot density ×").onChange(buildLand);
+  fLines.add(params, "lineSpacing", 0.15, 2, 0.01).name("Line spacing (°)").onChange((v) => (U.uSpacing.value = v));
+  fLines.add(params, "lineMin", 0, 0.6, 0.01).name("Thinnest (low ground)").onChange((v) => (U.uMinW.value = v));
+  fLines.add(params, "lineMax", 0.05, 1, 0.01).name("Thickest (high ground)").onChange((v) => (U.uMaxW.value = v));
+  fLines.add(params, "lineContrast", 0.2, 3, 0.05).name("Elevation contrast").onChange((v) => (U.uContrast.value = v));
+  fLines.add(params, "lineLift", 0, 4, 0.05).name("Ridge lift (°)").onChange((v) => (U.uLift.value = v));
+  fLines.add(params, "lineAngle", -90, 90, 1).name("Line angle (°)").onChange((v) => (U.uAngle.value = v));
+  fLines.add(params, "lineOpacity", 0.1, 1, 0.01).name("Line opacity").onChange((v) => (U.uLineOpacity.value = v));
+  showLandFolders(params.landMode);
+  const fRec = gui.addFolder("Recording");
+  fRec.add(params, "showCopy").name("Left column text").onChange((v) => document.getElementById("missions").classList.toggle("is-clean", !v));
+  fRec.add(params, "showShade").name("Text shading").onChange((v) => document.getElementById("missions").classList.toggle("is-no-shade", !v));
+  fRec.add(params, "showLegend").name("Legend").onChange((v) => { document.querySelector(".coverage_legend").hidden = !v; });
+  fRec.add({ tip: "Press H to hide this panel" }, "tip").name("Tip").disable();
+  addEventListener("keydown", (e) => { if ((e.key === "h" || e.key === "H") && !e.metaKey && !e.ctrlKey && !/input|textarea|select/i.test(e.target.tagName)) gui.domElement.hidden = !gui.domElement.hidden; });
+  fCam.add(params, "hud").name("Clock + counts").onChange((v) => { document.querySelector(".coverage_hud").hidden = !v; });
+  fSim.close(); fLook.close();
+  if (innerWidth < 720) gui.close();
+
+  /* keep the viewer's tweaks across reloads, and let them copy the full set */
+  const STORE = "mission-globe-settings";
+  try { const saved = JSON.parse(localStorage.getItem(STORE) || "null"); if (saved) gui.load(saved); } catch (e) {}
+  gui.onFinishChange(() => { try { localStorage.setItem(STORE, JSON.stringify(gui.save())); } catch (e) {} });
+  const copyOut = document.createElement("textarea");
+  copyOut.id = "settingsOut"; copyOut.readOnly = true; copyOut.hidden = true;
+  copyOut.style.cssText = "position:fixed;left:12px;bottom:12px;z-index:11;width:min(420px,calc(100vw - 24px));height:160px;font:11px/1.4 var(--mono);background:#0c1422;color:#cfe0ff;border:1px solid #2a3a5c;border-radius:8px;padding:10px";
+  document.body.appendChild(copyOut);
+  const actions = { copy() {
+    const { paused, ...cfg } = params; const json = JSON.stringify(cfg, null, 2);   // paste into window.MISSION_GLOBE_CONFIG
+    const done = () => { copyBtn.name("Copied ✓"); setTimeout(() => copyBtn.name("Copy settings"), 1600); };
+    const fallback = () => { copyOut.value = json; copyOut.hidden = false; copyOut.focus(); copyOut.select(); copyBtn.name("Select + copy below"); };
+    try { navigator.clipboard.writeText(json).then(done, fallback); } catch (e) { fallback(); }
+  }};
+  const copyBtn = gui.add(actions, "copy").name("Copy settings");
+  copyOut.addEventListener("blur", () => { copyOut.hidden = true; copyBtn.name("Copy settings"); });
+
+}

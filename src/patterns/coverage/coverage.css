@@ -19,15 +19,20 @@
   }
   .coverage_stage canvas { display: block; width: 100%; height: 100%; }
   .coverage_stage::after {   /* left + bottom scrim so copy stays legible over the globe */
+    /* --ink is set by mission-globe.js to the globe's main background colour */
     content: "";
     position: absolute; inset: 0; pointer-events: none;
     background:
       linear-gradient(90deg,
-        color-mix(in srgb, var(--sc-color-background) 72%, transparent) 0%,
-        color-mix(in srgb, var(--sc-color-background) 35%, transparent) 38%,
+        color-mix(in srgb, var(--ink, var(--sc-color-background)) 72%, transparent) 0%,
+        color-mix(in srgb, var(--ink, var(--sc-color-background)) 35%, transparent) 38%,
         transparent 60%),
-      linear-gradient(0deg, color-mix(in srgb, var(--sc-color-background) 80%, transparent) 0%, transparent 22%);
+      linear-gradient(0deg, color-mix(in srgb, var(--ink, var(--sc-color-background)) 80%, transparent) 0%, transparent 22%);
+    transition: opacity var(--sc-duration-fast) var(--sc-ease-standard);
   }
+  /* ?controls › Recording toggles (set by mission-globe.js) */
+  .coverage_wrap.is-no-shade .coverage_stage::after { opacity: 0; }
+  .coverage_wrap.is-clean .coverage_story { visibility: hidden; }
 
   .coverage_story { position: relative; z-index: 2; margin-top: -100svh; pointer-events: none; }
   .coverage_beat {
@@ -73,8 +78,8 @@
     display: flex; flex-wrap: wrap; gap: var(--sc-padding-gap-medium);
   }
   .coverage_legend span { display: inline-flex; align-items: center; gap: var(--sc-padding-gap-small); }
-  .coverage_legend i { width: var(--sc-padding-control-small); height: var(--sc-padding-control-small); border-radius: var(--sc-radius-round); border: 2px solid var(--sc-color-accent); }
-  .coverage_legend i.is-trail { width: var(--sc-padding-control-large); height: 2px; border: 0; background: linear-gradient(90deg, transparent, var(--sc-color-accent)); }
+  .coverage_legend i { width: var(--sc-padding-control-small); height: var(--sc-padding-control-small); border-radius: var(--sc-radius-round); border: 2px solid var(--mission, var(--sc-color-accent)); }
+  .coverage_legend i.is-trail { width: var(--sc-padding-control-large); height: 2px; border: 0; background: linear-gradient(90deg, transparent, var(--mission, var(--sc-color-accent))); }
 
   .coverage_fallback { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding-inline: var(--sc-padding-section-global); }
   .coverage_fallback[hidden] { display: none; }
