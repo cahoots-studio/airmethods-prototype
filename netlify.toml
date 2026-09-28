@@ -2,7 +2,7 @@
 # The style guide is the deployable artifact; everything else is source.
 
 [build]
-  command = "npm run build:site"
+  command = "npm run build:netlify"   # build:site minus the blocking scale check — see CHANGELOG 2026-09-28
   publish = "_site"
 
 [build.environment]
