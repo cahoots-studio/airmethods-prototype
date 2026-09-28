@@ -37,6 +37,25 @@
   }
   .media.newsfeed_media img { object-position: 60% center; }   /* keep the crew member in the portrait crop */
 
+  /* States (prototype, 28 Sep 2026 — not yet in Figma):
+       Default  photo + headline only
+       Hover    summary and link fade in (also on keyboard focus inside the card)
+     The summary and link keep their space while hidden, so the card never
+     changes height and nothing below it moves. Hover is an enhancement: touch
+     and ≤991px always show everything, or the link would be unreachable. */
+  .newsfeed_item > p,
+  .newsfeed_cta {
+    transition: opacity var(--sc-duration-base) var(--sc-ease-standard),
+                transform var(--sc-duration-base) var(--sc-ease-standard);
+  }
+  @media (hover: hover) and (min-width: 992px) {
+    .newsfeed_item > p,
+    .newsfeed_cta { opacity: 0; transform: translateY(calc(var(--sc-distance-reveal) * -0.5)); }
+    .newsfeed_item:is(:hover, :focus-within) > p,
+    .newsfeed_item:is(:hover, :focus-within) .newsfeed_cta { opacity: 1; transform: none; }
+    .newsfeed_item:is(:hover, :focus-within) .newsfeed_cta { transition-delay: var(--sc-duration-instant); }
+  }
+
   /* Three across gets too narrow for the portrait photos below 992. */
   @media (max-width: 991px) {
     .newsfeed_list { flex-direction: column; gap: var(--sc-padding-gap-huge); }
