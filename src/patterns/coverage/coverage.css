@@ -100,14 +100,17 @@
 @layer sc-components {
   .coverage_beat.coverage_partners {
     max-width: var(--sc-width-container-medium);
-    padding-block-end: calc(var(--sc-padding-block-large) * 1.25);   /* clear the HUD in the stage's bottom corners */
-    gap: var(--sc-padding-gap-large);
+    padding-block: var(--sc-padding-block-small);
+    gap: var(--sc-padding-gap-medium);
     --tile: color-mix(in srgb, var(--sc-color-background) 90%, var(--sc-color-text));
     --tile-line: color-mix(in srgb, var(--sc-color-text) var(--sc-opacity-20), transparent);
     --logo: color-mix(in srgb, var(--sc-color-text) 55%, transparent);
   }
   .coverage_partners_head { display: flex; flex-direction: column; gap: var(--sc-padding-gap-small); max-width: var(--sc-width-column-medium); }
   .coverage_partners_field { position: relative; width: 100%; touch-action: pan-y; }
+  /* While the partners beat is on screen the HUD and legend step aside (set by js/partner-field.js). */
+  .coverage_hud, .coverage_legend { transition: opacity var(--sc-duration-base) var(--sc-ease-standard); }
+  .coverage_stage.is-partners .coverage_hud, .coverage_stage.is-partners .coverage_legend { opacity: 0; }
 
   .partner-logo {
     position: absolute; left: 0; top: 0;

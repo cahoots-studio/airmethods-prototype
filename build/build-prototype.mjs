@@ -15,7 +15,17 @@ const guide = readFileSync(join(SITE, 'index.html'), 'utf8').replaceAll('href="a
 mkdirSync(join(SITE, 'styleguide'), { recursive: true });
 writeFileSync(join(SITE, 'styleguide/index.html'), guide);
 
-cpSync(join(ROOT, 'site/index.html'), join(SITE, 'index.html'));
+// Cache-bust: /assets/* is served immutable, so every CSS/JS reference carries a content hash.
+{
+  const { createHash } = await import('node:crypto');
+  const hash = (f) => createHash('sha1').update(readFileSync(f)).digest('hex').slice(0, 10);
+  let html = readFileSync(join(ROOT, 'site/index.html'), 'utf8');
+  html = html
+    .replace('href="assets/supercomponent.css"', `href="assets/supercomponent.css?v=${hash(join(SITE, 'assets/supercomponent.css'))}"`)
+    .replace('href="assets/site.css"', `href="assets/site.css?v=${hash(join(ROOT, 'site/site.css'))}"`)
+    .replace(/src="js\/([\w-]+\.js)"/g, (m, f) => `src="js/${f}?v=${hash(join(ROOT, 'site/js', f))}"`);
+  writeFileSync(join(SITE, 'index.html'), html);
+}
 cpSync(join(ROOT, 'site/site.css'), join(SITE, 'assets/site.css'));
 cpSync(join(ROOT, 'site/img'), join(SITE, 'img'), { recursive: true });
 cpSync(join(ROOT, 'site/js'), join(SITE, 'js'), { recursive: true });

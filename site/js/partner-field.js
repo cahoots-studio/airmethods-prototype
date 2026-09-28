@@ -150,3 +150,7 @@ function tick(now) {
 
 addEventListener("resize", layout);
 build();
+
+/* Hand the stage's bottom corners to the grid: fade the globe HUD while this beat is in view. */
+const stage = document.getElementById("stage");
+if (stage) new IntersectionObserver(([e]) => stage.classList.toggle("is-partners", e.isIntersecting), { threshold: 0.35 }).observe(section);

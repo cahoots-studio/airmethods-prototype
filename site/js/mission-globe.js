@@ -411,9 +411,11 @@ if (window.gsap && window.ScrollTrigger) {
 const DAYS = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"];
 const $ = (id) => document.getElementById(id);
 const totalYear = BASES.reduce((s, b) => s + b.fpy, 0);
-$("statYear").textContent = totalYear.toLocaleString("en-US");
-$("statBases").textContent = BASES.length;
-$("statEvery").textContent = Math.max(1, Math.round(525600 / totalYear));
+/* the stat spans are optional — the page may drop beats */
+const setText = (id, v) => { const el = $(id); if (el) el.textContent = v; };
+setText("statYear", totalYear.toLocaleString("en-US"));
+setText("statBases", BASES.length);
+setText("statEvery", Math.max(1, Math.round(525600 / totalYear)));
 $("hudBases").textContent = BASES.length;
 function hud() {
   const d = Math.floor(simMin / 1440), h = Math.floor((simMin % 1440) / 60), m = Math.floor(simMin % 60);
