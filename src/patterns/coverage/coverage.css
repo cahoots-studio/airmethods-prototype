@@ -98,8 +98,11 @@
    Scheme 3 roles mixed with transparency, so light/dark follows the scheme.
    Layout and motion live in js/partner-field.js. */
 @layer sc-components {
+  /* The beat spans the site container (Container/Large) like every other section;
+     the logo field keeps its Container/Medium width and centres in it. The CTA
+     row sits under the field and ends on its right edge. */
   .coverage_beat.coverage_partners {
-    max-width: var(--sc-width-container-medium);
+    max-width: none;
     padding-block: var(--sc-padding-block-small);
     gap: var(--sc-padding-gap-medium);
     --tile: color-mix(in srgb, var(--sc-color-background) 90%, var(--sc-color-text));
@@ -108,6 +111,8 @@
   }
   .coverage_partners_head { display: flex; flex-direction: column; gap: var(--sc-padding-gap-small); max-width: var(--sc-width-column-medium); }
   .coverage_partners_field { position: relative; width: 100%; touch-action: pan-y; }
+  .coverage_partners_field,
+  .coverage_partners > .action-row { width: 100%; max-width: var(--sc-width-container-medium); margin-inline: auto; }
   /* While the partners beat is on screen the HUD and legend step aside (set by js/partner-field.js). */
   .coverage_hud, .coverage_legend { transition: opacity var(--sc-duration-base) var(--sc-ease-standard); }
   .coverage_stage.is-partners .coverage_hud, .coverage_stage.is-partners .coverage_legend { opacity: 0; }
