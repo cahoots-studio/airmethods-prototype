@@ -14,7 +14,7 @@
      radius       Figma Corners/Button   -> --sc-corners-button
      font-size    Figma 18 (raw)        -> --sc-font-size-text-small
      font-family  Figma Inter (raw)     -> --sc-typeface-family-text
-     Link hover text colour is unbound in Figma; left unchanged here. */
+     Link: Text at rest, Accent on hover (Figma Link / Hover, 28 Sep 2026). */
 
 @layer sc-components {
   .button {
@@ -52,6 +52,7 @@
     transition:
       background-color var(--sc-duration-fast) var(--sc-ease-standard),
       border-color var(--sc-duration-fast) var(--sc-ease-standard),
+      color var(--sc-duration-fast) var(--sc-ease-standard),
       transform var(--sc-duration-fast) var(--sc-ease-standard);
   }
 
@@ -97,6 +98,7 @@
     border-bottom-color: var(--sc-color-accent);
     border-radius: 0;
   }
+  .button.is-link:is(:hover, :focus-visible) { --button-text: var(--sc-color-accent); }
 
   /* Reduced motion: the overlay still resolves, it just arrives immediately. */
   @media (prefers-reduced-motion: reduce) {

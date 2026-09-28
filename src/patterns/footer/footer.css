@@ -1,22 +1,31 @@
 /* PATTERN: footer
-   Figma: Homepage — Phase 1 Update › Section / Footer · Scheme 3.
-   Upper: primary links (wrapped, Column/Tight wide) | Logo [Type=Mark].
+   Figma: Homepage — Phase 1 Update › Section / Footer (146:2751) · Scheme 3,
+   revised 28 Sep 2026.
+   Section/Global padding top and bottom, Container/Large, two ~100 tall rows
+   Gap/Huge apart.
+   Upper: full wordmark (250 wide, Scheme Text) | primary links, one line, end-aligned.
    Lower: legal links (Regular weight, Scheme Accent) | copyright. */
 @layer sc-components {
+  .footer_padding { padding-block: var(--sc-padding-section-global); }
   .footer_component { display: flex; flex-direction: column; gap: var(--sc-padding-gap-huge); }
-  .footer_row { display: flex; align-items: center; justify-content: space-between; gap: var(--sc-padding-gap-large); }
+  .footer_row {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: var(--sc-padding-gap-large);
+    padding-block: var(--sc-padding-gap-large);          /* Figma rows are 100 tall, content centred */
+  }
+  .footer_logo { flex: none; display: block; width: max(calc(var(--sc-padding-block-large) * 1.5625), calc(var(--sc-width-column-tightest) / 2)); color: var(--sc-color-text); }   /* 250 @1920, never under 160 */
+  .footer_logo svg { display: block; width: 100%; height: auto; fill: currentColor; }
   .footer_links {
-    display: flex; flex-wrap: wrap;
+    display: flex; flex-wrap: wrap; justify-content: flex-end;
     gap: var(--sc-padding-gap-small) var(--sc-padding-gap-large);
-    max-width: var(--sc-width-column-tight);
     margin: 0; padding: 0; list-style: none;
   }
   .footer_links a { text-decoration: none; font-size: var(--sc-font-size-text-small); padding-inline: var(--sc-padding-gap-tiny); }
   .footer_link { font-weight: var(--sc-typeface-weight-extrabold); }
+  .footer_legal { justify-content: flex-start; }
   .footer_legal a { color: var(--sc-color-accent); font-weight: var(--sc-typeface-weight-regular); }
-  .footer_mark { width: calc(var(--sc-padding-block-large) * 0.64); color: var(--sc-color-text); }
-  .footer_mark svg { width: 100%; height: auto; fill: currentColor; }
-  @media (max-width: 767px) {
+  @media (max-width: 991px) {
     .footer_row { flex-direction: column; align-items: flex-start; }
+    .footer_links { justify-content: flex-start; }
   }
 }

@@ -1,39 +1,46 @@
 /* PATTERN: newsfeed
-   Figma: Homepage — Phase 1 Update › Newsfeed (146:2941).
-   Centred heading + View All, then a horizontal track: one lead story with a
-   large shaped image, followed by smaller stories that run past the right edge
-   (Figma lets them overflow the frame). The track scrolls; the section clips. */
+   Figma: Homepage — Phase 1 Update › Newsfeed (146:2941), revised 28 Sep 2026.
+   Scheme 2 section. Centred Headline Medium + View All, then three equal
+   "Newsfeed Item" cards (component 204:1332, all set to Expanded) across
+   Container/Large with a Gap/Medium gutter.
+
+   Each card: a portrait shaped photo (Figma Media — Vertical, 323 × 404 of a
+   453 inner width) aligned to the card's end edge, Headline Small, Text Medium
+   and a View All Partners link, also end-aligned. The Collapsed variant has
+   no interaction wired in Figma, so the cards are static.
+
+   The links here are overridden to Accent in Figma (the Link component now
+   defaults to Text); that override is kept for this section only. */
 @layer sc-components {
-  .newsfeed_wrap { overflow: hidden; }
   .newsfeed_component { display: flex; flex-direction: column; gap: var(--sc-padding-gap-large); }
   .supercomponent.newsfeed_heading { align-items: center; text-align: center; gap: var(--sc-padding-gap-small); }
+  .newsfeed_wrap .button.is-link { --button-text: var(--sc-color-accent); }
 
-  .newsfeed_list {
-    display: flex;
-    align-items: flex-end;
-    gap: var(--sc-padding-gap-huge);
-    width: 100%;
-    max-width: var(--sc-width-container-medium);
-    margin-inline: auto;
-    overflow-x: auto;
-    overflow-y: visible;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    /* room for the mark watermark, which sits outside the lead card's corner */
-    padding-block-start: var(--sc-padding-block-medium);
-    padding-inline-start: var(--sc-padding-block-medium);
-    scroll-padding-inline-start: var(--sc-padding-block-medium);
+  .newsfeed_list { display: flex; gap: var(--sc-padding-gap-medium); }
+  .newsfeed_item {
+    flex: 1 1 0; min-width: 0;
+    display: flex; flex-direction: column; align-items: flex-end;
+    gap: var(--sc-padding-gap-small);
+    /* Figma: Supercomponent Gap/Tiny + Newsfeed Item Gap/Medium either side */
+    padding-inline: calc(var(--sc-padding-gap-tiny) + var(--sc-padding-gap-medium));
   }
-  .newsfeed_list > * { flex: 0 0 auto; scroll-snap-align: start; position: relative; isolation: isolate; }
-  .newsfeed_list > .is-lead { width: 70%; }
-  .newsfeed_list > :not(.is-lead) { width: 31.5%; }
-  .newsfeed_list .supercomponent { gap: var(--sc-padding-gap-small); padding-inline: var(--sc-padding-gap-medium); }
-  .newsfeed_list .media { border: 0; background: none; }
-  .newsfeed_list .media.is-strip { aspect-ratio: auto; }
-  .newsfeed_list .media.is-strip img { width: 45%; height: auto; }
+  .newsfeed_item > :is(h3, p) { align-self: stretch; }
 
-  @media (max-width: 767px) {
-    .newsfeed_list > .is-lead { width: 88%; }
-    .newsfeed_list > :not(.is-lead) { width: 70%; }
+  /* Figma: Media — Vertical › Rectangle 6 — four points, 30px corners on three,
+     a curved lower-left edge. */
+  .media.newsfeed_media {
+    --media-ratio: 323 / 404;
+    width: 71.3%;                         /* 323 / 453 */
+    border: 0; border-radius: 0; background: none;
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 323.2 404' preserveAspectRatio='none'%3E%3Cpath d='M47.8 24.4L279.2 2.8Q309 0 310.1 30L322.1 373.9Q323.2 403.9 293.2 404.6C293.2 404.6 32.1 410.7 8.5 322.2C-15.1 233.7 13.2 56.9 13.2 56.9Q17.9 27.2 47.8 24.4Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 323.2 404' preserveAspectRatio='none'%3E%3Cpath d='M47.8 24.4L279.2 2.8Q309 0 310.1 30L322.1 373.9Q323.2 403.9 293.2 404.6C293.2 404.6 32.1 410.7 8.5 322.2C-15.1 233.7 13.2 56.9 13.2 56.9Q17.9 27.2 47.8 24.4Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+  }
+  .media.newsfeed_media img { object-position: 60% center; }   /* keep the crew member in the portrait crop */
+
+  /* Three across gets too narrow for the portrait photos below 992. */
+  @media (max-width: 991px) {
+    .newsfeed_list { flex-direction: column; gap: var(--sc-padding-gap-huge); }
+    .newsfeed_item { padding-inline: 0; }
+    .media.newsfeed_media { width: min(80%, var(--sc-width-column-tighter)); }
   }
 }
