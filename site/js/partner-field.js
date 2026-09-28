@@ -153,4 +153,6 @@ build();
 
 /* Hand the stage's bottom corners to the grid: fade the globe HUD while this beat is in view. */
 const stage = document.getElementById("stage");
+/* UNUSED since 28 Sep 2026: the HUD moved into the intro beat and scrolls away, so no CSS reads
+   .is-partners any more. Kept (harmless) in case a pinned element needs to react to this beat again. */
 if (stage) new IntersectionObserver(([e]) => stage.classList.toggle("is-partners", e.isIntersecting), { threshold: 0.35 }).observe(section);

@@ -1,5 +1,30 @@
 # Changelog
 
+## 2026-09-28 — End of session: Figma sync + handoff
+
+Prototype (all pushed, 2bac300 → 606425c):
+- Hero matches Figma height (1085 @1920 as a share of width) and 80% bottom gradient; transition wing
+  (wordmark) leaves the hero and sweeps into What We Do.
+- Coverage: blue colorway from the approved artifact settings, tuning panel at `?controls`; pills,
+  eyebrows and "Wheels up" line removed; HUD + legend beside the statement; partners on a transparent →
+  Royal Blue wash with unfilled tiles.
+- What We Do: Healthcare Partners cards grow on hover as in Figma — row centred at Figma's height, the
+  hovered card grows up and down past it (image above, CTA below); neighbours never move.
+- History and Join the Team swapped per Figma; Join gets the vertical media variant (`.is-media-left`).
+- Newsfeed redesigned (Scheme 2, three cards); rest = headline + summary, hover = image + Read Article.
+- Footer: wordmark left, links right. Link button turns Accent on hover.
+- Patient CTA removed from the page (pattern kept).
+
+Figma (file 18WKlxwsAYNi1EVrq21obj):
+- Newsfeed Item set 204:1332: new Rest / Hover variants (Smart Animate 400ms on hover); homepage cards
+  switched to Rest. Existing Expanded / Collapsed untouched.
+- Section / Coverage 146:2655: Royal Blue → Top gradient, left scrim, partners wash, editable HUD,
+  editable partner logo field; globe still placeholder awaiting capture.
+
+Process:
+- New `end-of-session` project skill and `spec/figma-sync.md` sync log.
+- Cleanup was non-destructive: nothing deleted; unused files listed in HANDOFF.md.
+
 ## 2026-09-28 — Mission Globe in Section 2
 
 - Section 2 (Coverage) is now the "Mission Globe" artifact as a pinned scroll story: WebGL globe
