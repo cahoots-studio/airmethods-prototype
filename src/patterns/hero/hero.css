@@ -28,6 +28,10 @@
       var(--hero-royal);
   }
 
+  /* Figma 215:1710 @1920: wing 1217 wide at x 943, base on the hero's bottom
+     edge, running off the right (the section clips it). */
+  .hero_transition { left: 49.11%; bottom: 0; width: 63.39%; }
+
   .hero_component {
     position: relative;
     display: flex;

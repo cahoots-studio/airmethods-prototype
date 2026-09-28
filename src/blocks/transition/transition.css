@@ -1,0 +1,23 @@
+/* BLOCK: transition
+   Figma: the "Transition" frames in Homepage — Phase 1 Update — the Air
+   Methods wordmark's wing (stripes + swept tip) used as a section-to-section
+   motif. It leaves the Hero at the bottom-right (215:1710) and sweeps back in,
+   flipped, at the top of What We Do (215:1717), as if it passed behind the map.
+
+   Decorative only (aria-hidden). The shape is the #am-wing symbol in the page
+   sprite. Position and size are set per use by the pattern as a share of the
+   section width, so the wing scales with the viewport like the Figma frame.
+   Colour: Figma binds Scheme 1 Accent, which is Royal Blue — named directly so
+   a Scheme 3 section (the hero) doesn't swap it for its lighter accent. */
+@layer sc-components {
+  .transition {
+    position: absolute;
+    z-index: 0;
+    display: block;
+    height: auto;
+    color: var(--sc-color-royal-blue);
+    pointer-events: none;
+  }
+  .transition svg { display: block; width: 100%; height: auto; overflow: visible; }
+  .transition.is-flipped svg { transform: scaleY(-1); }
+}

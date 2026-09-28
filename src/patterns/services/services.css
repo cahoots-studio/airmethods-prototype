@@ -18,7 +18,16 @@
    hover and the row is side by side. Touch and ≤991px get the Hover state,
    otherwise the CTA would be unreachable. */
 @layer sc-components {
-  .services_component { display: flex; flex-direction: column; gap: var(--sc-padding-gap-huge); }
+  /* Figma 215:1717 @1920: the wing flipped, 1329 wide at x 601 on the
+     section's top edge, 10px past the right edge (clipped). */
+  .services_wrap { position: relative; overflow-x: clip; }
+  .services_transition { top: 0; left: 31.3%; width: 69.22%; }
+
+  /* Extra top space so the heading clears the wing's inner edge (it runs
+     diagonally from the top-left down to the right). Puts the heading ~208px
+     down at 1920, in line with Figma's ~215. On phones the wing is too shallow
+     to reach the heading, so it is dropped there. */
+  .services_component { position: relative; z-index: 1; display: flex; flex-direction: column; gap: var(--sc-padding-gap-huge); padding-top: var(--sc-padding-gap-huge); }
 
   .services_list {
     display: flex;
@@ -95,6 +104,7 @@
   }
 
   @media (max-width: 767px) {
+    .services_component { padding-top: 0; }
     .services_list { flex-direction: column; align-items: stretch; gap: var(--sc-padding-gap-huge); }
     .supercomponent.services_footnote { align-self: stretch; }
   }

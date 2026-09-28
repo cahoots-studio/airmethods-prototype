@@ -24,6 +24,10 @@
     <path fill="none" stroke="currentColor" d="M30.5 1.156c16.206 0 29.344 13.138 29.344 29.344 0 16.206-13.138 29.344-29.344 29.344-16.206 0-29.344-13.138-29.344-29.344 0-16.206 13.138-29.344 29.344-29.344z"/>
     <path fill="currentColor" fill-rule="evenodd" d="M16.486 14.551l14.221 37.373L44.93 14.551l-14.223 7.9-14.221-7.9zm14.221 34.083V23.787l11.992-6.661-11.992 31.508z"/>
   </symbol>
+  <!-- Wordmark wing, used by the transition block (Figma 215:1712) -->
+  <symbol id="am-wing" viewBox="0 0 1217 271">
+    <path fill="currentColor" fill-rule="evenodd" d="M1193.13 259.236C1184.09 258.07 1173.89 246.334 1173.89 246.334L1056.37 37.8145C1034.69 1.16483 980.081 0.0804138 980.081 0.0804138H952.385C935.148 -1.0726 882.461 10.5125 876.12 13.0382L696.156 63.4281H880.169C886.427 63.4281 890.407 63.4281 893.811 68.1226L898.34 78.7057C898.34 85.1846 896.693 86.9004 890.435 86.9004H623.761L475.458 131.457H910.98C917.224 131.457 921.218 131.457 924.608 136.137L929.137 146.72C929.137 153.199 927.49 154.901 921.245 154.901H392.826L239.994 199.416L941.777 200.638C948.035 200.638 952.015 200.638 955.418 205.333L959.947 215.916C959.947 222.395 958.3 224.097 952.042 224.097H168.683C167.187 224.097 0 271 0 271H1217L1209.01 262.792L1193.13 259.236Z"/>
+  </symbol>
   <symbol id="am-ekg" viewBox="0 0 463.5 57.5">
     <path fill="none" stroke="currentColor" d="M462.5 33.5H243.826l-4.001 8-5-34-7 49-4-31-4 8H.5"/>
   </symbol>
@@ -112,6 +116,8 @@
     <!-- Figma: Section / Hero · clouds + Royal Blue washes · Headline Huge · Action Row (Primary + Secondary) -->
     <section class="hero_wrap section_wrap" data-sc-pattern="hero" data-sc-scheme="scheme-3" style="--hero-bg: url('/img/hero-clouds.webp')">
       <img class="hero_image" src="img/hero-helicopter.webp" alt="" width="1248" height="596" data-sc-slot="image">
+      <!-- Figma: Transition (215:1710) · wing leaves the hero bottom-right -->
+      <span class="transition hero_transition" aria-hidden="true"><svg viewBox="0 0 1217 271"><use href="#am-wing"/></svg></span>
       <div class="padding-global">
         <div class="container-full">
           <div class="hero_component">
@@ -165,6 +171,8 @@
 
     <!-- Figma: What we do at Air Methods · Headline Large · three Supercomponents · capabilities -->
     <section class="services_wrap section_wrap" data-sc-pattern="services">
+      <!-- Figma: Transition (215:1717) · the wing sweeps back in, flipped -->
+      <span class="transition is-flipped services_transition" aria-hidden="true"><svg viewBox="0 0 1217 271"><use href="#am-wing"/></svg></span>
       <div class="padding-global">
         <div class="container-large">
           <div class="padding-section-large">
