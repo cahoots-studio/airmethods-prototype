@@ -107,12 +107,16 @@
           <h2 class="text-style-headline-medium">Most flights stay within <span class="coverage_stat">150&nbsp;mi</span> of home.</h2>
           <p class="text-style-text-small">Short hops are hard to see at continental scale, so distances and arc heights are gently exaggerated.</p>
         </div>
-        <div class="coverage_beat is-wide">
-          <div class="coverage_eyebrow">Partners</div>
-          <h2 class="text-style-headline-medium" data-sc-slot="heading">Our partners make it possible</h2>
-          <!-- ARTIFACT SLOT 2 — partner network (incoming from another project) -->
-          <div class="coverage_feature" data-sc-slot="partner-feature" role="img" aria-label="Partner network — artifact pending">
-            <span class="coverage_eyebrow">Partner network — artifact pending</span>
+        <div class="coverage_beat coverage_partners">
+          <div class="coverage_partners_head">
+            <span class="coverage_pill">Prototype · placeholder logos</span>
+            <div class="coverage_eyebrow">Our partners</div>
+            <h2 class="text-style-headline-medium" data-sc-slot="heading">Our partners make it possible</h2>
+          </div>
+          <!-- Partner Logo Field (artifact 2) — js/partner-field.js -->
+          <div class="coverage_partners_field" id="partnerField" role="list" aria-label="Partner organizations" data-sc-slot="partner-feature"></div>
+          <div class="action-row is-end">
+            <a href="#" class="button is-secondary" data-sc-slot="cta">Explore our partner network →</a>
           </div>
         </div>
       </div>
@@ -129,7 +133,7 @@
                 <div class="services_item">
                   <span class="mark" aria-hidden="true"><svg viewBox="0 0 61.5 61.5"><use href="#am-mark-ring"/></svg></span>
                   <div class="supercomponent">
-                    <figure class="media is-free" data-sc-slot="item-media"><img src="img/what-we-do-1.webp" alt="Air Methods crew member stepping from a rescue helicopter" width="416" height="271"></figure>
+                    <figure class="media is-free" data-sc-slot="item-media"><img src="img/what-we-do-1.webp" alt="Air Methods crew member stepping from a rescue helicopter" width="468" height="304"></figure>
                     <h3 class="text-style-headline-small" data-sc-slot="item-heading">Healthcare Partners</h3>
                     <p class="text-style-text-small" data-sc-slot="item-text">We partner with our EMS and hospitals to solve the challenges of patient logistics and save lives.</p>
                     <div class="action-row is-inline-mobile"><a href="#" class="button is-link" data-sc-slot="item-cta">View All Partners</a></div>
@@ -138,7 +142,7 @@
                 <div class="services_item">
                   <span class="mark is-small" aria-hidden="true"><svg viewBox="0 0 61.5 61.5"><use href="#am-mark-ring"/></svg></span>
                   <div class="supercomponent">
-                    <figure class="media is-strip" data-sc-slot="item-media"><img src="img/what-we-do-2.webp" alt="" width="208" height="135"></figure>
+                    <figure class="media is-strip" data-sc-slot="item-media"><span class="media_tint" style="--tint-from:#FCFC2C; --tint-mask:url('/img/what-we-do-2.webp')"><img src="img/what-we-do-2.webp" alt="" width="208" height="135"></span></figure>
                     <h3 class="text-style-headline-small" data-sc-slot="item-heading">Healthcare Partners</h3>
                     <div class="action-row is-inline-mobile"><a href="#" class="button is-link" data-sc-slot="item-cta">View All Partners</a></div>
                   </div>
@@ -146,7 +150,7 @@
                 <div class="services_item">
                   <span class="mark is-small" aria-hidden="true"><svg viewBox="0 0 61.5 61.5"><use href="#am-mark-ring"/></svg></span>
                   <div class="supercomponent">
-                    <figure class="media is-strip" data-sc-slot="item-media"><img src="img/what-we-do-2.webp" alt="" width="208" height="135"></figure>
+                    <figure class="media is-strip" data-sc-slot="item-media"><span class="media_tint" style="--tint-from:#FF5A1F; --tint-mask:url('/img/what-we-do-2.webp')"><img src="img/what-we-do-2.webp" alt="" width="208" height="135"></span></figure>
                     <h3 class="text-style-headline-small" data-sc-slot="item-heading">Healthcare Partners</h3>
                     <div class="action-row is-inline-mobile"><a href="#" class="button is-link" data-sc-slot="item-cta">View All Partners</a></div>
                   </div>
@@ -295,5 +299,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script type="module" src="js/mission-globe.js"></script>
+<script type="module" src="js/partner-field.js"></script>
 </body>
 </html>

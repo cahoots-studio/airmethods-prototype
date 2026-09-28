@@ -11,7 +11,7 @@
     gap: var(--sc-padding-gap-medium);
     align-items: center;
     width: 100%;
-    max-width: var(--sc-width-container-medium);
+    max-width: var(--sc-width-container-large);   /* Figma: Container / Posts → Width/Container/Large */
     margin-inline: auto;
   }
   .services_list > * { flex: 1 1 0; min-width: 0; }
@@ -19,8 +19,19 @@
   .services_item { position: relative; isolation: isolate; }
   .services_item .supercomponent { gap: var(--sc-padding-gap-small); padding-inline: var(--sc-padding-gap-medium); }
   .services_item .media { border: 0; background: none; }
-  .services_item .media.is-strip { aspect-ratio: auto; height: auto; }
-  .services_item .media.is-strip img { width: 50%; height: auto; }
+  /* Secondary items: a small image (Figma 210 of 469) pushed to the right of
+     the column, above the title, with a 30% brand-gradient tint clipped to the
+     image's own shape. */
+  .services_item .media.is-strip { aspect-ratio: auto; height: auto; display: flex; justify-content: flex-end; overflow: visible; }
+  .services_item .media.is-strip .media_tint { position: relative; display: block; width: 45%; }
+  .services_item .media.is-strip img { width: 100%; height: auto; }
+  .services_item .media_tint::after {
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(90deg, var(--tint-from) 0%, var(--sc-color-royal-blue) 67%);
+    opacity: 0.3;
+    -webkit-mask: var(--tint-mask) center / 100% 100% no-repeat;
+            mask: var(--tint-mask) center / 100% 100% no-repeat;
+  }
 
   .supercomponent.services_footnote {
     align-self: flex-end;

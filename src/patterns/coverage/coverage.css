@@ -86,16 +86,54 @@
   .coverage_fallback { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding-inline: var(--sc-padding-section-global); }
   .coverage_fallback[hidden] { display: none; }
 
-  /* Artifact slot 2 — partner network (incoming from another project) */
-  .coverage_feature {
-    display: grid; place-items: center;
-    min-height: calc(var(--sc-padding-block-huge) * 1.25);
-    border: 1px dashed var(--sc-color-border);
-    border-radius: var(--sc-corners-card);
-  }
 
   @media (max-width: 767px) {
     .coverage_legend { display: none; }
     .coverage_hud .is-clock { font-size: var(--sc-font-size-text-small); }
   }
+}
+
+/* ---- Partner Logo Field (artifact 2: claude.ai/artifact/56GMw54cWSzbAL6nUmQ9Js) ----
+   The last beat of the scroll story. Tiles sit on the globe; colours are the
+   Scheme 3 roles mixed with transparency, so light/dark follows the scheme.
+   Layout and motion live in js/partner-field.js. */
+@layer sc-components {
+  .coverage_beat.coverage_partners {
+    max-width: var(--sc-width-container-medium);
+    padding-block-end: calc(var(--sc-padding-block-large) * 1.25);   /* clear the HUD in the stage's bottom corners */
+    gap: var(--sc-padding-gap-large);
+    --tile: color-mix(in srgb, var(--sc-color-background) 90%, var(--sc-color-text));
+    --tile-line: color-mix(in srgb, var(--sc-color-text) var(--sc-opacity-20), transparent);
+    --logo: color-mix(in srgb, var(--sc-color-text) 55%, transparent);
+  }
+  .coverage_partners_head { display: flex; flex-direction: column; gap: var(--sc-padding-gap-small); max-width: var(--sc-width-column-medium); }
+  .coverage_partners_field { position: relative; width: 100%; touch-action: pan-y; }
+
+  .partner-logo {
+    position: absolute; left: 0; top: 0;
+    display: flex; align-items: center; justify-content: center; gap: var(--sc-padding-gap-small);
+    background: var(--tile); border: 1px solid var(--tile-line);
+    color: var(--logo);
+    will-change: transform; transform-origin: 50% 50%;
+    transition: color .35s ease, border-color .35s ease, box-shadow .35s ease;
+    outline: none; cursor: default; user-select: none;
+  }
+  .partner-logo.is-circle { border-radius: var(--sc-radius-round); flex-direction: column; text-align: center; }
+  .partner-logo.is-pill { border-radius: var(--sc-radius-round); flex-direction: row; }
+  .partner-logo svg { width: 30%; height: auto; flex: none; }
+  .partner-logo.is-pill svg { width: auto; height: 42%; }
+  .partner-logo_name {
+    font-family: var(--sc-typeface-family-text);
+    font-size: var(--partner-name-size, var(--sc-font-size-text-tiny));
+    font-weight: var(--sc-typeface-weight-extrabold);
+    line-height: 1.1; max-width: 80%;
+  }
+  .partner-logo.is-pill .partner-logo_name { max-width: none; white-space: nowrap; }
+  .partner-logo.is-near, .partner-logo:focus-visible {
+    color: var(--sc-color-text);
+    border-color: color-mix(in srgb, var(--sc-color-accent) 70%, transparent);
+    box-shadow: 0 0 0 1px color-mix(in srgb, var(--sc-color-accent) 40%, transparent),
+                0 var(--sc-padding-gap-medium) var(--sc-padding-gap-huge) calc(var(--sc-padding-gap-medium) * -1) color-mix(in srgb, var(--sc-color-accent) 60%, transparent);
+  }
+  .partner-logo:focus-visible { box-shadow: 0 0 0 3px color-mix(in srgb, var(--sc-color-accent) 55%, transparent); }
 }

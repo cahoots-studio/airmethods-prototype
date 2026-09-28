@@ -15,7 +15,9 @@
     pointer-events: none;
   }
   .mark.is-small {
-    top: auto; bottom: 0;
+    /* Figma: 97px ring, 48px left of the column and 75px down — beside the title */
+    top: calc(var(--sc-padding-block-medium) * 0.78);
+    left: calc(var(--sc-padding-gap-huge) * -0.6);
     width: calc(var(--sc-padding-block-large) * 0.6);
     color: var(--sc-color-foreground);
     opacity: var(--sc-opacity-60);
