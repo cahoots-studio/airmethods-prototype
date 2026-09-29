@@ -6,6 +6,8 @@
   <title>Air Methods — Homepage prototype (Phase 1)</title>
   <meta name="description" content="Supercomponent prototype: Air Methods homepage, Phase 1 update, built from tokens synced from Figma.">
   <meta name="robots" content="noindex">
+  <!-- Motion: hide entrance targets until the presets take over; reveal anyway after 3s if they never do. -->
+  <script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('sc-motion');setTimeout(function(){document.documentElement.classList.add('sc-motion-ready')},3000)}</script>
   <!-- Proxima Nova Condensed (display headlines). Adobe Fonts kit vir5hey — list the Netlify domain on the web project. -->
   <link rel="stylesheet" href="https://use.typekit.net/vir5hey.css">
   <!-- Hanken Grotesk (Figma Text family) + Fira Sans Condensed (headline fallback until the kit carries 900). -->
@@ -114,15 +116,17 @@
   <main class="main-wrapper">
 
     <!-- Figma: Section / Hero · clouds + Royal Blue washes · Headline Huge · Action Row (Primary + Secondary) -->
-    <section class="hero_wrap section_wrap" data-sc-pattern="hero" data-sc-scheme="scheme-3" style="--hero-bg: url('/img/hero-clouds.webp')">
-      <img class="hero_image" src="img/hero-helicopter.webp" alt="" width="1248" height="596" data-sc-slot="image">
+    <section class="hero_wrap section_wrap" data-sc-pattern="hero" data-sc-scheme="scheme-3" style="--hero-bg: url('/img/hero-bg.webp')">
+      <!-- Layers: clouds (fade in, slowest drift) · gradients (::before) · helicopter (drift + cursor magnet) · text -->
+      <div class="hero_clouds" data-sc-motion="scroll-drift" data-sc-motion-depth="1.5" aria-hidden="true"><div class="hero_clouds_img" data-sc-motion="reveal-fade"></div></div>
+      <div class="hero_heli" data-sc-motion="scroll-drift" data-sc-motion-depth="0.75"><img class="hero_image" src="img/hero-helicopter.webp" alt="" width="1248" height="596" data-sc-slot="image" data-sc-motion="magnet"></div>
       <!-- Figma: Transition (215:1710) · wing leaves the hero bottom-right -->
       <span class="transition hero_transition" aria-hidden="true"><svg viewBox="0 0 1217 271"><use href="#am-wing"/></svg></span>
-      <div class="padding-global">
+      <div class="padding-global hero_front">
         <div class="container-full">
           <div class="hero_component">
             <div class="hero_content">
-              <h1 class="text-style-headline-huge" data-sc-slot="heading">Closing the distance to lifesaving care</h1>
+              <h1 class="text-style-headline-huge" data-sc-motion="lines-up" data-sc-slot="heading">Closing the distance to lifesaving care</h1>
               <div class="action-row hero_actions">
                 <a href="#" class="button" data-sc-slot="cta-primary">Partner with Us</a>
                 <a href="#" class="button is-secondary" data-sc-slot="cta-secondary">Explore Careers</a>
@@ -157,7 +161,7 @@
         </div>
         <div class="coverage_beat coverage_partners">
           <div class="coverage_partners_head">
-            <h2 class="text-style-headline-medium" data-sc-slot="heading">Our partners make it possible</h2>
+            <h2 class="text-style-headline-medium" data-sc-motion="lines-up" data-sc-slot="heading">Our partners make it possible</h2>
           </div>
           <!-- Partner Logo Field (artifact 2) — js/partner-field.js -->
           <div class="coverage_partners_field" id="partnerField" role="list" aria-label="Partner organizations" data-sc-slot="partner-feature"></div>
@@ -177,9 +181,9 @@
         <div class="container-large">
           <div class="padding-section-large">
             <div class="services_component">
-              <h2 class="text-style-headline-large" data-sc-slot="heading">What we do at Air Methods</h2>
+              <h2 class="text-style-headline-large" data-sc-motion="lines-up" data-sc-slot="heading">What we do at Air Methods</h2>
               <!-- Figma: Healthcare Partners (200:616) · State=Default, Hover on :hover / :focus-within -->
-              <div class="services_list">
+              <div class="services_list" data-sc-motion="cascade-up" data-sc-motion-after="h2">
                 <div class="services_item">
                   <span class="mark" aria-hidden="true"><svg viewBox="0 0 61.5 61.5"><use href="#am-mark-ring"/></svg></span>
                   <div class="supercomponent">
@@ -218,26 +222,6 @@
       </div>
     </section>
 
-    <!-- Figma: History (146:2747) · copy left, full-bleed art right -->
-    <section class="story_wrap section_wrap" data-sc-pattern="story">
-      <div class="story_art" data-sc-slot="media">
-        <img src="img/history-art.webp" alt="Flight crew member stepping out of a rescue helicopter" width="1642" height="825" loading="lazy">
-      </div>
-      <div class="padding-global">
-        <div class="container-large">
-          <div class="padding-section-large">
-            <div class="story_component">
-              <div class="supercomponent">
-                <h2 class="text-style-headline-medium" data-sc-slot="heading">46 years. One mission that still moves us forward.</h2>
-                <p class="text-style-text-medium" data-sc-slot="text">What began with a belief that where you live shouldn’t determine your access to critical care has grown into a nationwide air medical operation. Through it all, our purpose has remained the same: connecting people and communities to the care they need.</p>
-                <div class="action-row is-inline-mobile"><a href="#" class="button is-link" data-sc-slot="cta">About Air Methods</a></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <!-- Figma: Team (204:1191) · vertical media left, copy right -->
     <section class="story_wrap section_wrap is-media-left" data-sc-pattern="story">
       <div class="padding-global">
@@ -248,9 +232,29 @@
                 <img src="img/join-the-team-art.webp" alt="Flight crew member stepping out of a rescue helicopter" width="552" height="847" loading="lazy">
               </div>
               <div class="supercomponent">
-                <h2 class="text-style-headline-medium" data-sc-slot="heading">Join a team that shows up when it matters most.</h2>
+                <h2 class="text-style-headline-medium" data-sc-motion="lines-up" data-sc-slot="heading">Join a team that shows up when it matters most.</h2>
                 <p class="text-style-text-medium" data-sc-slot="text">Behind every mission is a team of people bringing their expertise, commitment, and care to work every day. Find your place at Air Methods and help make critical care possible.</p>
                 <div class="action-row is-inline-mobile"><a href="#" class="button is-link" data-sc-slot="cta">Find your place at Air Methods</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Figma: History (146:2747) · copy left, full-bleed art right -->
+    <section class="story_wrap section_wrap" data-sc-pattern="story">
+      <div class="story_art" data-sc-slot="media">
+        <img src="img/history-art.webp" alt="Flight crew member stepping out of a rescue helicopter" width="1642" height="825" loading="lazy">
+      </div>
+      <div class="padding-global">
+        <div class="container-large">
+          <div class="padding-section-large">
+            <div class="story_component">
+              <div class="supercomponent">
+                <h2 class="text-style-headline-medium" data-sc-motion="lines-up" data-sc-slot="heading">46 years. One mission that still moves us forward.</h2>
+                <p class="text-style-text-medium" data-sc-slot="text">What began with a belief that where you live shouldn’t determine your access to critical care has grown into a nationwide air medical operation. Through it all, our purpose has remained the same: connecting people and communities to the care they need.</p>
+                <div class="action-row is-inline-mobile"><a href="#" class="button is-link" data-sc-slot="cta">About Air Methods</a></div>
               </div>
             </div>
           </div>
@@ -265,7 +269,7 @@
           <div class="padding-section-large">
             <div class="newsfeed_component">
               <div class="supercomponent newsfeed_heading">
-                <h2 class="text-style-headline-medium" data-sc-slot="heading">Newsfeed</h2>
+                <h2 class="text-style-headline-medium" data-sc-motion="lines-up" data-sc-slot="heading">Newsfeed</h2>
                 <div class="action-row is-inline-mobile"><a href="#" class="button is-link" data-sc-slot="cta">View All</a></div>
               </div>
               <div class="newsfeed_list">
@@ -346,6 +350,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="js/navigation.js" defer></script>
+<script type="module" src="js/motion.js"></script>
 <script type="module" src="js/mission-globe.js"></script>
 <script type="module" src="js/partner-field.js"></script>
 </body>
