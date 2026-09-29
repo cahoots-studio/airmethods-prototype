@@ -40,6 +40,14 @@
     outline-offset: 3px;
   }
 
+  /* Motion: entrance targets stay hidden until src/motion/presets.js sets their
+     start state (it adds .sc-motion-ready), so nothing flashes in first. The
+     inline head script adds .sc-motion only when motion is allowed, and adds
+     .sc-motion-ready after 3s regardless, so content can never stay hidden. */
+  html.sc-motion:not(.sc-motion-ready) :is([data-sc-motion="lines-up"], [data-sc-motion="cascade-up"] > *, [data-sc-motion="reveal-fade"], [data-sc-motion="reveal-up"]) {
+    visibility: hidden;
+  }
+
   /* Quality floor: honour the OS setting, don't fight it. */
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }

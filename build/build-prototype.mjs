@@ -29,4 +29,6 @@ writeFileSync(join(SITE, 'styleguide/index.html'), guide);
 cpSync(join(ROOT, 'site/site.css'), join(SITE, 'assets/site.css'));
 cpSync(join(ROOT, 'site/img'), join(SITE, 'img'), { recursive: true });
 cpSync(join(ROOT, 'site/js'), join(SITE, 'js'), { recursive: true });
+// Motion presets live in src/ (the portable source); ship them beside the page scripts.
+cpSync(join(ROOT, 'src/motion/presets.js'), join(SITE, 'js/presets.js'));
 console.log('✓ _site/index.html (Air Methods homepage) · _site/styleguide/ (token inspector)');

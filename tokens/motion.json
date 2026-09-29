@@ -3,6 +3,7 @@
   "duration": {
     "instant": { "$type": "duration", "$value": "0.12s" },
     "fast":    { "$type": "duration", "$value": "0.24s" },
+    "reveal":  { "$type": "duration", "$value": "0.3s", "$description": "One reveal step: a headline line or a card entering (Phillip, 29 Sep 2026)." },
     "base":    { "$type": "duration", "$value": "0.4s" },
     "slow":    { "$type": "duration", "$value": "0.7s" },
     "ambient": { "$type": "duration", "$value": "1.2s" }

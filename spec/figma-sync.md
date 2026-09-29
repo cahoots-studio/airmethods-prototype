@@ -12,6 +12,9 @@ Add a row whenever a change is made in the prototype through chat.
 | Date | Section | Prototype change | Figma target |
 |---|---|---|---|
 | 2026-09-28 | Coverage (map) | Background: linear gradient Royal Blue → Top (navy), 178°. Dots + streaks `#DCE740`. Land = Elevation lines (spacing 0.19). Zoom 0.92, tilt 21, shift 23. Commit 8e38164 | Section / Coverage `146:2655` — gradient, scrim and wash done; **globe still pending** (needs the browser pane visible to capture) — placeholder layer `237:466` |
+| 2026-09-29 | All headlines | Load-in motion: each line slides + fades up over 300ms (`--sc-duration-reveal`), next line at the halfway point. Preset `lines-up` | Figma motion (Config 2026) on the Headline components, or a documented Smart Animate note — to decide |
+| 2026-09-29 | Hero | Split into layers: clouds (fade in, drift ×1.5 on scroll) · gradients · helicopter (drift ×0.75, eases ≤24px toward the cursor) · text. Presets `reveal-fade`, `scroll-drift`, `magnet` | Section / Hero `146:2643` — motion annotation; layer order already matches (image fill, gradients, helicopter, content) |
+| 2026-09-29 | What We Do | Cards cascade in left → right after the headline: 300ms each, next starts at the halfway point. Preset `cascade-up` | Section `146:2732` — motion on the three Healthcare Partners instances |
 
 ## Synced
 
