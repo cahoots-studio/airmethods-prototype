@@ -15,7 +15,7 @@
       },
       "decorative": {
         "$type": "string",
-        "$value": "Roboto Mono",
+        "$value": "IBM Plex Sans",
         "$figmaName": "Typography/Typeface/Family/Decorative"
       }
     },
@@ -68,13 +68,13 @@
       },
       "huge": {
         "$type": "dimension",
-        "$value": "5.625rem",
+        "$value": "4.625rem",
         "$modes": {
-          "wide": "6.25rem",
-          "xwide": "7.25rem",
-          "tablet": "4.5rem",
-          "landscape": "3.25rem",
-          "portrait": "2.75rem"
+          "wide": "5.1875rem",
+          "xwide": "6rem",
+          "tablet": "3.75rem",
+          "landscape": "2.6875rem",
+          "portrait": "2.25rem"
         },
         "$figmaName": "Typography/Size/Headline/Huge"
       },
@@ -92,12 +92,12 @@
       },
       "medium": {
         "$type": "dimension",
-        "$value": "2.8125rem",
+        "$value": "2.5rem",
         "$modes": {
-          "wide": "3rem",
-          "xwide": "3.25rem",
-          "tablet": "2.5rem",
-          "landscape": "2.125rem",
+          "wide": "2.8125rem",
+          "xwide": "3rem",
+          "tablet": "2.25rem",
+          "landscape": "2rem",
           "portrait": "1.875rem"
         },
         "$figmaName": "Typography/Size/Headline/Medium"

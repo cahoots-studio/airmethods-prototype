@@ -4,5 +4,6 @@
   "Proxima Nova": "\"proxima-nova\", \"Hanken Grotesk\", Arial, sans-serif",
   "Hanken Grotesk": "\"Hanken Grotesk\", Arial, sans-serif",
   "Fira Sans Condensed": "\"Fira Sans Condensed\", \"Arial Narrow\", sans-serif",
-  "Roboto Mono": "\"Roboto Mono\", ui-monospace, monospace"
+  "Roboto Mono": "\"Roboto Mono\", ui-monospace, monospace",
+  "IBM Plex Sans": "\"IBM Plex Sans\", \"Hanken Grotesk\", Arial, sans-serif"
 }
