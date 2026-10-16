@@ -25,6 +25,13 @@
   }
   .navigation_wrap.is-overlay:hover,
   .navigation_wrap.is-overlay:focus-within { background-color: var(--nav-surface); }
+  /* Over the light hero (Figma 15 Oct 2026) the resting desktop bar is
+     transparent with Scheme 1 Text (navy) logo and links; once it turns Royal
+     Blue on hover/focus it falls back to Scheme 3 (white). Mobile keeps its
+     solid Royal bar, so this is desktop-only. */
+  @media (min-width: 992px) {
+    .navigation_wrap.is-overlay:not(:hover, :focus-within) { --sc-color-text: var(--sc-color-top); }
+  }
 
   .navigation_component {
     display: flex;
