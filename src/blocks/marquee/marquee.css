@@ -1,0 +1,42 @@
+/* BLOCK: marquee
+   Figma: Logo / 3 / (401:1340) in Section / Coverage — three rows of Logo
+   Placeholder instances (401:1325), 171 wide, 86 apart, rows 30 apart, 60%.
+
+   Rows scroll forever, edge to edge (full viewport width even inside a
+   container). Each row holds one set of items twice; the track slides by
+   exactly one set (-50%) and loops, so there is no seam. A set must be wider
+   than the widest screen it will meet (10 × 257px ≈ 2570px covers 2560).
+   .is-reverse rows run the other way. A row pauses while it is hovered or
+   has keyboard focus inside it. Reduced motion: the base.css floor stops it.
+
+   Speed is a motion token multiple, so tokens/motion.json moves it too. */
+@layer sc-components {
+  .marquee {
+    --marquee-gap: calc(var(--sc-padding-gap-huge) * 1.075);                                 /* Figma 86 @1920 */
+    --marquee-item: calc(var(--sc-width-column-tightest) * 0.534);                            /* Figma 171 */
+    --marquee-duration: calc(var(--sc-duration-ambient) * 40);                                /* 48s per set */
+    display: flex; flex-direction: column;
+    gap: calc(var(--sc-padding-gap-large) * 0.75);                                            /* Figma 30 @1920 */
+    padding-block: calc(var(--sc-padding-gap-huge) * 0.8);                                    /* Figma 64 @1920 */
+    /* edge to edge from inside any container */
+    width: 100vw;
+    margin-inline: calc(50% - 50vw);
+  }
+  .marquee_row { overflow: hidden; }
+  .marquee_track {
+    display: flex; align-items: center;
+    width: max-content;
+    animation: marquee-scroll var(--marquee-duration) linear infinite;
+  }
+  .marquee_row.is-reverse .marquee_track { animation-direction: reverse; }
+  .marquee_row:is(:hover, :focus-within) .marquee_track { animation-play-state: paused; }
+
+  .marquee_set { display: flex; align-items: center; gap: var(--marquee-gap); padding-inline-end: var(--marquee-gap); margin: 0; list-style: none; padding-inline-start: 0; }
+  .marquee_item { flex: none; width: var(--marquee-item); display: flex; justify-content: center; }
+  .marquee_item svg { display: block; width: 100%; height: auto; fill: currentColor; opacity: var(--sc-opacity-60); }   /* Figma 60% */
+
+  @keyframes marquee-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+}

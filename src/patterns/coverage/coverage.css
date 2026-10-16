@@ -9,6 +9,15 @@
    network (artifact 2) lands in the last beat. */
 @layer sc-components {
   .coverage_wrap { position: relative; }
+  /* Soft edge where the light hero meets the globe (Phillip, 16 Oct 2026; not
+     yet in Figma): Ground (white) fading to transparent over the section's top
+     Block/Large. On the section, not the pinned stage, so it scrolls away with
+     the seam instead of hanging at the top of the viewport. */
+  .coverage_wrap::before {
+    content: ""; position: absolute; inset: -2px 0 auto; z-index: 1; pointer-events: none;   /* -2px: covers the sub-pixel seam where the pinned stage meets the hero */
+    height: calc(var(--sc-padding-block-large) + 2px);
+    background: linear-gradient(to bottom, var(--sc-color-ground), color-mix(in srgb, var(--sc-color-ground) 0%, transparent));
+  }
 
   .coverage_stage {
     position: sticky;
@@ -92,64 +101,21 @@
   }
 }
 
-/* ---- Partner Logo Field (artifact 2: claude.ai/artifact/56GMw54cWSzbAL6nUmQ9Js) ----
-   The last beat of the scroll story. Colorway from the approved package
-   (claude-code-handoff/partner-logo-field, 28 Sep 2026), with the beat on a
+/* ---- Partners beat ----
+   The last beat of the scroll story: Scheme 3 (white heading and logos) on a
    full-bleed wash from transparent to solid Royal Blue, so the globe shows
-   through at the top and the section lands on brand blue at the bottom. Tiles
-   have no fill, so only the logos read at rest; the nearest logo turns white
-   and its tile picks up the accent ring.
-     --lf-bg                            #416DE7  → Royal Blue wash (0% → 100%)
-     --lf-tile / --lf-border            #416DE7  → none (transparent)
-     --lf-logo                          #C5CEDD  → Neutral Light / Neutral mix
-     --lf-logo-focus                    #FFFFFF  → White
-   Layout and motion live in js/partner-field.js. */
+   through at the top and the section lands on brand blue at the bottom.
+   Logos: three marquee rows (src/blocks/marquee), edge to edge — Figma
+   Logo / 3 / (401:1340). The magnify field (js/partner-field.js) is retired
+   here; the script stays in the repo, unused. */
 @layer sc-components {
-  /* The beat spans the site container (Container/Large) like every other section;
-     the logo field keeps its Container/Medium width and centres in it. The head
-     and the CTA row span the full container. */
   .coverage_beat.coverage_partners {
     max-width: none;
     padding-block: var(--sc-padding-block-small);
     gap: var(--sc-padding-gap-medium);
-    --tile: transparent;
-    --tile-line: transparent;
-    /* Full-bleed wash from inside the container: transparent Royal Blue at the
-       top (the globe shows through) to solid Royal Blue at the bottom. The
-       border-image outset paints out to the viewport edges without adding width. */
+    /* Full-bleed wash from inside the container. The border-image outset
+       paints out to the viewport edges without adding width. */
     border-image: linear-gradient(to bottom, color-mix(in srgb, var(--sc-color-royal-blue) 0%, transparent), var(--sc-color-royal-blue)) fill 0 / / 0 100vw;
-    --logo: color-mix(in srgb, var(--sc-color-neutral-light) 65%, var(--sc-color-neutral-neutral));
-    --logo-focus: var(--sc-color-white);
   }
   .coverage_partners_head { display: flex; flex-direction: column; gap: var(--sc-padding-gap-small); max-width: var(--sc-width-column-medium); }
-  .coverage_partners_field { position: relative; width: 100%; touch-action: pan-y; }
-  .coverage_partners_field { max-width: var(--sc-width-container-medium); margin-inline: auto; }
-
-  .partner-logo {
-    position: absolute; left: 0; top: 0;
-    display: flex; align-items: center; justify-content: center; gap: var(--sc-padding-gap-small);
-    background: var(--tile); border: 1px solid var(--tile-line);
-    color: var(--logo);
-    will-change: transform; transform-origin: 50% 50%;
-    transition: color .35s ease, border-color .35s ease, box-shadow .35s ease;
-    outline: none; cursor: default; user-select: none;
-  }
-  .partner-logo.is-circle { border-radius: var(--sc-radius-round); flex-direction: column; text-align: center; }
-  .partner-logo.is-pill { border-radius: var(--sc-radius-round); flex-direction: row; }
-  .partner-logo svg { width: 30%; height: auto; flex: none; }
-  .partner-logo.is-pill svg { width: auto; height: 42%; }
-  .partner-logo_name {
-    font-family: var(--sc-typeface-family-text);
-    font-size: var(--partner-name-size, var(--sc-font-size-text-tiny));
-    font-weight: var(--sc-typeface-weight-extrabold);
-    line-height: 1.1; max-width: 80%;
-  }
-  .partner-logo.is-pill .partner-logo_name { max-width: none; white-space: nowrap; }
-  .partner-logo.is-near, .partner-logo:focus-visible {
-    color: var(--logo-focus);
-    border-color: color-mix(in srgb, var(--sc-color-accent) 70%, transparent);
-    box-shadow: 0 0 0 1px color-mix(in srgb, var(--sc-color-accent) 40%, transparent),
-                0 var(--sc-padding-gap-medium) var(--sc-padding-gap-huge) calc(var(--sc-padding-gap-medium) * -1) color-mix(in srgb, var(--sc-color-accent) 60%, transparent);
-  }
-  .partner-logo:focus-visible { border-color: var(--logo-focus); box-shadow: 0 0 0 3px color-mix(in srgb, var(--logo-focus) 55%, transparent); }
 }

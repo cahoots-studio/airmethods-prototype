@@ -14,7 +14,6 @@
                        slowest on scroll (parallax).
      2  .hero_heli     the cut-out helicopter, drifting at a middle rate; the
                        image inside eases toward the cursor (magnet preset).
-     2  .hero_transition  the wordmark wing on the bottom edge.
      3  .hero_front    headline + actions, scrolling normally.
    The old Royal Blue gradient wash is hidden in Figma, so it is gone here.
    Motion comes from data-sc-motion presets (src/motion/presets.js); the CSS
@@ -44,11 +43,22 @@
     background: var(--hero-bg, none) center top / 100% auto no-repeat;
   }
 
-  /* Figma 215:1710 @1920: wing 1217 wide at x 943, base on the hero's bottom
-     edge, running off the right (the section clips it). */
-  .hero_transition { left: 49.11%; bottom: 0; width: 63.39%; z-index: 2; }
+
+  /* Soft edge into the globe section (Phillip, 16 Oct 2026; not yet in Figma):
+     the clouds fade to Ground (white) over the bottom Block/Large, meeting the
+     matching white → transparent fade at the top of .coverage_wrap, so the
+     seam falls on white. Above the clouds, below the helicopter and copy. */
+  .hero_wrap::after {
+    content: ""; position: absolute; inset: auto 0 0; z-index: 1; pointer-events: none;
+    height: var(--sc-padding-block-large);
+    background: linear-gradient(to bottom, color-mix(in srgb, var(--sc-color-ground) 0%, transparent), var(--sc-color-ground));
+  }
 
   .hero_front { position: relative; z-index: 3; }
+
+  /* Figma: Announcement Beacon instance at x 59, y 162 @1920 — on the page
+     padding, just under the nav. Above the copy layer so it stays hoverable. */
+  .hero_beacon { position: absolute; z-index: 4; top: 8.44cqi; left: var(--sc-padding-section-global); }
 
   .hero_component {
     position: relative;
@@ -93,6 +103,8 @@
        short for the stacked copy and helicopter, so the hero fills the screen
        with the copy bottom-aligned, as before. */
     .hero_component { min-height: 100svh; justify-content: flex-end; }
+    /* no Figma below desktop: sit one Large gap under the nav bar */
+    .hero_beacon { top: calc(var(--sc-padding-block-tiny) * 2 + var(--sc-padding-control-medium) * 2 + var(--sc-font-size-text-small) + var(--sc-padding-gap-large)); }
     .hero_clouds_img { background-size: cover; background-position: center bottom; }
     .hero_heli { width: 90%; right: -10%; top: var(--sc-padding-block-small); }
   }

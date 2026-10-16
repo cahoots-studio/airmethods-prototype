@@ -15,6 +15,10 @@ Add a row whenever a change is made in the prototype through chat.
 | 2026-09-29 | All headlines | Load-in motion: each line slides + fades up over 300ms (`--sc-duration-reveal`), next line at the halfway point. Preset `lines-up` | Figma motion (Config 2026) on the Headline components, or a documented Smart Animate note — to decide |
 | 2026-09-29 | Hero | Split into layers: clouds (fade in, drift ×1.5 on scroll) · gradients · helicopter (drift ×0.75, eases ≤24px toward the cursor) · text. Presets `reveal-fade`, `scroll-drift`, `magnet` | Section / Hero `146:2643` — motion annotation; layer order already matches (image fill, gradients, helicopter, content) |
 | 2026-09-29 | What We Do | Cards cascade in left → right after the headline: 300ms each, next starts at the halfway point. Preset `cascade-up` | Section `146:2732` — motion on the three Healthcare Partners instances |
+| 2026-10-16 | Hero | Announcement Beacon motion: dot blinks on a 2.4s cycle (2 × Ambient), two rings ripple out from each blink to ~3× and fade; Figma's static rings are the placeholder | Announcement Beacon `401:1300` — motion on the Dot animation group |
+| 2026-10-16 | Hero → Coverage | Soft seam: hero clouds fade to white over the bottom Block/Large; Coverage fades white → transparent over its top Block/Large | Section / Hero `146:2643` bottom + Section / Coverage `146:2655` top — two gradient layers |
+| 2026-10-16 | Coverage | Globe defaults: Ground → #8f8f8f at 108°, light globe, zoom 2.2 (`?controls` export). Text scheme now from Figma: section Scheme 1, partners beat Scheme 3 (applied 2026-10-16) | Section / Coverage `146:2655` — globe still only |
+| 2026-10-16 | Coverage · Partners | Logo marquee: three rows scroll edge to edge forever (48s per set = 40 × Ambient), middle row reversed, each row pauses on hover / focus. Magnify field retired | Logo / 3 / `401:1340` — motion annotation (direction, speed, hover pause) |
 
 ## Synced
 

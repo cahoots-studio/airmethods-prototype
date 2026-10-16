@@ -1,0 +1,86 @@
+/* BLOCK: beacon
+   Figma: Announcement Beacon (401:1300) · State = Initial | Open.
+
+   A short announcement with a homing-beacon dot on its left edge.
+     Initial  title only (Headline/Tiny, Proxima Condensed), no border
+     Open     on hover / keyboard focus: the title gives way to the body copy
+              (Text/Small) and a 1px Scheme 3 Accent (Royal Blue Light) border
+              appears. No fill in either state.
+   The dot (11px, Accent) blinks like a homing beacon, and on each blink two
+   rings ripple out from it — Figma's static 17px / 23px rings at 50% / 25%
+   are the placeholder for that. One cycle is two Ambient durations (2.4s);
+   the reduced-motion floor in base.css freezes both.
+
+   Both texts stay in the DOM so screen readers get the whole announcement;
+   the hidden one is visually hidden, not display:none. */
+@layer sc-components {
+  .beacon {
+    --beacon-cycle: calc(var(--sc-duration-ambient) * 2);
+    --beacon-dot: calc(var(--sc-padding-control-small) * 1.375);   /* 11 */
+    position: relative;
+    display: inline-grid;
+    padding: var(--sc-padding-control-medium) var(--sc-padding-control-huge);   /* Figma 16 / 32 */
+    border: 1px solid transparent;
+    color: var(--sc-color-text);
+    transition: border-color var(--sc-duration-fast) var(--sc-ease-standard);
+    outline-offset: var(--sc-padding-gap-tiny);
+  }
+  /* both texts share one grid cell; only the active one is shown */
+  .beacon_title, .beacon_body { grid-area: 1 / 1; margin: 0; transition: opacity var(--sc-duration-fast) var(--sc-ease-standard); }
+  .beacon_title {
+    font-family: var(--sc-typeface-family-headline);
+    font-size: var(--sc-font-size-headline-tiny);
+    font-weight: var(--sc-typeface-weight-semibold);
+    line-height: 1.2;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .beacon_body {
+    max-width: calc(var(--sc-width-column-tight) * 0.775);    /* Figma text block 372 */
+    font-family: var(--sc-typeface-family-text);
+    font-size: var(--sc-font-size-text-small);
+    line-height: 1.3;
+  }
+
+  /* Initial: body visually hidden (still read by screen readers) */
+  .beacon:not(:hover, :focus-within) .beacon_body {
+    position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); opacity: 0;
+  }
+  /* Open */
+  .beacon:is(:hover, :focus-within) { border-color: var(--sc-color-royal-blue-light); }
+  .beacon:is(:hover, :focus-within) .beacon_title {
+    position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); opacity: 0;
+  }
+
+  /* The dot sits centred on the left border, vertically centred. */
+  .beacon_dot {
+    position: absolute; left: 0; top: 50%;
+    width: var(--beacon-dot); aspect-ratio: 1;
+    translate: -50% -50%;
+    pointer-events: none;
+  }
+  .beacon_dot::before,
+  .beacon_ring {
+    content: ""; position: absolute; inset: 0; border-radius: var(--sc-radius-round);
+  }
+  .beacon_dot::before { background: var(--sc-color-accent); animation: beacon-blink var(--beacon-cycle) var(--sc-ease-standard) infinite; }
+  .beacon_ring {
+    border: 1px solid var(--sc-color-accent);
+    opacity: 0;
+    animation: beacon-ripple var(--beacon-cycle) var(--sc-ease-standard) infinite;
+  }
+  .beacon_ring + .beacon_ring { animation-delay: calc(var(--beacon-cycle) * 0.12); }
+
+  /* a quick flash at the top of each cycle, then a dim rest */
+  @keyframes beacon-blink {
+    0%, 100% { opacity: 0.45; scale: 1; }
+    6%       { opacity: 1;    scale: 1.2; }
+    18%      { opacity: 1;    scale: 1; }
+    40%      { opacity: 0.45; }
+  }
+  /* each ring starts at the dot and spreads to ~3× while fading */
+  @keyframes beacon-ripple {
+    0%        { opacity: 0.6; scale: 1; }
+    60%, 100% { opacity: 0;   scale: 3; }
+  }
+}
