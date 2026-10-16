@@ -47,51 +47,52 @@ const FRAMINGS = {
   "Regional (Southeast)": { lat: 33, lon: -86,  dist: 0.58, tilt: 24, sweep: 5 },
 };
 const params = {
+  /* Approved defaults (Phillip, 16 Oct 2026 — "Copy settings" from ?controls). */
   accent: "#406de7",
   timeframe: "7 days",
-  loopSeconds: 60,
+  loopSeconds: 48,
   activity: 1,
   flightSeconds: 1.6,
   trail: 0.55,
   trailWidth: 3.6,
   arcHeight: 1,
-  distanceScale: 2.2,
+  distanceScale: 2.65,
   framing: "North America",
-  tilt: 21,
-  offset: 23,
-  axisTilt: 18,
-  zoom: 0.92,
+  tilt: 26,
+  offset: 17,
+  axisTilt: 16.5,
+  zoom: 2.2,
   graticule: true,
   hud: true,
   inverted: false,
-  background: "#0c223f",
+  background: "#ffffff",
   bgMode: "Linear gradient",
-  background2: "#040b17",
-  bgAngle: 178,
+  background2: "#8f8f8f",    /* no brand token for this grey */
+  bgAngle: 108,
   bgX: 68,
   bgY: 42,
   missionColor: "#dce740",   /* Dots + streaks: no brand token for this yellow-green */
-  globeColor: "#0a1424", globeMatchBg: false, globeShift: -0.06, globeOpacity: 1,
+  globeColor: "#d1d1d1", globeMatchBg: true, globeShift: -0.13, globeOpacity: 1,
   rimColor: "#406de7", rimStrength: 0.35, rimTightness: 3,
   haloOn: true, haloColor: "#406de7", haloStrength: 0.55, haloSize: 1.14,
   landColor: "#546e99", landFront: 0.8, landEdge: 0.35,
   gridColor: "#1a2a44", gridOpacity: 0.55,
-  lightStrength: 0, lightAngle: -40, lightHeight: 30,
+  lightStrength: 0.21, lightAngle: 28, lightHeight: 40,
   showCopy: true,
   showLegend: true,
   showShade: true,
   dotDensity: 4,
   landMode: "Elevation lines",
-  lineSpacing: 0.19, lineMin: 0.1, lineMax: 0.75, lineContrast: 0.6, lineLift: 0.8, lineAngle: 0, lineOpacity: 0.6,
+  lineSpacing: 0.19, lineMin: 0.26, lineMax: 0.55, lineContrast: 0.6, lineLift: 1.5, lineAngle: 9, lineOpacity: 0.6,
   paused: false,
 };
 /* Brand colours come from the Supercomponent tokens so the globe follows the theme. */
 {
   const css = getComputedStyle(document.documentElement);
   const tok = (n, f) => (css.getPropertyValue(n).trim() || f);
-  const royal = tok("--sc-color-royal-blue", params.accent), top = tok("--sc-color-top", params.background);
-  /* Approved colorway: Royal Blue → Top (navy) gradient behind the globe. */
-  Object.assign(params, { accent: royal, rimColor: royal, haloColor: royal, background: royal, background2: top });
+  const royal = tok("--sc-color-royal-blue", params.accent), ground = tok("--sc-color-ground", params.background);
+  /* Approved colorway: Ground (white) → grey gradient behind the globe, Royal Blue rim and halo. */
+  Object.assign(params, { accent: royal, rimColor: royal, haloColor: royal, background: ground });
 }
 Object.assign(params, window.MISSION_GLOBE_CONFIG || {});
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
