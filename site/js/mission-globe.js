@@ -67,8 +67,8 @@ const params = {
   inverted: false,
   background: "#ffffff",
   bgMode: "Linear gradient",
-  background2: "#8f8f8f",    /* no brand token for this grey */
-  bgAngle: 108,
+  background2: "#959595",    /* no brand token for this grey · Figma: white → #959595, top to bottom */
+  bgAngle: 180,
   bgX: 68,
   bgY: 42,
   missionColor: "#406de7",   /* Dots + streaks: Accent (Royal Blue), set from the token below */

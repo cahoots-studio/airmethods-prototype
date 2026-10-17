@@ -1,6 +1,6 @@
 /* BLOCK: marquee
    Figma: Logo / 3 / (401:1340) in Section / Coverage — three rows of Logo
-   Placeholder instances (401:1325), 171 wide, 86 apart, rows 30 apart, 60%.
+   Placeholder instances (401:1325), 171 wide, 86 apart, rows 30 apart, 100%.
 
    Rows scroll forever, edge to edge (full viewport width even inside a
    container). Each row holds one set of items twice; the track slides by
@@ -33,7 +33,7 @@
 
   .marquee_set { display: flex; align-items: center; gap: var(--marquee-gap); padding-inline-end: var(--marquee-gap); margin: 0; list-style: none; padding-inline-start: 0; }
   .marquee_item { flex: none; width: var(--marquee-item); display: flex; justify-content: center; }
-  .marquee_item svg { display: block; width: 100%; height: auto; fill: currentColor; opacity: var(--sc-opacity-60); }   /* Figma 60% */
+  .marquee_item svg { display: block; width: 100%; height: auto; fill: currentColor; }
 
   @keyframes marquee-scroll {
     from { transform: translateX(0); }

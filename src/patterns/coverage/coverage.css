@@ -102,21 +102,22 @@
 }
 
 /* ---- Partners beat ----
-   The last beat of the scroll story: Scheme 3 (white heading and logos) on a
-   full-bleed wash from transparent to solid Royal Blue, so the globe shows
-   through at the top and the section lands on brand blue at the bottom.
+   The last beat of the scroll story: Scheme 1 heading, white logos, on a
+   full-bleed wash from transparent to solid Royal Blue (Figma: 0% → 100% by
+   47.3% of the wash), so the globe shows through at the top and the section
+   lands on brand blue.
    Logos: three marquee rows (src/blocks/marquee), edge to edge — Figma
    Logo / 3 / (401:1340). The magnify field (js/partner-field.js) is retired
    here; the script stays in the repo, unused. */
 @layer sc-components {
   .coverage_beat.coverage_partners {
     max-width: none;
-    background-color: transparent;    /* Scheme 3 for its text only — its navy fill would hide the wash */
     padding-block: var(--sc-padding-block-small);
     gap: var(--sc-padding-gap-medium);
     /* Full-bleed wash from inside the container. The border-image outset
        paints out to the viewport edges without adding width. */
-    border-image: linear-gradient(to bottom, color-mix(in srgb, var(--sc-color-royal-blue) 0%, transparent), var(--sc-color-royal-blue)) fill 0 / / 0 100vw;
+    border-image: linear-gradient(to bottom, color-mix(in srgb, var(--sc-color-royal-blue) 0%, transparent), var(--sc-color-royal-blue) 47.3%) fill 0 / / 0 100vw;
   }
   .coverage_partners_head { display: flex; flex-direction: column; gap: var(--sc-padding-gap-small); max-width: var(--sc-width-column-wide); }   /* one line @1920, as in Figma */
+  .coverage_partners_marquee { color: var(--sc-color-white); }   /* Figma: logos White, 100% */
 }
