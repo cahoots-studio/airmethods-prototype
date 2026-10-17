@@ -1,6 +1,6 @@
 # Air Methods prototype — handoff
 
-Written 2026-09-28 when work moved from Cowork to Claude Code; updated at the end of that session. Read `CLAUDE.md` first for the
+Written 2026-09-28 when work moved from Cowork to Claude Code; last updated 2026-10-16. Read `CLAUDE.md` first for the
 Supercomponent rules (tokens, Client-First naming, cascade layers). This note covers what is
 specific to the Air Methods build.
 
@@ -24,11 +24,13 @@ you need bound variables, and with `get_screenshot` for visuals.
 | · Hero | `146:2643` |
 | · Coverage (globe + partners) | `146:2655` |
 | · What We Do (Healthcare Partners set `200:616`, Default/Hover) | `146:2732` |
-| · History (layer still named "Section / History"; was Join the Team) | `146:2747` |
-| · Team — Join the Team | `204:1191` |
+| · Story 1 — copy left, art right ("Section / History") | `260:1203` |
+| · Story 2 — mirrored, art left ("Section / History") | `295:1147` |
+| · Announcement Beacon (hero) | `401:1300` |
+| · Partner logo marquee (Logo / 3 /) · Logo Placeholder | `401:1340` · `401:1325` |
 | · Newsfeed (Newsfeed Item set `204:1332`; homepage uses Rest/Hover) | `146:2941` |
 | · Footer | `146:2751` |
-| · Transition wing (hero / What We Do) | `215:1710` / `215:1717` |
+| · Transition wing (What We Do; removed from the hero) | `215:1717` |
 | Patient CTA — no longer on the page | `146:2739` |
 | Navigation component set | `36:946` |
 | · Layout=Desktop (transparent) / Desktop Expanded | child / `95:148` |
@@ -48,11 +50,11 @@ every bound text node drops to Regular. Restore weights explicitly afterwards.
 | Section | Pattern CSS | Notes |
 |---|---|---|
 | Navigation | `src/patterns/navigation/` + `site/js/navigation.js` | Desktop: transparent bar, Royal Blue on hover/focus, dropdown panels on items with a menu (pure CSS). ≤991px: solid Royal bar, Logo Mark, Main Menu/Close toggle, full-height drawer with accordion (JS). |
-| Hero | `src/patterns/hero/` + block `transition` | Figma height as a share of width (1085 @1920 → `56.51cqi`), copy bottom-aligned; ≤991px full-screen. Transition wing leaves bottom-right. |
-| Coverage `#missions` | `src/patterns/coverage/` + `site/js/mission-globe.js`, `site/js/partner-field.js` | Pinned WebGL globe, two beats. Globe colorway: Royal Blue → Top gradient, `#DCE740` trails, elevation lines. **Tuning panel at `?controls`** ("Copy settings" → new defaults). Intro beat: statement + HUD (clock, counts, legend) top-aligned beside it. Partners beat: transparent → Royal Blue wash, tiles without fill. |
+| Hero | `src/patterns/hero/` + block `beacon` | Light hero: clouds layer, helicopter, Announcement Beacon top-left. Soft white fade into the globe. ≤991px full-screen. |
+| Coverage `#missions` | `src/patterns/coverage/` + `site/js/mission-globe.js` + block `marquee` | Scheme 1. Pinned WebGL globe, two beats. Light colorway: white → #959595 top to bottom, Royal Blue dots/streaks/rim, elevation lines, US state lines. **Tuning panel at `?controls`** ("Copy settings" → new defaults). Intro beat: statement + HUD (clock, counts, legend). Partners beat: transparent → Royal Blue wash, three marquee rows of white logos, each pausing on hover. |
 | What We Do | `src/patterns/services/` + block `transition` | Three Healthcare Partners cards; row centred at Figma's height, hovered card grows up and down past it like the Figma Hover variant (image above, CTA below). Wing sweeps in at the top. |
-| History | `src/patterns/story/` | Copy left, full-bleed ramp-lines art right (`history-art.webp`). |
-| Join the Team | `src/patterns/story/` `.is-media-left` | Vertical shaped photo + cut-out left (`join-the-team-art.webp`), copy right. |
+| Join the Team | `src/patterns/story/` | Copy left, full-bleed art right (`history-art-2.webp`). Figma shows History copy in both story sections — read as placeholder; prototype keeps Join first. |
+| History | `src/patterns/story/` `.is-media-left` | Mirrored: full-bleed art left (`team-art-2.webp`), copy right from x 1096 @1920. |
 | Newsfeed | `src/patterns/newsfeed/` | Scheme 2. Rest: headline + summary; hover/focus: image rises in, "Read Article" drops in. Stacks ≤991px. |
 | Footer | `src/patterns/footer/` | Wordmark left, links right; legal + copyright. |
 
@@ -84,7 +86,7 @@ Source artifacts that were ported (the globe's tuning panel is back behind `?con
    - The drawer list is indented 40px while the logo is at 20px (panel padding nested inside the
      bar padding). Built as drawn.
    - The mobile bar is solid Royal, not transparent. Built as drawn.
-3. **Placeholder content:** the partner logos (18 invented names), the globe base list/volumes, and
+3. **Placeholder content:** the partner logos (two Figma placeholder marks), the globe base list/volumes, and
    the three Newsfeed cards are placeholders. The "Prototype ·" pills were removed on request, so
    nothing on the page flags them any more. Swap them when real data arrives.
 4. **Dropdown info column** only has a Learn More link; the design may want more there.
@@ -99,7 +101,8 @@ Source artifacts that were ported (the globe's tuning panel is back behind `?con
 - `site/img/patient-center.webp`, `site/img/what-we-do-2.webp`
 - `src/patterns/cta/` (Patient CTA — removed from the page, may return)
 - `src/blocks/placeholder/`, `.mark.is-small` in `src/blocks/mark/`
-- `.is-partners` toggle in `site/js/partner-field.js` (annotated)
+- `site/js/partner-field.js` (magnify logo field — retired here, saved for another project)
+- `site/img/hero-helicopter.webp`, `hero-clouds.webp`, `hero-bg.webp`, `history-art.webp`, `join-the-team-art.webp`
 
 ## End of session
 

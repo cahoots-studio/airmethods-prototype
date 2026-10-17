@@ -1,5 +1,21 @@
 # Changelog
 
+## 2026-10-16 — Light hero, beacon, logo marquee, globe state lines
+
+- Globe: US state lines overlay — interior state borders (us-atlas / Census 1:10m, simplified,
+  embedded as `STATES_B64`) drawn over the land; on by default. `?controls` → Globe → State lines
+  (Show, Color, Opacity).
+- Hero: light redesign from Figma; Announcement Beacon block (`src/blocks/beacon/`, Figma 401:1300):
+  Initial → Open on hover/focus, blinking dot with ripple rings. Transition wing removed; soft white
+  seam into the globe.
+- Coverage: light globe defaults (white → #959595 top to bottom, zoom 2.2); dots, streaks and legend
+  in Accent (Royal Blue), drawn as ink on the light globe. Section Scheme 1 (navy text).
+- Partners: magnify logo field retired (`partner-field.js` kept, unused); new marquee block
+  (`src/blocks/marquee/`, Figma 401:1340) — three edge-to-edge rows, middle reversed, each pauses on
+  hover/focus. Logos white at 100%.
+- Story sections from Figma 260:1203 / 295:1147: copy left + full-bleed art right, then mirrored
+  (`.is-media-left` now means full-bleed art on the left). New 2× art exports.
+
 ## 2026-09-28 — End of session: Figma sync + handoff
 
 Prototype (all pushed, 2bac300 → 606425c):
