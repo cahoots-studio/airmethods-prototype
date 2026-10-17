@@ -66,24 +66,31 @@
     font-size: var(--sc-font-size-text-tiny);
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: color-mix(in srgb, var(--sc-color-text) var(--sc-opacity-60), transparent);
+    color: var(--sc-color-text);
   }
 
+  /* Figma HUD (237:468): Scheme 2 Foreground panel at 90%, 16 padding all
+     round, rows 4 apart; labels 14 / 12% tracking, values 18 Medium / 6%,
+     clock 24 / 4%. */
   .coverage_hud {
     flex: none;
     display: grid; grid-template-columns: auto auto;
-    column-gap: var(--sc-padding-gap-medium); row-gap: var(--sc-padding-gap-tiny);
+    column-gap: var(--sc-padding-gap-medium); row-gap: calc(var(--sc-padding-gap-tiny) / 2);
+    padding: var(--sc-padding-control-medium);
+    background: color-mix(in srgb, var(--sc-color-ground) 90%, transparent);
+    line-height: 1.3;
     font-variant-numeric: tabular-nums;
   }
-  .coverage_hud b { color: var(--sc-color-text); font-weight: var(--sc-typeface-weight-medium); text-align: right; }
+  .coverage_hud > span { align-self: center; }
+  .coverage_hud b { font-size: var(--sc-font-size-text-small); letter-spacing: 0.06em; font-weight: var(--sc-typeface-weight-medium); text-align: right; }
   .coverage_hud .is-clock {
     grid-column: 1 / -1; text-align: right;
-    font-size: var(--sc-font-size-text-medium); line-height: 1; color: var(--sc-color-text);
-    margin-bottom: var(--sc-padding-gap-small);
+    font-size: var(--sc-font-size-text-medium); line-height: 1.3; letter-spacing: 0.04em; font-weight: var(--sc-typeface-weight-regular);
+    margin-bottom: calc(var(--sc-padding-gap-small) - var(--sc-padding-gap-tiny) / 2);   /* Figma 16 below the clock */
   }
   .coverage_legend {                 /* last row of the HUD grid */
     grid-column: 1 / -1; justify-content: flex-end;
-    margin-top: var(--sc-padding-gap-small);
+    margin-top: var(--sc-padding-gap-tiny);
     display: flex; flex-wrap: wrap; gap: var(--sc-padding-gap-medium);
   }
   .coverage_legend span { display: inline-flex; align-items: center; gap: var(--sc-padding-gap-small); }
