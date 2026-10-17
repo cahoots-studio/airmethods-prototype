@@ -2,8 +2,9 @@
 
 ## 2026-10-16 — Light hero, beacon, logo marquee, globe state lines
 
-- Globe: US state lines overlay — interior state borders (us-atlas / Census 1:10m, simplified,
-  embedded as `STATES_B64`) drawn over the land; on by default. `?controls` → Globe → State lines
+- Globe: US state lines overlay — lower-48 state outlines including shorelines, so Great Lakes and
+  bay states close (us-atlas 3 states-10m / Census 1:10m, simplified, embedded as `STATES_B64`);
+  on by default. `?controls` → Globe → State lines
   (Show, Color, Opacity).
 - Hero: light redesign from Figma; Announcement Beacon block (`src/blocks/beacon/`, Figma 401:1300):
   Initial → Open on hover/focus, blinking dot with ripple rings. Transition wing removed; soft white
