@@ -1,66 +1,72 @@
 /* PATTERN: story
-   Figma: Homepage — Phase 1 Update › "History" (146:2747) and, with
-   .is-media-left, "Team" (204:1191).
+   Figma: Homepage — Phase 1 › "Section / History" (260:1203) and, mirrored
+   with .is-media-left, "Section / History" (295:1147).
 
-   Default — full-bleed art: the shape-ramp lines + angled photo frame +
-   cut-out crew member, exported from the section's Image Block as one image.
-   It is absolutely placed against the section, not the container, so it runs
-   to the right viewport edge. Size is a share of the section width (Figma
-   @1920: 1642 × 825) so the composition holds at every desktop width. Like
-   Figma, the art starts at the section's top edge and the copy centres in the
-   space beside it; the component's min-height is the art height less the
-   section padding above it, which is what puts the copy there.
+   Full-bleed art: the shape-ramp lines + angled photo frame + cut-out crew
+   member, exported from the section's Image Block as one image (2×). It is
+   absolutely placed against the section, not the container, so it runs to
+   the viewport edge — right by default, left with .is-media-left. Its size is
+   a share of the section width, so the composition holds at every desktop
+   width. Section height follows Figma (998 @1920) and the copy centres in it.
 
-   .is-media-left — contained art: a tall shaped photo with the crew member
-   breaking out of its top (Figma "Media — Vertical", 552 × 847 @1920),
-   centred in a media column left of the copy. It is taller than the copy row
-   and overhangs the section padding by ~78px above and below, as in Figma. */
+   Figma @1920 (section 1920 × 998)
+     default        art 1134 × 806 at right 0, top 30 · copy in the container, left
+     .is-media-left art 1112 × 806 at left 0,  top 26 · copy from x 1096 to the
+                    global padding edge (Column/Wide, 768) */
 @layer sc-components {
   .story_wrap {
     position: relative;
     container-type: inline-size;       /* cqi below = section width */
     overflow: clip;
-    --story-art-w: 85.52;              /* 1642 / 1920 */
-    --story-art-h: 42.97;              /*  825 / 1920 */
+    --story-h: 51.98;                  /*  998 / 1920 */
+    --story-art-w: 59.04;              /* 1134 / 1920 */
+    --story-art-top: 1.56;             /*   30 / 1920 */
+  }
+  .story_wrap.is-media-left {
+    --story-art-w: 57.89;              /* 1112 / 1920 */
+    --story-art-top: 1.35;             /*   26 / 1920 */
+    --story-copy-x: 57.08;             /* 1096 / 1920 */
   }
 
   .story_art {
-    position: absolute; top: 0; right: 0;
+    position: absolute; right: 0;
+    top: calc(var(--story-art-top) * 1cqi);
     width: calc(var(--story-art-w) * 1cqi);
     pointer-events: none;
   }
+  .story_wrap.is-media-left .story_art { right: auto; left: 0; }
   .story_art img { display: block; width: 100%; height: auto; }
 
   .story_component {
     position: relative;
-    display: flex; align-items: center; justify-content: space-between;
+    display: flex; align-items: center;
     gap: var(--sc-padding-gap-large);
-    min-height: calc(var(--story-art-h) * 1cqi - var(--sc-padding-section-large));
+    min-height: calc(var(--story-h) * 1cqi - var(--sc-padding-section-large) * 2);
   }
   /* Column/Wide, but never more than half the section: the art scales with
-     the viewport and the copy does not, so below ~1600 a full Column/Wide
-     would run into the photo. */
+     the viewport and the copy does not. */
   .story_component > .supercomponent { flex: 0 1 min(var(--sc-width-column-wide), 50cqi); min-width: 0; gap: var(--sc-padding-gap-large); }
 
-  /* ---- .is-media-left ---- */
-  .story_wrap.is-media-left .story_component { min-height: 0; }
-  .story_media {
-    flex: 1 1 0; min-width: 0;
-    display: flex; justify-content: center;
-    margin-block: calc(var(--sc-padding-section-large) * -0.6);   /* Figma: ~78 overhang each side */
+  /* Mirrored: no container, so the copy can start where Figma puts it — just
+     past the art — and run to the global padding edge. */
+  .story_wrap.is-media-left .story_component {
+    justify-content: flex-end;
+    padding-inline-start: calc(var(--story-copy-x) * 1cqi - var(--sc-padding-section-global));
   }
-  .story_media img { display: block; width: calc(28.75 * 1cqi); height: auto; }   /* 552 / 1920 */
+  .story_wrap.is-media-left .story_component > .supercomponent { flex: 1 1 0; max-width: var(--sc-width-column-wide); }
 
-  /* Stacked: art first, then copy. */
+  /* Stacked: art first, then copy. The art is cropped at its faded, lines-only
+     end so the photo leads. */
   @media (max-width: 991px) {
     .story_art {
-      position: static; width: 130%; margin-left: -30%;   /* crop the white, faded end so the photo leads */
+      position: static; width: 130%; margin-left: -30%;
       /* the section padding above the copy would double up with the art */
       margin-bottom: calc(var(--sc-padding-gap-large) - var(--sc-padding-section-large));
     }
+    .story_wrap.is-media-left .story_art { margin-left: 0; margin-right: -30%; }
     .story_component { min-height: 0; flex-direction: column; align-items: stretch; }
     .story_component > .supercomponent { flex-basis: auto; }
-    .story_media { margin-block: 0; }
-    .story_media img { width: min(70%, var(--sc-width-column-tight)); }
+    .story_wrap.is-media-left .story_component { padding-inline-start: 0; }
+    .story_wrap.is-media-left .story_component > .supercomponent { max-width: none; }
   }
 }

@@ -19,6 +19,7 @@ Add a row whenever a change is made in the prototype through chat.
 | 2026-10-16 | Hero → Coverage | Soft seam: hero clouds fade to white over the bottom Block/Large; Coverage fades white → transparent over its top Block/Large | Section / Hero `146:2643` bottom + Section / Coverage `146:2655` top — two gradient layers |
 | 2026-10-16 | Coverage | Globe defaults: Ground → #8f8f8f at 108°, light globe, zoom 2.2 (`?controls` export). Text scheme now from Figma: section Scheme 1, partners beat Scheme 3 (applied 2026-10-16) | Section / Coverage `146:2655` — globe still only |
 | 2026-10-16 | Coverage · Partners | Logo marquee: three rows scroll edge to edge forever (48s per set = 40 × Ambient), middle row reversed, each row pauses on hover / focus. Magnify field retired | Logo / 3 / `401:1340` — motion annotation (direction, speed, hover pause) |
+| 2026-10-16 | Coverage | Globe dots + streaks and the legend swatches → Accent (Royal Blue, was #DCE740). On the light globe they draw as ink (normal blending) instead of additive light, which washed blue out to white | Section / Coverage `146:2655` — globe still + legend swatches |
 
 ## Synced
 

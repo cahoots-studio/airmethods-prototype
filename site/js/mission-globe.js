@@ -71,7 +71,7 @@ const params = {
   bgAngle: 108,
   bgX: 68,
   bgY: 42,
-  missionColor: "#dce740",   /* Dots + streaks: no brand token for this yellow-green */
+  missionColor: "#406de7",   /* Dots + streaks: Accent (Royal Blue), set from the token below */
   globeColor: "#d1d1d1", globeMatchBg: true, globeShift: -0.13, globeOpacity: 1,
   rimColor: "#406de7", rimStrength: 0.35, rimTightness: 3,
   haloOn: true, haloColor: "#406de7", haloStrength: 0.55, haloSize: 1.14,
@@ -91,8 +91,9 @@ const params = {
   const css = getComputedStyle(document.documentElement);
   const tok = (n, f) => (css.getPropertyValue(n).trim() || f);
   const royal = tok("--sc-color-royal-blue", params.accent), ground = tok("--sc-color-ground", params.background);
-  /* Approved colorway: Ground (white) → grey gradient behind the globe, Royal Blue rim and halo. */
-  Object.assign(params, { accent: royal, rimColor: royal, haloColor: royal, background: ground });
+  /* Approved colorway: Ground (white) → grey gradient behind the globe, Royal Blue rim, halo,
+     dots and streaks (the legend reads the same colour through --mission). */
+  Object.assign(params, { accent: royal, rimColor: royal, haloColor: royal, missionColor: royal, background: ground });
 }
 Object.assign(params, window.MISSION_GLOBE_CONFIG || {});
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -119,7 +120,7 @@ const globe = new THREE.Group(); globe.rotation.order = "XYZ"; axis.add(globe);
 
 const accent = new THREE.Color(params.accent);
 const missionColor = new THREE.Color(params.missionColor);
-const U = { uMission: { value: missionColor }, uLight: { value: 0 }, uBase: { value: new THREE.Color(0.039, 0.078, 0.141) }, uLand: { value: new THREE.Color(0.33, 0.43, 0.60) }, uTime: { value: 0 }, uDpr: { value: DPR }, uColor: { value: accent }, uTrail: { value: params.trail }, uSize: { value: params.trailWidth } };
+const U = { uMission: { value: missionColor }, uLight: { value: 0 }, uInk: { value: 0 }, uBase: { value: new THREE.Color(0.039, 0.078, 0.141) }, uLand: { value: new THREE.Color(0.33, 0.43, 0.60) }, uTime: { value: 0 }, uDpr: { value: DPR }, uColor: { value: accent }, uTrail: { value: params.trail }, uSize: { value: params.trailWidth } };
 
 // land mask + elevation as textures (lat/lon space) for the line texture mode
 const maskTex = (() => {
@@ -268,10 +269,10 @@ const trails = new THREE.Points(trailGeo, new THREE.ShaderMaterial({
       gl_PointSize = uSize * uDpr * (0.35 + 0.65 * k) + vHead * 3. * uDpr;
       gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.);
     }`,
-  fragmentShader: `uniform vec3 uMission; uniform float uLight; varying float vA; varying float vHead;
+  fragmentShader: `uniform vec3 uMission; uniform float uLight, uInk; varying float vA; varying float vHead;
     void main(){ float r = length(gl_PointCoord-.5)*2.; if (r>1.) discard;
       float a = vA * smoothstep(1., 0.2, r);
-      if (uLight > 0.5) { gl_FragColor = vec4(mix(uMission, uMission * 0.45, vHead * 0.8), a * 0.8); return; }
+      if (uLight > 0.5 || uInk > 0.5) { gl_FragColor = vec4(mix(uMission, uMission * 0.45, vHead * 0.8), a * 0.8); return; }
       vec3 c = mix(uMission, vec3(1.), vHead*0.75);
       gl_FragColor = vec4(c * a * 0.55, 1.); }`,
 }));
@@ -284,7 +285,7 @@ function pulseMaterial(withCore) {
     uniforms: U, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending,
     vertexShader: `uniform float uDpr, uTime; attribute float aStart; varying float vAge;
       void main(){ vAge = uTime - aStart; gl_PointSize = ${withCore ? "26." : "22."} * uDpr; gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.); }`,
-    fragmentShader: `uniform vec3 uMission; uniform float uLight; varying float vAge;
+    fragmentShader: `uniform vec3 uMission; uniform float uLight, uInk; varying float vAge;
       void main(){ float r = length(gl_PointCoord-.5)*2.; float a = 0.;
         float t = vAge / 1.4;
         if (t >= 0. && t < 1.) { float rr = mix(0.12, 1.0, 1.-pow(1.-t,2.)); a += smoothstep(0.09, 0., abs(r-rr)) * (1.-t) * 0.9; }
@@ -292,7 +293,7 @@ function pulseMaterial(withCore) {
           ? "a += smoothstep(0.2, 0.12, r) * 0.95; a += smoothstep(0.34, 0.2, r) * 0.25;"
           : "if (t >= 0. && t < 1.6) a += smoothstep(0.16, 0.05, r) * (1.-t/1.6) * 0.8;"}
         if (a <= 0.001) discard;
-        if (uLight > 0.5) { gl_FragColor = vec4(uMission * ${withCore ? "mix(1., 0.6, smoothstep(0.2,0.,r))" : "0.9"}, min(a, 1.)); return; }
+        if (uLight > 0.5 || uInk > 0.5) { gl_FragColor = vec4(uMission * ${withCore ? "mix(1., 0.6, smoothstep(0.2,0.,r))" : "0.9"}, min(a, 1.)); return; }
         vec3 c = mix(uMission, vec3(1.), ${withCore ? "smoothstep(0.2,0.,r)*0.55" : "0.3"});
         gl_FragColor = vec4(c * a, 1.); }`,
   });
@@ -469,6 +470,7 @@ function applyBackground() {
   root.setProperty("--ink", a);        // text scrims and shadows use the main color
   if (params.globeMatchBg) applyGlobe();
   root.setProperty("--bg-fill", fill);
+  applyInk();
   if (typeof bgCtrls !== "undefined") {
     const grad = params.bgMode !== "Solid";
     bgCtrls.b2.show(grad); bgCtrls.angle.show(params.bgMode === "Linear gradient");
@@ -482,6 +484,16 @@ function setScheme(light) {
   applyBackground();
   applyGlobe();
   for (const m of glowMats) { m.blending = light ? THREE.NormalBlending : THREE.AdditiveBlending; m.needsUpdate = true; }
+  applyInk();
+}
+/* Dots + streaks are additive light on a dark globe. On a light background
+   that washes a colour out to white, so they switch to ink: normal blending,
+   drawn in the mission colour itself. */
+function applyInk() {
+  const bg = new THREE.Color(params.background);
+  const ink = params.inverted || (0.2126 * bg.r + 0.7152 * bg.g + 0.0722 * bg.b) > 0.5;
+  U.uInk.value = ink ? 1 : 0;
+  for (const m of glowMats) if (m !== halo.material) { m.blending = (ink || params.inverted) ? THREE.NormalBlending : THREE.AdditiveBlending; m.needsUpdate = true; }
 }
 
 /* ---------- apply settings (also re-run by the panel) ---------- */
